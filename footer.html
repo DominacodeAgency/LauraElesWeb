@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELES · Footer Component</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================================
+       TOKENS BASE — copiar en cada página
+    ================================================ */
+    :root {
+      --c-bg:       #1d1d1d;
+      --c-surface:  #181818;
+      --c-border:   rgba(255,255,255,0.08);
+      --c-red:      #70000e;
+      --c-red-glow: rgba(112, 0, 14, 0.65);
+      --c-red-dim:  rgba(112, 0, 14, 0.1);
+      --c-white:    #ffffff;
+      --c-muted:    #888888;
+      --c-light:    #cccccc;
+      --f-serif:    'DM Serif Display', Georgia, serif;
+      --f-sans:     'DM Sans', system-ui, sans-serif;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--f-sans);
+      background: var(--c-bg);
+      color: var(--c-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; object-fit: cover; }
+
+    /* ================================================
+       DEMO SPACER — NO copiar en producción
+    ================================================ */
+    .demo-spacer {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 80% 30%, rgba(112,0,14,0.05), transparent 45%),
+        var(--c-bg);
+    }
+    .demo-spacer p {
+      font-family: var(--f-serif);
+      font-size: clamp(28px, 5vw, 54px);
+      opacity: 0.06;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    /* ================================================
+       ╔══════════════════════════════════════════════╗
+       ║           FOOTER — ELES COMPONENT            ║
+       ║  Copiar desde aquí hasta [/FOOTER CSS END]   ║
+       ╚══════════════════════════════════════════════╝
+    ================================================ */
+
+    .eles-footer {
+      background: var(--c-surface);
+      border-top: 1px solid var(--c-border);
+      padding: 0 48px 40px;
+      overflow: hidden;
+    }
+
+    /* ── Banda Marquee ────────────────────────────── */
+    .eles-footer__marquee {
+      border-bottom: 1px solid var(--c-border);
+      padding: 24px 0;
+      overflow: hidden;
+      margin: 0 -48px 70px;
+    }
+    .eles-footer__marquee-track {
+      display: flex;
+      width: max-content;
+      animation: footerMarquee 30s linear infinite;
+    }
+    @keyframes footerMarquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .eles-footer__marquee-track span {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      padding: 0 40px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .eles-footer__marquee-track span em {
+      color: var(--c-red);
+      font-style: normal;
+    }
+
+    /* ── CTA Principal ────────────────────────────── */
+    .eles-footer__cta-block {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding-bottom: 70px;
+      border-bottom: 1px solid var(--c-border);
+      margin-bottom: 70px;
+    }
+    .eles-footer__headline {
+      font-family: var(--f-serif);
+      font-size: clamp(32px, 5vw, 60px);
+      line-height: 1;
+      letter-spacing: -1.5px;
+    }
+    .eles-footer__headline em {
+      font-style: italic;
+      color: var(--c-red);
+    }
+    /* Botón CTA con efecto neón sweep */
+    .eles-footer__main-cta {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--c-red);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 20px 36px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      transition:
+        transform  0.4s var(--ease-out),
+        box-shadow 0.4s;
+    }
+    /* Sweep de brillo */
+    .eles-footer__main-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+      );
+      transition: left 0.6s var(--ease-out);
+    }
+    .eles-footer__main-cta:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 10px 30px var(--c-red-glow),
+        0 0 0 1px rgba(112,0,14,0.5);
+    }
+    .eles-footer__main-cta:hover::before { left: 150%; }
+    .eles-footer__main-cta svg {
+      transition: transform 0.35s var(--ease-out);
+    }
+    .eles-footer__main-cta:hover svg { transform: translateX(5px); }
+
+    /* ── Columnas de Links ────────────────────────── */
+    .eles-footer__grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 70px;
+    }
+
+    /* Columna Marca */
+    .eles-footer__brand-logo {
+      font-family: var(--f-serif);
+      font-size: 26px;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .eles-footer__brand-logo em { color: var(--c-red); font-style: normal; }
+
+    .eles-footer__brand-desc {
+      font-size: 13.5px;
+      color: var(--c-muted);
+      line-height: 1.8;
+      max-width: 290px;
+      margin-bottom: 28px;
+    }
+
+    /* Redes sociales con neón al hover */
+    .eles-footer__socials {
+      display: flex;
+      gap: 10px;
+    }
+    .eles-footer__social {
+      position: relative;
+      width: 42px; height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--c-border);
+      border-radius: 4px;
+      color: var(--c-muted);
+      transition:
+        border-color 0.35s,
+        color        0.35s,
+        box-shadow   0.35s,
+        transform    0.35s var(--ease-out);
+    }
+    .eles-footer__social:hover {
+      border-color: var(--c-red);
+      color: var(--c-red);
+      transform: translateY(-3px);
+      box-shadow:
+        0 0 12px rgba(112,0,14,0.5),
+        inset 0 0 12px rgba(112,0,14,0.07);
+    }
+
+    /* Columnas de nav */
+    .eles-footer__col-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-white);
+      margin-bottom: 22px;
+    }
+    .eles-footer__col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .eles-footer__col a {
+      font-size: 13.5px;
+      color: var(--c-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      transition: color 0.3s, gap 0.35s var(--ease-out), padding-left 0.35s var(--ease-out);
+    }
+    /* Pequeño bullet neón al hover */
+    .eles-footer__col a::before {
+      content: '▸';
+      font-size: 10px;
+      color: var(--c-red);
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      transition: opacity 0.3s, max-width 0.35s var(--ease-out);
+    }
+    .eles-footer__col a:hover {
+      color: var(--c-white);
+      padding-left: 6px;
+    }
+    .eles-footer__col a:hover::before {
+      opacity: 1;
+      max-width: 16px;
+    }
+
+    /* ── Badge / Copyright ────────────────────────── */
+    .eles-footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-top: 1px solid var(--c-border);
+      padding-top: 30px;
+    }
+    .eles-footer__copy {
+      font-size: 11.5px;
+      color: var(--c-muted);
+      letter-spacing: 0.04em;
+    }
+    /* Separador decorativo */
+    .eles-footer__divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eles-footer__divider-line {
+      width: 32px; height: 1.5px;
+      background: var(--c-red);
+      box-shadow: 0 0 8px var(--c-red-glow);
+    }
+    .eles-footer__motto {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 12px;
+      color: var(--c-red);
+      letter-spacing: 0.08em;
+    }
+
+    /* ================================================
+       [/FOOTER CSS END]
+    ================================================ */
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 1100px) {
+      .eles-footer { padding: 0 32px 36px; }
+      .eles-footer__marquee { margin: 0 -32px 60px; }
+      .eles-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .eles-footer__cta-block { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .eles-footer { padding: 0 20px 32px; }
+      .eles-footer__marquee { margin: 0 -20px 50px; }
+      .eles-footer__grid { grid-template-columns: 1fr; gap: 36px; }
+      .eles-footer__bottom { flex-direction: column; align-items: flex-start; }
+      .eles-footer__headline { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO SPACER — NO copiar -->
+  <div class="demo-spacer">
+    <p>ELES · Not for Everyone</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER HTML — Copiar dentro de cada página,
+       justo antes del </body>
+  ════════════════════════════════════════════ -->
+
+  <footer class="eles-footer" role="contentinfo">
+
+    <!-- Banda Marquee animada -->
+    <div class="eles-footer__marquee" aria-hidden="true">
+      <div class="eles-footer__marquee-track">
+        <!-- Duplicado para loop continuo -->
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+      </div>
+    </div>
+
+    <!-- Columnas -->
+    <div class="eles-footer__grid">
+
+      <!-- Columna Marca -->
+      <div class="eles-footer__brand">
+        <div class="eles-footer__brand-logo">ELES<em>.</em></div>
+        <p class="eles-footer__brand-desc">
+          Fitness de élite, método técnico y equipo boutique. Una comunidad guiada por la excelencia, la constancia y los resultados reales.
+        </p>
+        <div class="eles-footer__socials">
+          <!-- Instagram -->
+          <a href="#" class="eles-footer__social" aria-label="Instagram ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+          </a>
+          <!-- TikTok -->
+          <a href="#" class="eles-footer__social" aria-label="TikTok ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.19a8.18 8.18 0 004.79 1.53V6.27a4.85 4.85 0 01-1.02-.42z"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="eles-footer__social" aria-label="YouTube ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna Plataforma -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Plataforma</p>
+        <ul>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="planes.html">Membresía</a></li>
+          <li><a href="tienda.html">Tienda ELES</a></li>
+          <li><a href="metodo.html">Método</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Soporte -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Soporte</p>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="mailto:hola@eles.com">Contacto</a></li>
+          <li><a href="#">Mi Membresía</a></li>
+          <li><a href="#">Devoluciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Legal -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Legal</p>
+        <ul>
+          <li><a href="#">Aviso Legal</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="terminos.html">Términos</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="eles-footer__bottom">
+      <span class="eles-footer__copy">
+        © 2024 ELES Fitness Studio. Todos los derechos reservados.
+      </span>
+      <div class="eles-footer__divider">
+        <div class="eles-footer__divider-line"></div>
+        <span class="eles-footer__motto">not for everyone.</span>
+      </div>
+    </div>
+
+  </footer>
+
+</body>
+</html>

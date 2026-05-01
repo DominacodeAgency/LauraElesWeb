@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Preguntas Frecuentes · ELES Fitness</title>
+  <meta name="description" content="Respuestas rápidas sobre membresías, clases, método híbrido y cobros. Todo lo que necesitas saber sobre ELES Pilates Híbrido.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --c-bg:       #1d1d1d;
+      --c-surface:  #181818;
+      --c-border:   rgba(255,255,255,0.08);
+      --c-red:      #70000e;
+      --c-red-glow: rgba(112, 0, 14, 0.65);
+      --c-red-dim:  rgba(112, 0, 14, 0.1);
+      --c-white:    #ffffff;
+      --c-muted:    #888888;
+      --c-light:    #cccccc;
+      --f-serif:    'DM Serif Display', Georgia, serif;
+      --f-sans:     'DM Sans', system-ui, sans-serif;
+      --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-sans);
+      background: var(--c-bg);
+      color: var(--c-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ================================================
+       NAVIGATION
+    ================================================ */
+    /* ================================================
+       HEADER — ELES COMPONENT
+    ================================================ */
+
+    /* --- Nav Container --- */
+    .eles-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 999;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      transition:
+        background     0.5s var(--ease-out),
+        border-color   0.4s,
+        backdrop-filter 0.5s,
+        padding        0.4s var(--ease-out);
+      border-bottom: 1px solid transparent;
+    }
+
+    .eles-header.scrolled {
+      background: rgba(29, 29, 29, 0.94);
+      backdrop-filter: blur(20px) saturate(150%);
+      border-bottom-color: var(--c-border);
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    /* --- Logo --- */
+    .eles-header__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .eles-header__logo-img {
+      height: 60px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: height 0.4s var(--ease-out);
+    }
+    .eles-header.scrolled .eles-header__logo-img {
+      height: 48px;
+    }
+
+    /* --- Desktop Links --- */
+    .eles-header__nav {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      list-style: none;
+    }
+    .eles-header__nav a {
+      position: relative;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-light);
+      transition: color 0.3s;
+    }
+    .eles-header__nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 0; height: 1.5px;
+      background: var(--c-red);
+      box-shadow: 0 0 8px var(--c-red-glow);
+      transition: width 0.4s var(--ease-out);
+    }
+    .eles-header__nav a:hover { color: var(--c-white); }
+    .eles-header__nav a:hover::after { width: 100%; }
+    .eles-header__nav a.active { color: var(--c-white); }
+    .eles-header__nav a.active::after { width: 100%; }
+
+    /* --- Right side: Login + CTA --- */
+    .eles-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .eles-header__login {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--c-muted);
+      transition: color 0.3s;
+    }
+    .eles-header__login:hover { color: var(--c-white); }
+
+    .eles-header__cta {
+      position: relative;
+      overflow: hidden;
+      background: var(--c-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 13px 24px;
+      border-radius: 2px;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s, background 0.3s;
+    }
+    .eles-header__cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transition: left 0.55s var(--ease-out);
+    }
+    .eles-header__cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--c-red-glow), 0 0 0 1px rgba(112,0,14,0.4); }
+    .eles-header__cta:hover::before { left: 150%; }
+
+    /* --- Hamburger (móvil) --- */
+    .eles-header__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5.5px;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 4px;
+    }
+    .eles-header__burger span {
+      display: block;
+      width: 100%; height: 1.5px;
+      background: var(--c-white);
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform  0.45s var(--ease-out), opacity 0.3s, width 0.3s var(--ease-out);
+    }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; width: 0; }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* --- Mobile Drawer --- */
+    .eles-header__drawer {
+      position: fixed;
+      inset: 0 0 0 25%;
+      z-index: 998;
+      background: var(--c-surface);
+      border-left: 1px solid var(--c-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      transform: translateX(100%);
+      transition: transform 0.55s var(--ease-out);
+      gap: 0;
+    }
+    .eles-header__drawer.open { transform: translateX(0); }
+    .eles-header__overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 997;
+      background: rgba(0,0,0,0.6);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .eles-header__overlay.open { display: block; opacity: 1; }
+    .eles-header__drawer a {
+      font-family: var(--f-serif);
+      font-size: clamp(28px, 5vw, 36px);
+      font-style: italic;
+      color: var(--c-white);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--c-border);
+      transition: color 0.3s, padding-left 0.35s var(--ease-out);
+    }
+    .eles-header__drawer a:last-child { border-bottom: none; }
+    .eles-header__drawer a:hover { color: var(--c-red); padding-left: 10px; }
+    .eles-header__drawer a.active { color: var(--c-red); }
+
+    @media (max-width: 1024px) {
+      .eles-header { padding: 20px 24px; }
+      .eles-header__nav { display: none; }
+      .eles-header__login { display: none; }
+      .eles-header__burger { display: flex; }
+    }
+
+    /* ================================================
+       PAGE HERO — FAQ
+    ================================================ */
+    .page-hero {
+      position: relative;
+      padding: 160px 48px 100px;
+      border-bottom: 1px solid var(--c-border);
+      overflow: hidden;
+    }
+    /* Subtle background pattern */
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(112,0,14,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 15% 80%, rgba(112,0,14,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Big decorative text */
+    .page-hero-deco {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--f-serif);
+      font-size: clamp(120px, 18vw, 220px);
+      line-height: 1;
+      letter-spacing: -8px;
+      color: rgba(255,255,255,0.025);
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--c-red);
+    }
+    .page-hero h1 {
+      font-family: var(--f-serif);
+      font-size: clamp(48px, 8vw, 100px);
+      line-height: 0.93;
+      letter-spacing: -2px;
+      max-width: 700px;
+      margin-bottom: 32px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--c-red); }
+    .page-hero-desc {
+      max-width: 440px;
+      font-size: 16px;
+      color: var(--c-light);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* ================================================
+       FAQ SECTION
+    ================================================ */
+    .faq-section {
+      padding: 80px 48px 120px;
+    }
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 80px;
+      max-width: 1140px;
+    }
+
+    /* ── Sidebar categories ── */
+    .faq-sidebar {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+    .faq-sidebar-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 24px;
+    }
+    .faq-cats {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .faq-cat-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 2px;
+      color: var(--c-muted);
+      font-family: var(--f-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-align: left;
+      transition: color 0.25s, background 0.25s;
+    }
+    .faq-cat-btn::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      transition: background 0.25s, transform 0.3s;
+    }
+    .faq-cat-btn:hover,
+    .faq-cat-btn.active {
+      color: var(--c-white);
+      background: rgba(255,255,255,0.04);
+    }
+    .faq-cat-btn.active {
+      color: var(--c-red);
+    }
+    .faq-cat-btn.active::before {
+      background: var(--c-red);
+      transform: scale(1.6);
+    }
+
+    /* Contact card at sidebar bottom */
+    .faq-contact-card {
+      margin-top: 48px;
+      padding: 28px 24px;
+      border: 1px solid var(--c-border);
+      background: var(--c-surface);
+    }
+    .faq-contact-card p {
+      font-size: 13px;
+      color: var(--c-muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .faq-contact-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      transition: gap 0.3s var(--ease-out), opacity 0.25s;
+    }
+    .faq-contact-card a:hover { gap: 14px; opacity: 0.85; }
+
+    /* ── FAQ groups ── */
+    .faq-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+    .faq-group {
+      display: none;
+    }
+    .faq-group.visible {
+      display: block;
+    }
+    .faq-group-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      margin-bottom: 32px;
+    }
+    .faq-group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--c-border);
+      min-width: 60px;
+    }
+
+    /* ── Individual accordion item ── */
+    .faq-item {
+      border-top: 1px solid var(--c-border);
+      position: relative;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--c-border); }
+
+    .faq-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr 32px;
+      align-items: center;
+      gap: 24px;
+      padding: 26px 0;
+      text-align: left;
+      color: var(--c-white);
+      font-family: var(--f-sans);
+      transition: padding-left 0.35s var(--ease-out);
+      position: relative;
+    }
+    .faq-btn::before {
+      content: '';
+      position: absolute;
+      left: -48px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--c-red);
+      box-shadow: 0 0 14px rgba(112,0,14,0.7);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .faq-item.open .faq-btn::before { opacity: 1; }
+    .faq-btn:hover { padding-left: 6px; }
+    .faq-item.open .faq-btn { padding-left: 6px; }
+
+    .faq-question {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--c-white);
+      transition: color 0.25s;
+    }
+    .faq-btn:hover .faq-question,
+    .faq-item.open .faq-question {
+      color: var(--c-white);
+    }
+
+    /* Plus/minus icon */
+    .faq-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--c-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.3s, border-color 0.3s, transform 0.5s var(--ease-out);
+      color: var(--c-muted);
+    }
+    .faq-item.open .faq-icon {
+      background: var(--c-red);
+      border-color: var(--c-red);
+      color: white;
+      transform: rotate(45deg);
+    }
+    .faq-icon svg {
+      pointer-events: none;
+    }
+
+    /* Panel */
+    .faq-panel {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.55s var(--ease-out), opacity 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+      opacity: 0;
+      padding: 0 64px 0 6px;
+    }
+    .faq-item.open .faq-panel {
+      max-height: 600px;
+      opacity: 1;
+      padding: 0 64px 28px 6px;
+    }
+    .faq-panel p {
+      font-size: 15px;
+      color: var(--c-light);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+    .faq-panel strong { color: var(--c-white); font-weight: 500; }
+
+    /* ================================================
+       ALL FAQ (show all at once for "all" category)
+    ================================================ */
+    .faq-group.show-all {
+      display: block;
+    }
+
+    /* ================================================
+       CTA BAND
+    ================================================ */
+    .faq-cta {
+      padding: 80px 48px;
+      border-top: 1px solid var(--c-border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .faq-cta-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      margin-bottom: 14px;
+    }
+    .faq-cta-title {
+      font-family: var(--f-serif);
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+    .faq-cta-title em { font-style: italic; color: var(--c-red); }
+    .faq-cta-pills {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s, background 0.3s, border-color 0.3s;
+    }
+    .cta-pill--primary {
+      background: var(--c-red);
+      color: white;
+      border: 1px solid var(--c-red);
+    }
+    .cta-pill--primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(112,0,14,0.4);
+    }
+    .cta-pill--ghost {
+      color: var(--c-light);
+      border: 1px solid var(--c-border);
+      background: transparent;
+    }
+    .cta-pill--ghost:hover {
+      border-color: var(--c-red);
+      color: var(--c-white);
+      background: rgba(112,0,14,0.07);
+      transform: translateY(-3px);
+    }
+    .cta-pill svg { transition: transform 0.3s var(--ease-out); }
+    .cta-pill:hover svg { transform: translateX(4px); }
+
+    /* ================================================
+       FOOTER
+    ================================================ */
+        /* ================================================
+           ╔══════════════════════════════════════════════╗
+           ║           FOOTER — ELES COMPONENT            ║
+           ║  Copiar desde aquí hasta [/FOOTER CSS END]   ║
+           ╚══════════════════════════════════════════════╝
+        ================================================ */
+
+        .eles-footer {
+          background: var(--c-surface);
+          border-top: 1px solid var(--c-border);
+          padding: 0 48px 40px;
+          overflow: hidden;
+        }
+
+        /* ── Banda Marquee ────────────────────────────── */
+        .eles-footer__marquee {
+          border-bottom: 1px solid var(--c-border);
+          padding: 24px 0;
+          overflow: hidden;
+          margin: 0 -48px 70px;
+        }
+        .eles-footer__marquee-track {
+          display: flex;
+          width: max-content;
+          animation: footerMarquee 30s linear infinite;
+        }
+        @keyframes footerMarquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        .eles-footer__marquee-track span {
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: var(--c-muted);
+          padding: 0 40px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .eles-footer__marquee-track span em {
+          color: var(--c-red);
+          font-style: normal;
+        }
+
+        /* ── CTA Principal ────────────────────────────── */
+        .eles-footer__cta-block {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          align-items: center;
+          gap: 40px;
+          padding-bottom: 70px;
+          border-bottom: 1px solid var(--c-border);
+          margin-bottom: 70px;
+        }
+        .eles-footer__headline {
+          font-family: var(--f-serif);
+          font-size: clamp(32px, 5vw, 60px);
+          line-height: 1;
+          letter-spacing: -1.5px;
+        }
+        .eles-footer__headline em {
+          font-style: italic;
+          color: var(--c-red);
+        }
+        /* Botón CTA con efecto neón sweep */
+        .eles-footer__main-cta {
+          position: relative;
+          overflow: hidden;
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          background: var(--c-red);
+          color: #fff;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          padding: 20px 36px;
+          border-radius: 2px;
+          flex-shrink: 0;
+          transition:
+            transform  0.4s var(--ease-out),
+            box-shadow 0.4s;
+        }
+        /* Sweep de brillo */
+        .eles-footer__main-cta::before {
+          content: '';
+          position: absolute;
+          top: 0; left: -100%;
+          width: 55%; height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.2),
+            transparent
+          );
+          transition: left 0.6s var(--ease-out);
+        }
+        .eles-footer__main-cta:hover {
+          transform: translateY(-3px);
+          box-shadow:
+            0 10px 30px var(--c-red-glow),
+            0 0 0 1px rgba(112,0,14,0.5);
+        }
+        .eles-footer__main-cta:hover::before { left: 150%; }
+        .eles-footer__main-cta svg {
+          transition: transform 0.35s var(--ease-out);
+        }
+        .eles-footer__main-cta:hover svg { transform: translateX(5px); }
+
+        /* ── Columnas de Links ────────────────────────── */
+        .eles-footer__grid {
+          display: grid;
+          grid-template-columns: 2.2fr 1fr 1fr 1fr;
+          gap: 50px;
+          margin-bottom: 70px;
+        }
+
+        /* Columna Marca */
+        .eles-footer__brand-logo {
+          font-family: var(--f-serif);
+          font-size: 26px;
+          letter-spacing: -0.5px;
+          margin-bottom: 14px;
+        }
+        .eles-footer__brand-logo em { color: var(--c-red); font-style: normal; }
+
+        .eles-footer__brand-desc {
+          font-size: 13.5px;
+          color: var(--c-muted);
+          line-height: 1.8;
+          max-width: 290px;
+          margin-bottom: 28px;
+        }
+
+        /* Redes sociales con neón al hover */
+        .eles-footer__socials {
+          display: flex;
+          gap: 10px;
+        }
+        .eles-footer__social {
+          position: relative;
+          width: 42px; height: 42px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid var(--c-border);
+          border-radius: 4px;
+          color: var(--c-muted);
+          transition:
+            border-color 0.35s,
+            color        0.35s,
+            box-shadow   0.35s,
+            transform    0.35s var(--ease-out);
+        }
+        .eles-footer__social:hover {
+          border-color: var(--c-red);
+          color: var(--c-red);
+          transform: translateY(-3px);
+          box-shadow:
+            0 0 12px rgba(112,0,14,0.5),
+            inset 0 0 12px rgba(112,0,14,0.07);
+        }
+
+        /* Columnas de nav */
+        .eles-footer__col-title {
+          font-size: 10.5px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--c-white);
+          margin-bottom: 22px;
+        }
+        .eles-footer__col ul {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 13px;
+        }
+        .eles-footer__col a {
+          font-size: 13.5px;
+          color: var(--c-muted);
+          display: inline-flex;
+          align-items: center;
+          gap: 0;
+          transition: color 0.3s, gap 0.35s var(--ease-out), padding-left 0.35s var(--ease-out);
+        }
+        /* Pequeño bullet neón al hover */
+        .eles-footer__col a::before {
+          content: '▸';
+          font-size: 10px;
+          color: var(--c-red);
+          opacity: 0;
+          max-width: 0;
+          overflow: hidden;
+          transition: opacity 0.3s, max-width 0.35s var(--ease-out);
+        }
+        .eles-footer__col a:hover {
+          color: var(--c-white);
+          padding-left: 6px;
+        }
+        .eles-footer__col a:hover::before {
+          opacity: 1;
+          max-width: 16px;
+        }
+
+        /* ── Badge / Copyright ────────────────────────── */
+        .eles-footer__bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 20px;
+          border-top: 1px solid var(--c-border);
+          padding-top: 30px;
+        }
+        .eles-footer__copy {
+          font-size: 11.5px;
+          color: var(--c-muted);
+          letter-spacing: 0.04em;
+        }
+        /* Separador decorativo */
+        .eles-footer__divider {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .eles-footer__divider-line {
+          width: 32px; height: 1.5px;
+          background: var(--c-red);
+          box-shadow: 0 0 8px var(--c-red-glow);
+        }
+        .eles-footer__motto {
+          font-family: var(--f-serif);
+          font-style: italic;
+          font-size: 12px;
+          color: var(--c-red);
+          letter-spacing: 0.08em;
+        }
+
+        /* ================================================
+           [/FOOTER CSS END]
+        ================================================ */
+
+        /* ── RESPONSIVE ───────────────────────────────── */
+        @media (max-width: 1100px) {
+          .eles-footer { padding: 0 32px 36px; }
+          .eles-footer__marquee { margin: 0 -32px 60px; }
+          .eles-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+          .eles-footer__cta-block { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 700px) {
+          .eles-footer { padding: 0 20px 32px; }
+          .eles-footer__marquee { margin: 0 -20px 50px; }
+          .eles-footer__grid { grid-template-columns: 1fr; gap: 36px; }
+          .eles-footer__bottom { flex-direction: column; align-items: flex-start; }
+          .eles-footer__headline { font-size: 40px; }
+        }
+
+    /* ================================================
+       REVEAL ANIMATIONS
+    ================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media (max-width: 1024px) {
+      .nav { padding: 20px 24px; }
+      .nav-links, .nav-login { display: none; }
+      .page-hero { padding: 130px 24px 72px; }
+      .faq-section { padding: 60px 24px 80px; }
+      .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+      .faq-sidebar { position: static; }
+      .faq-cats { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+      .faq-cat-btn { padding: 9px 14px; }
+      .faq-contact-card { margin-top: 24px; }
+      .faq-cta { grid-template-columns: 1fr; gap: 32px; }
+      .faq-cta-pills { flex-wrap: wrap; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer { padding: 60px 24px 32px; }
+      .faq-btn::before { display: none; }
+    }
+    @media (max-width: 640px) {
+      .page-hero h1 { font-size: clamp(42px, 13vw, 72px); }
+      .faq-section { padding: 48px 20px 72px; }
+      .faq-question { font-size: 16px; }
+      .faq-panel { padding: 0 40px 0 6px; }
+      .faq-item.open .faq-panel { padding: 0 40px 22px 6px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .page-hero-deco { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       HEADER — ELES COMPONENT
+  ============================== -->
+  <header class="eles-header" id="eles-header" role="banner">
+    <!-- Logo -->
+    <a href="inicio.html" class="eles-header__logo" aria-label="ELES Fitness — Inicio">
+      <img src="logo.png" alt="ELES Fitness Logo" class="eles-header__logo-img">
+    </a>
+
+    <!-- Nav Desktop -->
+    <ul class="eles-header__nav" role="list">
+      <li><a href="cursos.html">Cursos</a></li>
+      <li><a href="planes.html">Membresía</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="metodo.html">Método</a></li>
+      <li><a href="faq.html" class="active">FAQ</a></li>
+      <li><a href="eventos.html">Eventos</a></li>
+    </ul>
+
+    <!-- Acciones -->
+    <div class="eles-header__actions">
+      <a href="#" class="eles-header__login">Mi cuenta</a>
+      <a href="planes.html" class="eles-header__cta">Unirme al Club</a>
+      <button
+        class="eles-header__burger"
+        id="eles-burger"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="eles-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="eles-header__overlay" id="eles-overlay" aria-hidden="true"></div>
+
+  <nav class="eles-header__drawer" id="eles-drawer" aria-label="Menú de navegación móvil">
+    <a href="inicio.html">Inicio</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="planes.html">Membresía</a>
+    <a href="tienda.html">Tienda</a>
+    <a href="metodo.html">Método</a>
+    <a href="faq.html" class="active">FAQ</a>
+    <a href="eventos.html">Eventos</a>
+  </nav>
+
+  <!-- ==============================
+       PAGE HERO
+  ============================== -->
+  <section class="page-hero">
+    <div class="page-hero-deco" aria-hidden="true">FAQ</div>
+    <p class="hero-eyebrow reveal">Soporte · Ayuda</p>
+    <h1 class="reveal reveal-delay-1">
+      Todo lo que<br>necesitas <em>saber.</em>
+    </h1>
+    <p class="page-hero-desc reveal reveal-delay-2">
+      Respuestas directas sobre membresías, clases, método híbrido y cobros. Sin rodeos.
+    </p>
+  </section>
+
+  <!-- ==============================
+       FAQ CONTENT
+  ============================== -->
+  <section class="faq-section">
+    <div class="faq-layout">
+
+      <!-- ── Sidebar ── -->
+      <aside class="faq-sidebar reveal">
+        <p class="faq-sidebar-title">Categorías</p>
+        <div class="faq-cats">
+          <button class="faq-cat-btn active" data-cat="all" id="cat-all">Todo</button>
+          <button class="faq-cat-btn" data-cat="metodo" id="cat-metodo">Método Híbrido</button>
+          <button class="faq-cat-btn" data-cat="membresia" id="cat-membresia">Membresía</button>
+          <button class="faq-cat-btn" data-cat="pagos" id="cat-pagos">Pagos</button>
+          <button class="faq-cat-btn" data-cat="tienda" id="cat-tienda">Tienda</button>
+        </div>
+
+        <div class="faq-contact-card">
+          <p>¿No encuentras lo que buscas? Escríbenos directamente y te respondemos en menos de 24h.</p>
+          <a href="mailto:hola@eles.com" id="contact-link">
+            Contactar ahora
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </aside>
+
+      <!-- ── FAQ Accordion ── -->
+      <div class="faq-groups">
+
+        <!-- Método Híbrido -->
+        <div class="faq-group visible" data-group="metodo" id="group-metodo">
+          <p class="faq-group-label">Método Híbrido</p>
+
+          <article class="faq-item reveal" id="faq-1">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-1" id="btn-faq-1">
+              <span class="faq-question">¿Necesito experiencia previa para empezar?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-1" role="region" aria-labelledby="btn-faq-1">
+              <p>No. Tenemos rutas diseñadas para <strong>principiante, intermedio y avanzado</strong>. El sistema analiza tu nivel inicial y te sugiere la progresión ideal para que nunca te sientas perdida ni por debajo de tu potencial.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-1" id="faq-2">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-2" id="btn-faq-2">
+              <span class="faq-question">¿Cómo se combinan las clases online y presenciales?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-2" role="region" aria-labelledby="btn-faq-2">
+              <p>Entrenas online durante la semana con nuestros programas en vídeo y usas las sesiones presenciales para <strong>corrección técnica y ajustes individualizados</strong>. Lo mejor de los dos mundos: rigor técnico y la flexibilidad que necesitas.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-2" id="faq-3">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-3" id="btn-faq-3">
+              <span class="faq-question">¿Cuánto tiempo necesito dedicar cada semana?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-3" role="region" aria-labelledby="btn-faq-3">
+              <p>Con <strong>3-4 sesiones semanales de 30 a 45 minutos</strong> verás cambios reales en 8 semanas. El método está diseñado para ser efectivo sin monopolizar tu agenda. Calidad sobre cantidad, siempre.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Membresía -->
+        <div class="faq-group visible" data-group="membresia" id="group-membresia">
+          <p class="faq-group-label">Membresía & Acceso</p>
+
+          <article class="faq-item reveal" id="faq-4">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-4" id="btn-faq-4">
+              <span class="faq-question">¿Qué incluye la zona premium?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-4" role="region" aria-labelledby="btn-faq-4">
+              <p>La membresía incluye <strong>programas completos, masterclasses exclusivas, calendario avanzado y seguimiento privado</strong>. Además tienes acceso prioritario a nuevos contenidos y un descuento fijo del 15% en todos los productos de la tienda.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-1" id="faq-5">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-5" id="btn-faq-5">
+              <span class="faq-question">¿Puedo pausar o cancelar mi plan?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-5" role="region" aria-labelledby="btn-faq-5">
+              <p>Sí. Puedes <strong>pausar hasta 2 meses al año o cancelar en cualquier momento</strong> desde tu cuenta, con al menos 48 horas antes de la renovación mensual. Sin penalizaciones, sin letra pequeña.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-2" id="faq-6">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-6" id="btn-faq-6">
+              <span class="faq-question">¿Puedo acceder desde el móvil?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-6" role="region" aria-labelledby="btn-faq-6">
+              <p>Sí. La plataforma está <strong>optimizada para móvil, tablet y escritorio</strong>. Entrena donde y cuando quieras: en casa, en el estudio o de viaje. El contenido también funciona sin conexión si lo guardas previamente.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Pagos -->
+        <div class="faq-group visible" data-group="pagos" id="group-pagos">
+          <p class="faq-group-label">Pagos & Facturación</p>
+
+          <article class="faq-item reveal" id="faq-7">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-7" id="btn-faq-7">
+              <span class="faq-question">¿Qué métodos de pago se aceptan?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-7" role="region" aria-labelledby="btn-faq-7">
+              <p>Aceptamos <strong>tarjeta de crédito y débito VISA, Mastercard y American Express</strong>, así como PayPal. Todos los pagos se procesan de forma segura a través de Stripe con cifrado SSL.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-1" id="faq-8">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-8" id="btn-faq-8">
+              <span class="faq-question">¿Cuándo se renueva mi suscripción?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-8" role="region" aria-labelledby="btn-faq-8">
+              <p>La renovación es <strong>automática cada mes en la fecha exacta de alta</strong>. Recibirás un recordatorio por email 72 horas antes y podrás gestionar todo desde el panel de tu cuenta sin contactar con soporte.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-2" id="faq-9">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-9" id="btn-faq-9">
+              <span class="faq-question">¿Ofrecéis reembolsos?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-9" role="region" aria-labelledby="btn-faq-9">
+              <p>Disponemos de una <strong>garantía de satisfacción de 14 días</strong>. Si dentro de ese plazo no estás satisfecha, te devolvemos el importe íntegro sin preguntas. Fuera de ese periodo, las suscripciones no son reembolsables pero puedes cancelar sin coste.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tienda -->
+        <div class="faq-group visible" data-group="tienda" id="group-tienda">
+          <p class="faq-group-label">Tienda & Envíos</p>
+
+          <article class="faq-item reveal" id="faq-10">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-10" id="btn-faq-10">
+              <span class="faq-question">¿Cuánto tarda en llegar mi pedido?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-10" role="region" aria-labelledby="btn-faq-10">
+              <p>Los pedidos dentro de España peninsular se entregan en <strong>2-4 días hábiles</strong>. Islas y Portugal en 3-6 días. El resto de Europa en 5-8 días. El envío es gratuito a partir de 60€ y recibirás un número de seguimiento en cuanto salga tu pedido.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-1" id="faq-11">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-11" id="btn-faq-11">
+              <span class="faq-question">¿Puedo devolver un producto de la tienda?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-11" role="region" aria-labelledby="btn-faq-11">
+              <p>Sí. Dispones de <strong>30 días desde la recepción para devolver cualquier artículo</strong> en perfecto estado y con el embalaje original. Los gastos de devolución corren por cuenta de la clienta excepto si el artículo presenta defectos de fabricación.</p>
+            </div>
+          </article>
+
+          <article class="faq-item reveal reveal-delay-2" id="faq-12">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-12" id="btn-faq-12">
+              <span class="faq-question">¿Los miembros premium tienen descuento en la tienda?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </span>
+            </button>
+            <div class="faq-panel" id="panel-12" role="region" aria-labelledby="btn-faq-12">
+              <p>Sí. Las miembros con membresía activa disfrutan de un <strong>descuento fijo del 15%</strong> en todos los productos de la tienda, acceso anticipado a nuevos lanzamientos y envío prioritario sin coste adicional.</p>
+            </div>
+          </article>
+        </div>
+
+      </div><!-- /faq-groups -->
+    </div><!-- /faq-layout -->
+  </section>
+
+  <!-- ==============================
+       CTA BAND
+  ============================== -->
+  <section class="faq-cta reveal">
+    <div class="faq-cta-left">
+      <p class="faq-cta-tag">El siguiente paso</p>
+      <h2 class="faq-cta-title">¿Preparada para el <em>estándar?</em></h2>
+    </div>
+    <div class="faq-cta-pills">
+      <a href="planes.html" class="cta-pill cta-pill--primary" id="cta-join">
+        Unirme al Club
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <a href="mailto:hola@eles.com" class="cta-pill cta-pill--ghost" id="cta-email">
+        Contactar
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==============================
+       FOOTER
+  ============================== -->
+  <footer class="eles-footer" role="contentinfo">
+
+    <!-- Banda Marquee animada -->
+    <div class="eles-footer__marquee" aria-hidden="true">
+      <div class="eles-footer__marquee-track">
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+      </div>
+    </div>
+
+    <!-- Columnas -->
+    <div class="eles-footer__grid">
+
+      <!-- Columna Marca -->
+      <div class="eles-footer__brand">
+        <div class="eles-footer__brand-logo">ELES<em>.</em></div>
+        <p class="eles-footer__brand-desc">
+          Fitness de élite, método técnico y equipo boutique. Una comunidad guiada por la excelencia, la constancia y los resultados reales.
+        </p>
+        <div class="eles-footer__socials">
+          <a href="#" class="eles-footer__social" aria-label="Instagram ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="TikTok ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.19a8.18 8.18 0 004.79 1.53V6.27a4.85 4.85 0 01-1.02-.42z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="YouTube ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna Plataforma -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Plataforma</p>
+        <ul>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="planes.html">Membresía</a></li>
+          <li><a href="tienda.html">Tienda ELES</a></li>
+          <li><a href="metodo.html">Método</a></li>
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Soporte -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Soporte</p>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="mailto:hola@eles.com">Contacto</a></li>
+          <li><a href="#">Mi Membresía</a></li>
+          <li><a href="#">Devoluciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Legal -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Legal</p>
+        <ul>
+          <li><a href="#">Aviso Legal</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="terminos.html">Términos</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="eles-footer__bottom">
+      <span class="eles-footer__copy">© 2024 ELES Fitness Studio. Todos los derechos reservados.</span>
+      <div class="eles-footer__divider">
+        <div class="eles-footer__divider-line"></div>
+        <span class="eles-footer__motto">not for everyone.</span>
+      </div>
+    </div>
+
+  </footer>
+
+  <script>
+    // ── Year ──────────────────────────────────────────
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    /* ── Header: Scroll effect ─────────────────── */
+    (function () {
+      const header = document.getElementById('eles-header');
+      if (!header) return;
+      const update = () => header.classList.toggle('scrolled', window.scrollY > 50);
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    /* ── Header: Hamburger / Drawer ────────────── */
+    (function () {
+      const burger  = document.getElementById('eles-burger');
+      const drawer  = document.getElementById('eles-drawer');
+      const overlay = document.getElementById('eles-overlay');
+      if (!burger || !drawer) return;
+
+      function open() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      burger.addEventListener('click', () =>
+        drawer.classList.contains('open') ? close() : open()
+      );
+
+      overlay.addEventListener('click', close);
+
+      drawer.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', close)
+      );
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') close();
+      });
+    })();
+
+    // ── Reveal on scroll ──────────────────────────────
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Accordion ─────────────────────────────────────
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const btn = item.querySelector('.faq-btn');
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all
+        faqItems.forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+        });
+        // Toggle clicked
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ── Category filter ───────────────────────────────
+    const catBtns = document.querySelectorAll('.faq-cat-btn');
+    const groups  = document.querySelectorAll('.faq-group');
+
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        catBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cat = btn.dataset.cat;
+
+        if (cat === 'all') {
+          groups.forEach(g => g.classList.add('visible'));
+        } else {
+          groups.forEach(g => {
+            if (g.dataset.group === cat) {
+              g.classList.add('visible');
+            } else {
+              g.classList.remove('visible');
+            }
+          });
+        }
+
+        // Close all open items when switching category
+        faqItems.forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

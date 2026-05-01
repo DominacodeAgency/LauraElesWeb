@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELES · Cursos — Programas de Pilates de Élite</title>
+  <meta name="description" content="Explora los programas de Pilates de ELES. Básicos, Premium y selección personal de Laura para mujeres que exigen resultados reales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ================================================
+       TOKENS & RESET
+    ================================================ */
+    :root {
+      --c-bg:       #1d1d1d;
+      --c-surface:  #242424;
+      --c-surface2: #1a1a1a;
+      --c-border:   rgba(255,255,255,0.08);
+      --c-red:      #70000e;
+      --c-red-glow: rgba(112,0,14,0.45);
+      --c-red-dim:  rgba(112,0,14,0.1);
+      --c-white:    #ffffff;
+      --c-muted:    #888888;
+      --c-light:    #cccccc;
+      --f-serif:    'DM Serif Display', Georgia, serif;
+      --f-sans:     'DM Sans', system-ui, sans-serif;
+      --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-sans);
+      background: var(--c-bg);
+      color: var(--c-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ================================================
+       NAVIGATION
+    ================================================ */
+    /* ================================================
+       HEADER — ELES COMPONENT
+    ================================================ */
+
+    /* --- Nav Container --- */
+    .eles-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 999;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      transition:
+        background     0.5s var(--ease-out),
+        border-color   0.4s,
+        backdrop-filter 0.5s,
+        padding        0.4s var(--ease-out);
+      border-bottom: 1px solid transparent;
+    }
+
+    .eles-header.scrolled {
+      background: rgba(29, 29, 29, 0.94);
+      backdrop-filter: blur(20px) saturate(150%);
+      border-bottom-color: var(--c-border);
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    /* --- Logo --- */
+    .eles-header__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .eles-header__logo-img {
+      height: 60px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: height 0.4s var(--ease-out);
+    }
+    .eles-header.scrolled .eles-header__logo-img {
+      height: 48px;
+    }
+
+    /* --- Desktop Links --- */
+    .eles-header__nav {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      list-style: none;
+    }
+    .eles-header__nav a {
+      position: relative;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-light);
+      transition: color 0.3s;
+    }
+    .eles-header__nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 0; height: 1.5px;
+      background: var(--c-red);
+      box-shadow: 0 0 8px var(--c-red-glow);
+      transition: width 0.4s var(--ease-out);
+    }
+    .eles-header__nav a:hover { color: var(--c-white); }
+    .eles-header__nav a:hover::after { width: 100%; }
+    .eles-header__nav a.active { color: var(--c-white); }
+    .eles-header__nav a.active::after { width: 100%; }
+
+    /* --- Right side: Login + CTA --- */
+    .eles-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .eles-header__login {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--c-muted);
+      transition: color 0.3s;
+    }
+    .eles-header__login:hover { color: var(--c-white); }
+
+    .eles-header__cta {
+      position: relative;
+      overflow: hidden;
+      background: var(--c-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 13px 24px;
+      border-radius: 2px;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s, background 0.3s;
+    }
+    .eles-header__cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transition: left 0.55s var(--ease-out);
+    }
+    .eles-header__cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--c-red-glow), 0 0 0 1px rgba(112,0,14,0.4); }
+    .eles-header__cta:hover::before { left: 150%; }
+
+    /* --- Hamburger (móvil) --- */
+    .eles-header__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5.5px;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 4px;
+    }
+    .eles-header__burger span {
+      display: block;
+      width: 100%; height: 1.5px;
+      background: var(--c-white);
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform  0.45s var(--ease-out), opacity 0.3s, width 0.3s var(--ease-out);
+    }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; width: 0; }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* --- Mobile Drawer --- */
+    .eles-header__drawer {
+      position: fixed;
+      inset: 0 0 0 25%;
+      z-index: 998;
+      background: var(--c-surface);
+      border-left: 1px solid var(--c-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      transform: translateX(100%);
+      transition: transform 0.55s var(--ease-out);
+      gap: 0;
+    }
+    .eles-header__drawer.open { transform: translateX(0); }
+    .eles-header__overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 997;
+      background: rgba(0,0,0,0.6);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .eles-header__overlay.open { display: block; opacity: 1; }
+    .eles-header__drawer a {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 5vw, 36px);
+      font-style: normal;
+      color: var(--c-white);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--c-border);
+      transition: color 0.3s, padding-left 0.35s var(--ease-out);
+    }
+    .eles-header__drawer a:last-child { border-bottom: none; }
+    .eles-header__drawer a:hover { color: var(--c-red); padding-left: 10px; }
+    .eles-header__drawer a.active { color: var(--c-red); }
+
+    @media (max-width: 1024px) {
+      .eles-header { padding: 20px 24px; }
+      .eles-header__nav { display: none; }
+      .eles-header__login { display: none; }
+      .eles-header__burger { display: flex; }
+    }
+
+    /* ================================================
+       HERO
+    ================================================ */
+    .hero {
+      padding: 160px 48px 96px;
+      border-bottom: 1px solid var(--c-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(112,0,14,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--c-red); margin-bottom: 24px;
+    }
+    .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--c-red); }
+    .hero-title {
+      font-family: var(--f-serif);
+      font-size: clamp(48px, 8vw, 100px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      max-width: 860px;
+      margin-bottom: 32px;
+    }
+    .hero-title em { font-style: italic; color: var(--c-red); }
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-desc {
+      max-width: 440px;
+      font-size: 16px; color: var(--c-light);
+      font-weight: 300; line-height: 1.75;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-shrink: 0;
+    }
+
+    .hstat-num {
+      font-family: var(--f-serif);
+      font-size: 36px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hstat-num em { color: var(--c-red); font-style: normal; }
+    .hstat-label { font-size: 11px; color: var(--c-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ================================================
+       SECTION COMMON
+    ================================================ */
+    .academy-section {
+      padding: 96px 48px;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+    .section-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-red); margin-bottom: 14px;
+    }
+    .section-h2 {
+      font-family: var(--f-serif);
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .section-h2 em { font-style: italic; color: var(--c-red); }
+    .section-desc {
+      font-size: 14px; color: var(--c-muted); margin-top: 10px;
+      max-width: 480px; line-height: 1.65;
+    }
+    .section-link {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--c-muted);
+      display: flex; align-items: center; gap: 8px;
+      transition: color 0.25s, gap 0.25s; flex-shrink: 0;
+    }
+    .section-link:hover { color: var(--c-white); gap: 14px; }
+
+    /* ================================================
+       COURSE CARDS GRID
+    ================================================ */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .courses-grid.grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .courses-grid.grid-3-wide { grid-template-columns: repeat(3, 1fr); }
+
+    /* ── Course Card ───────────────────────────── */
+    .ccard {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--c-white);
+      transition: border-color 0.4s var(--ease-out);
+    }
+    .ccard:hover { border-color: rgba(112,0,14,0.4); }
+
+    /* Image */
+    .ccard__img {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .ccard__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7) grayscale(20%);
+      transition: transform 0.7s var(--ease-out), filter 0.5s;
+    }
+    .ccard:hover .ccard__img img {
+      transform: scale(1.06);
+      filter: brightness(0.85) grayscale(0%);
+    }
+    .ccard__img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(29,29,29,0.85) 0%, transparent 60%);
+    }
+
+    /* Level badge on image */
+    .ccard__badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      z-index: 2;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+    }
+    .ccard__badge--basic {
+      background: rgba(29,29,29,0.88);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--c-light);
+    }
+    .ccard__badge--premium {
+      background: var(--c-red);
+      border: 1px solid var(--c-red);
+      color: white;
+    }
+    .ccard__badge--laura {
+      background: rgba(112,0,14,0.15);
+      border: 1px solid rgba(112,0,14,0.4);
+      color: var(--c-red);
+    }
+
+    /* Video count on image bottom-left */
+    .ccard__vcount {
+      position: absolute;
+      bottom: 14px; left: 16px;
+      z-index: 2;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .ccard__vcount svg { opacity: 0.6; }
+
+    /* Body */
+    .ccard__body {
+      padding: 24px 24px 26px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .ccard__cat {
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-red); margin-bottom: 8px;
+    }
+    .ccard__name {
+      font-family: var(--f-serif);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .ccard__desc {
+      font-size: 13px; color: var(--c-muted);
+      line-height: 1.6; flex: 1; margin-bottom: 20px;
+    }
+
+    /* Footer row */
+    .ccard__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 18px;
+      border-top: 1px solid var(--c-border);
+    }
+    .ccard__meta {
+      display: flex; gap: 12px; align-items: center;
+    }
+    .ccard__dur {
+      font-size: 11px; color: var(--c-muted); letter-spacing: 0.05em;
+    }
+    .ccard__sep { color: rgba(255,255,255,0.1); }
+    .ccard__level-tag {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid var(--c-border);
+      color: var(--c-muted);
+    }
+    .ccard__cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--c-muted);
+      transition: color 0.3s, gap 0.3s;
+    }
+    .ccard:hover .ccard__cta { color: var(--c-red); gap: 10px; }
+    .ccard__cta svg { transition: transform 0.3s var(--ease-out); }
+    .ccard:hover .ccard__cta svg { transform: translateX(4px); }
+
+    /* Lock icon for premium locked cards */
+    .ccard__lock {
+      position: absolute;
+      top: 16px; right: 16px;
+      z-index: 3;
+      width: 30px; height: 30px;
+      background: rgba(29,29,29,0.88);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--c-border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-muted);
+    }
+
+    /* ================================================
+       LAURA SECTION — special design
+    ================================================ */
+    .laura-intro {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 56px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .laura-photo {
+      position: relative;
+    }
+    .laura-photo img {
+      width: 100%;
+      height: 460px;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(30%);
+      transition: filter 0.5s;
+    }
+    .laura-photo:hover img { filter: grayscale(0%); }
+    .laura-photo::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40%;
+      background: linear-gradient(to top, var(--c-bg), transparent);
+    }
+
+    .laura-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--c-red-dim);
+      border: 1px solid rgba(112,0,14,0.3);
+      color: var(--c-red);
+      padding: 6px 14px;
+      margin-bottom: 20px;
+    }
+    .laura-quote {
+      font-family: var(--f-serif);
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.3;
+      font-style: italic;
+      color: var(--c-white);
+      margin-bottom: 20px;
+    }
+    .laura-sub {
+      font-size: 14px; color: var(--c-muted);
+      line-height: 1.7; max-width: 540px;
+    }
+    .laura-sig {
+      margin-top: 24px;
+      font-family: var(--f-serif);
+      font-size: 18px;
+      color: var(--c-red);
+      font-style: italic;
+    }
+
+    /* Laura card variant */
+    .ccard--laura .ccard__badge--laura::before {
+      content: '✦ ';
+    }
+
+    /* ================================================
+       CTA BAND
+    ================================================ */
+    .cta-band {
+      padding: 96px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(112,0,14,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-band-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--c-red); margin-bottom: 18px;
+    }
+    .cta-band-title {
+      font-family: var(--f-serif);
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -1.5px;
+      margin-bottom: 14px;
+    }
+    .cta-band-title em { font-style: italic; color: var(--c-red); }
+    .cta-band-sub {
+      font-size: 15px; color: var(--c-muted);
+      max-width: 440px; margin: 0 auto 40px; line-height: 1.7;
+    }
+    .cta-band-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--c-red); color: white;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 16px 34px; border-radius: 2px;
+      transition: opacity 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-3px); box-shadow: 0 10px 30px var(--c-red-glow); }
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.2); color: var(--c-light);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 16px 34px; border-radius: 2px;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease-out);
+    }
+    .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.05); transform: translateY(-3px); }
+
+    /* ================================================
+       REVEAL ANIMATIONS
+    ================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;z-index:1001}
+    .nav-burger span{display:block;width:100%;height:1.5px;background:var(--c-white);transition:transform .4s var(--ease-out),opacity .3s,width .3s;transform-origin:center}
+    .nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .nav-burger.open span:nth-child(2){opacity:0;width:0}
+    .nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .mobile-menu{position:fixed;inset:0;z-index:998;background:rgba(22,22,22,.98);backdrop-filter:blur(24px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 40px 60px;opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out)}
+    .mobile-menu.open{opacity:1;pointer-events:all}
+    .mobile-menu-links{list-style:none;display:flex;flex-direction:column;gap:6px;width:100%;margin-bottom:48px}
+    .mobile-menu-links a{display:flex;align-items:center;justify-content:space-between;padding:18px 0;font-family:var(--f-serif);font-size:clamp(28px,8vw,44px);line-height:1;letter-spacing:-1px;color:var(--c-light);border-bottom:1px solid var(--c-border);text-decoration:none;transform:translateY(30px);opacity:0;transition:transform .5s var(--ease-out),opacity .5s var(--ease-out),color .3s,padding-left .3s}
+    .mobile-menu.open .mobile-menu-links a{transform:translateY(0);opacity:1}
+    .mobile-menu-links li:nth-child(1) a{transition-delay:.05s}.mobile-menu-links li:nth-child(2) a{transition-delay:.1s}.mobile-menu-links li:nth-child(3) a{transition-delay:.15s}.mobile-menu-links li:nth-child(4) a{transition-delay:.2s}.mobile-menu-links li:nth-child(5) a{transition-delay:.25s}
+    .mobile-menu-links a:hover{color:var(--c-white);padding-left:8px}.mobile-menu-links a.active{color:var(--c-red)}
+    .mobile-menu-links a span{font-family:var(--f-sans);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--c-muted)}
+    .mobile-menu-bottom{display:flex;flex-direction:column;gap:16px;width:100%}
+    .mobile-menu-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--c-red);color:#fff;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:18px 32px;border-radius:2px;text-decoration:none;transition:opacity .3s}
+    .mobile-menu-cta:hover{opacity:.88}
+    .mobile-menu-note{font-size:12px;color:var(--c-muted);text-align:center}
+    .mobile-menu-note a{color:var(--c-light);transition:color .25s}
+    @media (max-width: 1024px) {
+      .nav { padding: 20px 24px; }
+      .nav-links, .nav-login { display: none; }
+      .nav-burger { display: flex; }
+      .hero { padding: 130px 24px 72px; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      .hero-stats { gap: 28px; }
+      .academy-section { padding: 64px 24px; }
+      .section-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .courses-grid { grid-template-columns: repeat(2, 1fr); }
+      .courses-grid.grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .laura-intro { grid-template-columns: 1fr; }
+      .laura-photo { max-width: 480px; margin: 0 auto; }
+      .laura-photo img { width: 100%; height: auto; object-fit: contain; }
+      .cta-band { padding: 64px 24px; }
+    }
+    @media (max-width: 640px) {
+      .courses-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-wrap: wrap; gap: 20px; }
+    }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    .eles-footer {
+      background: var(--c-surface, #181818);
+      border-top: 1px solid var(--c-border, rgba(255,255,255,0.08));
+      padding: 0 48px 40px;
+    }
+    .eles-footer__marquee {
+      border-bottom: 1px solid var(--c-border, rgba(255,255,255,0.08));
+      overflow: hidden;
+      padding: 18px 0;
+      margin: 0 -48px 60px;
+    }
+    .eles-footer__marquee-track {
+      display: flex;
+      width: max-content;
+      animation: footerMarquee 30s linear infinite;
+    }
+    @keyframes footerMarquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .eles-footer__marquee-track span {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-muted, #888);
+      padding: 0 24px;
+      white-space: nowrap;
+    }
+    .eles-footer__marquee-track span em { color: var(--c-red, #70000e); font-style: normal; }
+    .eles-footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+    .eles-footer__brand-logo {
+      font-family: var(--f-serif, 'DM Serif Display', Georgia, serif);
+      font-size: 26px;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      color: var(--c-white, #fff);
+    }
+    .eles-footer__brand-logo em { color: var(--c-red, #70000e); font-style: normal; }
+    .eles-footer__brand-desc {
+      font-size: 13.5px;
+      color: var(--c-muted, #888);
+      line-height: 1.8;
+      max-width: 290px;
+      margin-bottom: 28px;
+    }
+    .eles-footer__socials { display: flex; gap: 10px; }
+    .eles-footer__social {
+      width: 38px; height: 38px;
+      border: 1px solid var(--c-border, rgba(255,255,255,0.08));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-muted, #888);
+      transition: border-color 0.3s, color 0.3s, transform 0.3s;
+    }
+    .eles-footer__social:hover { border-color: var(--c-red, #70000e); color: var(--c-red, #70000e); transform: translateY(-3px); }
+    .eles-footer__col-title {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-white, #fff); margin-bottom: 22px;
+    }
+    .eles-footer__col ul { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+    .eles-footer__col a {
+      font-size: 13.5px; color: var(--c-muted, #888);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .eles-footer__col a:hover { color: var(--c-white, #fff); }
+    .eles-footer__bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+      border-top: 1px solid var(--c-border, rgba(255,255,255,0.08));
+      padding-top: 28px;
+    }
+    .eles-footer__copy { font-size: 11.5px; color: var(--c-muted, #888); letter-spacing: 0.04em; }
+    .eles-footer__divider { display: flex; align-items: center; gap: 10px; }
+    .eles-footer__divider-line { width: 32px; height: 1.5px; background: var(--c-red, #70000e); box-shadow: 0 0 8px rgba(112,0,14,0.65); }
+    .eles-footer__motto { font-family: var(--f-serif, 'DM Serif Display', Georgia, serif); font-style: italic; font-size: 12px; color: var(--c-red, #70000e); letter-spacing: 0.08em; }
+    @media (max-width: 1100px) {
+      .eles-footer { padding: 0 32px 36px; }
+      .eles-footer__marquee { margin: 0 -32px 60px; }
+      .eles-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 700px) {
+      .eles-footer { padding: 0 20px 32px; }
+      .eles-footer__marquee { margin: 0 -20px 50px; }
+      .eles-footer__grid { grid-template-columns: 1fr; gap: 36px; }
+      .eles-footer__bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       HEADER — ELES COMPONENT
+  ============================== -->
+  <header class="eles-header" id="eles-header" role="banner">
+    <!-- Logo -->
+    <a href="inicio.html" class="eles-header__logo" aria-label="ELES Fitness — Inicio">
+      <img src="logo.png" alt="ELES Fitness Logo" class="eles-header__logo-img">
+    </a>
+
+    <!-- Nav Desktop -->
+    <ul class="eles-header__nav" role="list">
+      <li><a href="cursos.html" class="active">Cursos</a></li>
+      <li><a href="planes.html">Membresía</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="metodo.html">Método</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="eventos.html">Eventos</a></li>
+    </ul>
+
+    <!-- Acciones -->
+    <div class="eles-header__actions">
+      <a href="#" class="eles-header__login">Mi cuenta</a>
+      <a href="planes.html" class="eles-header__cta">Unirme al Club</a>
+      <button
+        class="eles-header__burger"
+        id="eles-burger"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="eles-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="eles-header__overlay" id="eles-overlay" aria-hidden="true"></div>
+
+  <nav class="eles-header__drawer" id="eles-drawer" aria-label="Menú de navegación móvil">
+    <a href="inicio.html">Inicio</a>
+    <a href="cursos.html" class="active">Cursos</a>
+    <a href="planes.html">Membresía</a>
+    <a href="tienda.html">Tienda</a>
+    <a href="metodo.html">Método</a>
+    <a href="faq.html">FAQ</a>
+    <a href="eventos.html">Eventos</a>
+  </nav>
+
+  <!-- ==============================
+       HERO
+  ============================== -->
+  <section class="hero">
+    <h1 class="hero-title reveal">
+      Descubre el<br><em>Hybrid Pilates.</em>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc reveal reveal-d1">
+        Programas de Pilates diseñados con precisión técnica. Desde los fundamentos hasta protocolos avanzados — cada programa tiene un propósito, un orden y un resultado claro.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==============================
+       01 · BÁSICOS
+  ============================== -->
+  <section class="academy-section" id="basicos">
+    <div class="section-head">
+      <div>
+        <h2 class="section-h2 reveal">Construye tu <em>fuerza.</em></h2>
+        <p class="section-desc reveal reveal-d1">Los programas fundamentales para dominar la técnica, entender tu cuerpo y establecer una rutina sostenible. Acceso incluido en todos los planes.</p>
+      </div>
+      <a href="planes.html" class="section-link reveal">Ver planes de acceso →</a>
+    </div>
+
+    <div class="courses-grid grid-3-wide">
+
+      <!-- Card 01 -->
+      <a href="curso-detalle.html?curso=sculpt-base&nivel=basico" class="ccard reveal">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            15 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" alt="Sculpt Base" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Mat · Fundamentos</p>
+          <h3 class="ccard__name">Sculpt Base</h3>
+          <p class="ccard__desc">Dominio técnico desde los cimientos. Aprende alineación, activación del core y patrones de movimiento que soportarán todo lo que venga después.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">40 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Principiante</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 02 -->
+      <a href="curso-detalle.html?curso=mat-pilates&nivel=basico" class="ccard reveal reveal-d1">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            12 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop" alt="Mat Pilates" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Mat · Control</p>
+          <h3 class="ccard__name">Mat Pilates Essentials</h3>
+          <p class="ccard__desc">Base técnica en colchoneta para desarrollar fuerza funcional, mejorar postura y construir conciencia corporal real desde el principio.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">50 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Principiante</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 03 -->
+      <a href="curso-detalle.html?curso=express-30&nivel=basico" class="ccard reveal reveal-d2">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            18 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=800&auto=format&fit=crop" alt="Express 30" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Express · Eficiencia</p>
+          <h3 class="ccard__name">Express 30</h3>
+          <p class="ccard__desc">El programa para los días sin tiempo. Sesiones de 30 minutos diseñadas para máxima eficiencia sin renunciar a la técnica ni al resultado.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">30 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Principiante</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ==============================
+       02 · PREMIUM
+  ============================== -->
+  <section class="academy-section" id="premium" style="background: var(--c-surface2);">
+    <div class="section-head">
+      <div>
+        <h2 class="section-h2 reveal">Cardio de <em>élite.</em></h2>
+        <p class="section-desc reveal reveal-d1">Programas de alta intensidad cardiovascular con base en Pilates. Quema, activa y transforma — sin perder la técnica en el proceso.</p>
+      </div>
+      <a href="planes.html" class="section-link reveal">Acceder al Club →</a>
+    </div>
+
+    <div class="courses-grid grid-4">
+
+      <!-- Card P01 -->
+      <a href="curso-detalle.html?curso=mat-elite-flow&nivel=premium" class="ccard reveal">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--premium">Premium</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            22 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Mat Elite Flow" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Flow · Intensidad</p>
+          <h3 class="ccard__name">Mat Elite Flow</h3>
+          <p class="ccard__desc">Secuencias fluidas para resistencia, coordinación y foco mental. 8 semanas de progresión real.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">50 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Intermedio</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card P02 -->
+      <a href="curso-detalle.html?curso=extreme-burn&nivel=premium" class="ccard reveal reveal-d1">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--premium">Premium</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            30 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?q=80&w=800&auto=format&fit=crop" alt="Extreme Burn Protocol" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Burn · Transformación</p>
+          <h3 class="ccard__name">Extreme Burn Protocol</h3>
+          <p class="ccard__desc">El protocolo de transformación total. Intensidad máxima y progresión sin piedad para las que no aceptan límites.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">45 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Avanzado</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card P03 -->
+      <a href="curso-detalle.html?curso=deep-core&nivel=premium" class="ccard reveal reveal-d2">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--premium">Premium</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            20 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop" alt="Deep Core Series" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Core · Fuerza</p>
+          <h3 class="ccard__name">Deep Core Series</h3>
+          <p class="ccard__desc">Activación profunda del abdomen transverso y suelo pélvico. El trabajo interior que cambia todo lo exterior.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">40 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Intermedio</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card P04 -->
+      <a href="curso-detalle.html?curso=power-reformer&nivel=premium" class="ccard reveal reveal-d3">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--premium">Premium</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            28 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?q=80&w=800&auto=format&fit=crop" alt="Power Reformer" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Reformer · Potencia</p>
+          <h3 class="ccard__name">Power Reformer</h3>
+          <p class="ccard__desc">El sistema más completo de Pilates en reformer. Fuerza, longitud muscular y estabilidad articular en un solo programa de élite.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">55 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Avanzado</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ==============================
+       03 · MOVILIDAD
+  ============================== -->
+  <section class="academy-section" id="movilidad">
+    <div class="section-head">
+      <div>
+        <h2 class="section-h2 reveal">Movilidad sin <em>límites.</em></h2>
+        <p class="section-desc reveal reveal-d1">Programas centrados en flexibilidad, movilidad articular y control postural. El trabajo que tus articulaciones necesitan y que la mayoría ignora.</p>
+      </div>
+      <a href="planes.html" class="section-link reveal">Ver planes de acceso →</a>
+    </div>
+
+    <div class="courses-grid grid-3-wide">
+
+      <!-- Card M01 -->
+      <a href="curso-detalle.html?curso=stretch-flow&nivel=basico" class="ccard reveal">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            14 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop" alt="Stretch & Flow" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Movilidad · Flexibilidad</p>
+          <h3 class="ccard__name">Stretch & Flow</h3>
+          <p class="ccard__desc">Rutinas de estiramientos activos y movilidad global para recuperar rango de movimiento, aliviar tensión acumulada y preparar el cuerpo para entrenar mejor.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">35 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Todos los niveles</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card M02 -->
+      <a href="curso-detalle.html?curso=hip-unlock&nivel=basico" class="ccard reveal reveal-d1">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            10 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=800&auto=format&fit=crop" alt="Hip Unlock" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Cadera · Apertura</p>
+          <h3 class="ccard__name">Hip Unlock</h3>
+          <p class="ccard__desc">Protocolo específico para liberar la cadera, uno de los puntos de mayor tensión crónica. Mejora tu movilidad articular y cambia cómo te mueves en cada entrenamiento.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">30 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Principiante</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card M03 -->
+      <a href="curso-detalle.html?curso=spine-release&nivel=premium" class="ccard reveal reveal-d2">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--premium">Premium</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            16 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=800&auto=format&fit=crop" alt="Spine Release" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Columna · Postura</p>
+          <h3 class="ccard__name">Spine Release</h3>
+          <p class="ccard__desc">Trabajo profundo de descompresión vertebral, movilidad torácica y corrección postural. Para las que pasan horas sentadas y quieren recuperar una espalda funcional y libre.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">40 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Intermedio</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ==============================
+       04 · EXPRESS
+  ============================== -->
+  <section class="academy-section" id="express" style="background: var(--c-surface2);">
+    <div class="section-head">
+      <div>
+        <h2 class="section-h2 reveal">Sesiones <em>Express.</em></h2>
+        <p class="section-desc reveal reveal-d1">Sesiones cortas diseñadas para encajar en cualquier día. Sin excusas, sin sacrificar resultados. Pilates de élite en menos de 30 minutos.</p>
+      </div>
+      <a href="planes.html" class="section-link reveal">Ver planes de acceso →</a>
+    </div>
+
+    <div class="courses-grid grid-4">
+
+      <!-- Card E01 -->
+      <a href="curso-detalle.html?curso=express-20&nivel=basico" class="ccard reveal">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            20 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=800&auto=format&fit=crop" alt="Express 20" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Express · 20 min</p>
+          <h3 class="ccard__name">Express 20</h3>
+          <p class="ccard__desc">El programa más corto de ELES. 20 minutos de trabajo concentrado para días de agenda imposible. Cada movimiento cuenta.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">20 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Principiante</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card E02 -->
+      <a href="curso-detalle.html?curso=express-30&nivel=basico" class="ccard reveal reveal-d1">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            18 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop" alt="Express 30" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Express · 30 min</p>
+          <h3 class="ccard__name">Express 30</h3>
+          <p class="ccard__desc">El programa para los días sin tiempo. Sesiones de 30 minutos diseñadas para máxima eficiencia sin renunciar a la técnica ni al resultado.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">30 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Principiante</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card E03 -->
+      <a href="curso-detalle.html?curso=morning-activation&nivel=basico" class="ccard reveal reveal-d2">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--basic">Básico</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            15 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" alt="Morning Activation" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Morning · Activación</p>
+          <h3 class="ccard__name">Morning Activation</h3>
+          <p class="ccard__desc">Rutinas matutinas para despertar el cuerpo, activar la circulación y entrar en el día con energía real. Perfectas antes del trabajo o de otro entrenamiento.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">25 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Todos los niveles</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card E04 -->
+      <a href="curso-detalle.html?curso=night-reset&nivel=premium" class="ccard reveal reveal-d3">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--premium">Premium</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            12 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=800&auto=format&fit=crop" alt="Night Reset" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Night · Recuperación</p>
+          <h3 class="ccard__name">Night Reset</h3>
+          <p class="ccard__desc">Sesiones nocturnas para liberar tensión, preparar el sistema nervioso para el descanso y cerrar el día con un cuerpo que realmente se recupera.</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">20 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Intermedio</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ==============================
+       05 · LAURA'S PICKS
+  ============================== -->
+  <section class="academy-section" id="laura">
+    <div class="section-head">
+      <div>
+        <h2 class="section-h2 reveal">Los favoritos de <em>Laura.</em></h2>
+      </div>
+    </div>
+
+    <!-- Laura intro block -->
+    <div class="laura-intro reveal">
+      <div class="laura-photo">
+        <img src="productos/eles-mujer-sentadilla-pelota-pilates-fitness.jpeg" alt="Laura — Instructora ELES" loading="lazy">
+      </div>
+      <div class="laura-text">
+        <div class="laura-badge">
+          <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Recomendado por Laura
+        </div>
+        <blockquote class="laura-quote">
+          "Estos son los programas que yo misma haría si volviera a empezar. Los elegí porque funcionan — y lo demuestran."
+        </blockquote>
+        <p class="laura-sub">
+          Laura lleva más de 8 años perfeccionando su metodología. Esta selección representa los programas que, en su experiencia, producen los cambios más reales y duraderos — independientemente de tu punto de partida.
+        </p>
+        <p class="laura-sig">— Laura, Instructora & Fundadora ELES</p>
+      </div>
+    </div>
+
+    <div class="courses-grid grid-3-wide">
+
+      <!-- Card L01 -->
+      <a href="curso-detalle.html?curso=sculpt-base&nivel=basico&ref=laura" class="ccard ccard--laura reveal">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--laura">Laura's Pick</span>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            15 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" alt="Sculpt Base" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Mat · Fundamentos</p>
+          <h3 class="ccard__name">Sculpt Base</h3>
+          <p class="ccard__desc">"El punto de partida que nadie debería saltarse. Te enseña a escuchar tu cuerpo antes de exigirle."</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">40 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Principiante</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card L02 -->
+      <a href="curso-detalle.html?curso=deep-core&nivel=premium&ref=laura" class="ccard ccard--laura reveal reveal-d1">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--laura">Laura's Pick</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            20 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop" alt="Deep Core Series" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Core · Fuerza</p>
+          <h3 class="ccard__name">Deep Core Series</h3>
+          <p class="ccard__desc">"Mi programa favorito. Cuando activé correctamente el core, todo — absolutamente todo — cambió en mi entrenamiento."</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">40 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Intermedio</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card L03 -->
+      <a href="curso-detalle.html?curso=extreme-burn&nivel=premium&ref=laura" class="ccard ccard--laura reveal reveal-d2">
+        <div class="ccard__img">
+          <span class="ccard__badge ccard__badge--laura">Laura's Pick</span>
+          <div class="ccard__lock">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="ccard__vcount">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            30 vídeos
+          </div>
+          <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?q=80&w=800&auto=format&fit=crop" alt="Extreme Burn Protocol" loading="lazy">
+          <div class="ccard__img-overlay"></div>
+        </div>
+        <div class="ccard__body">
+          <p class="ccard__cat">Burn · Transformación</p>
+          <h3 class="ccard__name">Extreme Burn Protocol</h3>
+          <p class="ccard__desc">"Solo cuando sientas que el cuerpo está listo. Este programa no perdona, pero los resultados tampoco mienten."</p>
+          <div class="ccard__footer">
+            <div class="ccard__meta">
+              <span class="ccard__dur">45 min / sesión</span>
+              <span class="ccard__sep">·</span>
+              <span class="ccard__level-tag">Avanzado</span>
+            </div>
+            <span class="ccard__cta">
+              Ver programa
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ==============================
+       CTA BAND
+  ============================== -->
+  <section class="cta-band border-top" style="border-top: 1px solid var(--c-border);">
+    <p class="cta-band-tag">El acceso completo</p>
+    <h2 class="cta-band-title reveal">Desbloquea todos<br>los <em>Cursos.</em></h2>
+    <p class="cta-band-sub">Un solo plan. Todos los programas — básicos y premium — para siempre actualizados.</p>
+    <div class="cta-band-actions">
+      <a href="planes.html" class="btn-primary">Unirme al Club →</a>
+      <a href="metodo.html" class="btn-ghost">Conocer el Método</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="eles-footer" role="contentinfo">
+
+    <!-- Banda Marquee animada -->
+    <div class="eles-footer__marquee" aria-hidden="true">
+      <div class="eles-footer__marquee-track">
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+      </div>
+    </div>
+
+    <!-- Columnas -->
+    <div class="eles-footer__grid">
+
+      <!-- Columna Marca -->
+      <div class="eles-footer__brand">
+        <div class="eles-footer__brand-logo">ELES<em>.</em></div>
+        <p class="eles-footer__brand-desc">
+          Fitness de élite, método técnico y equipo boutique. Una comunidad guiada por la excelencia, la constancia y los resultados reales.
+        </p>
+        <div class="eles-footer__socials">
+          <a href="#" class="eles-footer__social" aria-label="Instagram ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="TikTok ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.19a8.18 8.18 0 004.79 1.53V6.27a4.85 4.85 0 01-1.02-.42z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="YouTube ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna Plataforma -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Plataforma</p>
+        <ul>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="planes.html">Membresía</a></li>
+          <li><a href="tienda.html">Tienda ELES</a></li>
+          <li><a href="metodo.html">Método</a></li>
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Soporte -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Soporte</p>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="mailto:hola@eles.com">Contacto</a></li>
+          <li><a href="#">Mi Membresía</a></li>
+          <li><a href="#">Devoluciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Legal -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Legal</p>
+        <ul>
+          <li><a href="#">Aviso Legal</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="terminos.html">Términos</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="eles-footer__bottom">
+      <span class="eles-footer__copy">© 2024 ELES Fitness Studio. Todos los derechos reservados.</span>
+      <div class="eles-footer__divider">
+        <div class="eles-footer__divider-line"></div>
+        <span class="eles-footer__motto">not for everyone.</span>
+      </div>
+    </div>
+
+  </footer>
+
+  <script>
+    /* ── Header: Scroll effect ─────────────────── */
+    (function () {
+      const header = document.getElementById('eles-header');
+      if (!header) return;
+      const update = () => header.classList.toggle('scrolled', window.scrollY > 50);
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    /* ── Header: Hamburger / Drawer ────────────── */
+    (function () {
+      const burger  = document.getElementById('eles-burger');
+      const drawer  = document.getElementById('eles-drawer');
+      const overlay = document.getElementById('eles-overlay');
+      if (!burger || !drawer) return;
+
+      function open() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      burger.addEventListener('click', () =>
+        drawer.classList.contains('open') ? close() : open()
+      );
+
+      overlay.addEventListener('click', close);
+
+      drawer.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', close)
+      );
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') close();
+      });
+    })();
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

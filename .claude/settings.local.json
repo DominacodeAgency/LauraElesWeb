@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/rafag/OneDrive/Escritorio/Dominacode/Proyectos/Eles fitness/**)",
+      "Bash(find . -type d -name \"wp-content\" -o -name \"themes\" -o -name \"theme\")",
+      "Bash(mv \"1.jpg\" \"eles-kit-pilates-mat-pesas-banda-pelota-toalla.jpg\")",
+      "Bash(mv \"IMG_5822.jpg\" \"eles-mujer-pilates-pesa-mano-mat-ejercicio.jpg\")",
+      "Bash(mv \"freepik_generate-9-different-angl_2761968331.jpeg\" \"eles-mat-pilates-gris-claro-logo-detalle.jpeg\")",
+      "Bash(mv \"freepik_generate-9-different-angl_2761968335.jpeg\" \"eles-pesas-pilates-mano-detalle-beige-logo.jpeg\")",
+      "Bash(mv \"freepik_haz-una-foto-de-ecommerce_2759926081.jpeg\" \"eles-pesas-pilates-mano-par-producto-beige.jpeg\")"
+    ]
+  }
+}

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELES · Componentes: Header & Footer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================================
+       TOKENS COMPARTIDOS
+    ================================================ */
+    :root {
+      --c-bg:       #1d1d1d;
+      --c-surface:  #242424;
+      --c-border:   rgba(255,255,255,0.08);
+      --c-red:      #70000e;
+      --c-red-glow: rgba(112, 0, 14, 0.7);
+      --c-red-dim:  rgba(112, 0, 14, 0.12);
+      --c-white:    #ffffff;
+      --c-muted:    #888888;
+      --c-light:    #cccccc;
+      --f-serif:    'DM Serif Display', Georgia, serif;
+      --f-sans:     'DM Sans', system-ui, sans-serif;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--f-sans);
+      background: var(--c-bg);
+      color: var(--c-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ================================================
+       DEMO LAYOUT WRAPPER — solo para visualizar ambos
+    ================================================ */
+    .demo-body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .demo-spacer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      padding: 80px 48px;
+    }
+    .demo-spacer h2 {
+      font-family: var(--f-serif);
+      font-size: 36px;
+      opacity: 0.15;
+    }
+
+    /* ================================================
+       ── COMPONENTE: HEADER ──────────────────────────
+    ================================================ */
+    /*
+      INSTRUCCIONES DE USO:
+      Copia todo lo que está entre las marcas
+      [HEADER-START] y [HEADER-END] dentro del
+      <body> de cada página justo al inicio.
+      El JS del header va al final del <body>.
+    */
+
+    /* [HEADER-START] */
+    .eles-nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 48px;
+      transition: background 0.5s var(--ease-out),
+                  border-color 0.5s,
+                  backdrop-filter 0.5s;
+      border-bottom: 1px solid transparent;
+    }
+    .eles-nav.nav-scrolled {
+      background: rgba(29, 29, 29, 0.94);
+      backdrop-filter: blur(18px);
+      border-bottom-color: var(--c-border);
+    }
+
+    /* Logo */
+    .eles-nav__logo {
+      font-family: var(--f-serif);
+      font-size: 26px;
+      letter-spacing: -0.5px;
+      color: var(--c-white);
+    }
+    .eles-nav__logo em {
+      color: var(--c-red);
+      font-style: normal;
+    }
+
+    /* Links */
+    .eles-nav__links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .eles-nav__links a {
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-light);
+      position: relative;
+      transition: color 0.3s;
+    }
+    .eles-nav__links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -4px;
+      width: 0; height: 1px;
+      background: var(--c-red);
+      transition: width 0.35s var(--ease-out);
+    }
+    .eles-nav__links a:hover { color: var(--c-white); }
+    .eles-nav__links a:hover::after { width: 100%; }
+
+    /* Actions */
+    .eles-nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .eles-nav__login {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--c-muted);
+      transition: color 0.3s;
+    }
+    .eles-nav__login:hover { color: var(--c-white); }
+    .eles-nav__btn {
+      background: var(--c-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 22px;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
+    }
+    .eles-nav__btn::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 4px;
+      background: var(--c-red);
+      filter: blur(10px);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: -1;
+    }
+    .eles-nav__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px var(--c-red-glow);
+    }
+    .eles-nav__btn:hover::before { opacity: 0.6; }
+
+    /* Hamburger (móvil) */
+    .eles-nav__burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .eles-nav__burger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--c-white);
+      transition: transform 0.4s var(--ease-out), opacity 0.3s;
+    }
+    .eles-nav__burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .eles-nav__burger.open span:nth-child(2) { opacity: 0; }
+    .eles-nav__burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .eles-nav__drawer {
+      position: fixed;
+      inset: 0 0 0 30%;
+      background: var(--c-surface);
+      border-left: 1px solid var(--c-border);
+      z-index: 998;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      transform: translateX(100%);
+      transition: transform 0.5s var(--ease-out);
+    }
+    .eles-nav__drawer.open { transform: translateX(0); }
+    .eles-nav__drawer a {
+      font-family: var(--f-serif);
+      font-size: 32px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--c-border);
+      color: var(--c-white);
+      transition: color 0.3s, padding-left 0.3s;
+    }
+    .eles-nav__drawer a:hover { color: var(--c-red); padding-left: 8px; }
+    /* [HEADER-END] */
+
+    /* ================================================
+       ── COMPONENTE: FOTO CON NEÓN ────────────────────
+    ================================================ */
+    /*
+      Clase: .eles-photo-neon
+      Úsala en cualquier contenedor de imagen para
+      obtener el efecto de resplandor neón rojo al hover.
+    */
+
+    /* [NEON-PHOTO-START] */
+    .eles-photo-neon {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Capa de neón: borde brillante emergente */
+    .eles-photo-neon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      z-index: 3;
+      transition: border-color 0.5s var(--ease-out),
+                  box-shadow 0.5s var(--ease-out);
+      pointer-events: none;
+    }
+
+    /* Capa de overlay oscuro que se ilumina */
+    .eles-photo-neon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(112, 0, 14, 0.18) 0%,
+        transparent 70%
+      );
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 0.5s var(--ease-out);
+      pointer-events: none;
+    }
+
+    /* La imagen hace zoom suave */
+    .eles-photo-neon img {
+      transition: transform 0.7s var(--ease-out),
+                  filter 0.7s var(--ease-out);
+      filter: brightness(0.75) grayscale(20%);
+    }
+
+    .eles-photo-neon:hover::before {
+      border-color: var(--c-red);
+      box-shadow:
+        inset 0 0 30px rgba(112, 0, 14, 0.25),
+        0 0 30px rgba(112, 0, 14, 0.5),
+        0 0 80px rgba(112, 0, 14, 0.2);
+    }
+    .eles-photo-neon:hover::after { opacity: 1; }
+    .eles-photo-neon:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.9) grayscale(0%);
+    }
+
+    /* Etiqueta interna de texto al hover */
+    .eles-photo-neon .pn-label {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      z-index: 4;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s 0.1s, transform 0.4s var(--ease-out) 0.1s;
+      text-shadow: 0 0 12px var(--c-red-glow);
+    }
+    .eles-photo-neon:hover .pn-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* [NEON-PHOTO-END] */
+
+    /* ─── DEMO: Gallery de fotos neón ─── */
+    .neon-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .neon-gallery .eles-photo-neon { height: 280px; }
+    .neon-gallery .eles-photo-neon.tall {
+      grid-row: span 2;
+      height: 100%;
+    }
+
+    /* ================================================
+       ── COMPONENTE: FOOTER ──────────────────────────
+    ================================================ */
+    /*
+      INSTRUCCIONES DE USO:
+      Copia todo lo que está entre las marcas
+      [FOOTER-START] y [FOOTER-END] justo antes
+      del cierre del </body> en cada página.
+    */
+
+    /* [FOOTER-START] */
+    .eles-footer {
+      border-top: 1px solid var(--c-border);
+      padding: 80px 48px 40px;
+      background: var(--c-bg);
+    }
+
+    /* Banda superior con el logo grande */
+    .eles-footer__hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--c-border);
+      margin-bottom: 60px;
+      gap: 30px;
+    }
+    .eles-footer__big-logo {
+      font-family: var(--f-serif);
+      font-size: clamp(52px, 8vw, 100px);
+      letter-spacing: -3px;
+      line-height: 1;
+      opacity: 0.08;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .eles-footer__tagline {
+      max-width: 480px;
+      font-size: 16px;
+      color: var(--c-muted);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+    .eles-footer__tagline strong { color: var(--c-white); font-weight: 600; }
+    .eles-footer__cta {
+      flex-shrink: 0;
+      display: inline-block;
+      background: var(--c-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 30px;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+    }
+    .eles-footer__cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px var(--c-red-glow);
+    }
+
+    /* Columnas de links */
+    .eles-footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+    .eles-footer__brand-logo {
+      font-family: var(--f-serif);
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+    .eles-footer__brand-logo em { color: var(--c-red); font-style: normal; }
+    .eles-footer__brand-desc {
+      font-size: 13px;
+      color: var(--c-muted);
+      line-height: 1.75;
+      max-width: 280px;
+    }
+    .eles-footer__col-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-white);
+      margin-bottom: 20px;
+    }
+    .eles-footer__col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .eles-footer__col a {
+      font-size: 13.5px;
+      color: var(--c-muted);
+      position: relative;
+      display: inline-block;
+      transition: color 0.3s, transform 0.3s var(--ease-out);
+    }
+    .eles-footer__col a::before {
+      content: '';
+      position: absolute;
+      left: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c-red);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .eles-footer__col a:hover {
+      color: var(--c-white);
+      transform: translateX(6px);
+    }
+    .eles-footer__col a:hover::before { opacity: 1; }
+
+    /* Redes sociales con efecto neón */
+    .eles-footer__socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .eles-footer__social {
+      width: 40px; height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--c-border);
+      border-radius: 4px;
+      font-size: 16px;
+      color: var(--c-muted);
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s var(--ease-out);
+    }
+    .eles-footer__social:hover {
+      border-color: var(--c-red);
+      color: var(--c-red);
+      box-shadow: 0 0 14px rgba(112, 0, 14, 0.5), inset 0 0 14px rgba(112, 0, 14, 0.08);
+      transform: translateY(-3px);
+    }
+
+    /* Línea de copyright */
+    .eles-footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--c-border);
+      padding-top: 28px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .eles-footer__copy {
+      font-size: 11.5px;
+      color: var(--c-muted);
+      letter-spacing: 0.04em;
+    }
+    .eles-footer__badge {
+      font-family: var(--f-serif);
+      font-size: 11px;
+      font-style: italic;
+      color: var(--c-red);
+      letter-spacing: 0.1em;
+    }
+    /* [FOOTER-END] */
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .eles-nav { padding: 20px 24px; }
+      .eles-nav__links { display: none; }
+      .eles-nav__login { display: none; }
+      .eles-nav__burger { display: flex; }
+      .eles-footer { padding: 60px 24px 32px; }
+      .eles-footer__hero { flex-direction: column; align-items: flex-start; }
+      .eles-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .neon-gallery { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .eles-footer__grid { grid-template-columns: 1fr; }
+      .eles-footer__bottom { flex-direction: column; text-align: center; gap: 10px; }
+      .neon-gallery { grid-template-columns: 1fr; }
+      .neon-gallery .eles-photo-neon.tall { grid-row: auto; height: 280px; }
+    }
+  </style>
+</head>
+<body class="demo-body">
+
+  <!-- =====================================================
+       ── COMPONENTE: HEADER ──────────────────────────────
+       (Código listo para copiar en cualquier página)
+  ===================================================== -->
+
+  <!-- [HEADER HTML START] -->
+  <header class="eles-nav" id="eles-navbar" role="banner">
+    <!-- Logo -->
+    <a href="inicio.html" class="eles-nav__logo" aria-label="ELES Fitness - Inicio">
+      ELES<em>.</em>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="eles-nav__links" role="list">
+      <li><a href="cursos.html">Cursos</a></li>
+      <li><a href="planes.html">Membresía</a></li>
+      <li><a href="shop.html">Tienda</a></li>
+      <li><a href="metodo.html">Método</a></li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="eles-nav__actions">
+      <a href="#" class="eles-nav__login" aria-label="Acceder a mi cuenta">Mi cuenta</a>
+      <a href="planes.html" class="eles-nav__btn" aria-label="Unirse al club ELES">Unirme al Club</a>
+      <!-- Burger (solo móvil) -->
+      <button class="eles-nav__burger" id="eles-burger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <nav class="eles-nav__drawer" id="eles-drawer" aria-label="Navegación móvil">
+    <a href="inicio.html">Inicio</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="planes.html">Membresía</a>
+    <a href="shop.html">Tienda</a>
+    <a href="metodo.html">Método</a>
+  </nav>
+  <!-- [HEADER HTML END] -->
+
+
+  <!-- =====================================================
+       ── DEMO: SECCIÓN GALERÍA CON EFECTO NEÓN EN FOTOS ──
+  ===================================================== -->
+  <div class="demo-spacer" style="padding-top: 120px;">
+
+    <h2>— Efecto Neón en Fotos —</h2>
+
+    <!-- GALERÍA con clase .eles-photo-neon -->
+    <div class="neon-gallery" style="width: 100%; max-width: 1200px;">
+
+      <!-- Foto grande (alta) -->
+      <div class="eles-photo-neon tall">
+        <img
+          src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop"
+          alt="Pilates Elite ELES"
+          loading="lazy">
+        <span class="pn-label">Los Cursos · Programa Élite</span>
+      </div>
+
+      <!-- Foto normal -->
+      <div class="eles-photo-neon">
+        <img
+          src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=900&auto=format&fit=crop"
+          alt="Club ELES"
+          loading="lazy">
+        <span class="pn-label">Membresía · The Club</span>
+      </div>
+
+      <!-- Foto normal -->
+      <div class="eles-photo-neon">
+        <img
+          src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=900&auto=format&fit=crop"
+          alt="ELES Equipment"
+          loading="lazy">
+        <span class="pn-label">Equipment · The Shop</span>
+      </div>
+
+      <!-- Foto normal -->
+      <div class="eles-photo-neon">
+        <img
+          src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=900&auto=format&fit=crop"
+          alt="Sculpt Base"
+          loading="lazy">
+        <span class="pn-label">Programa · Sculpt Base</span>
+      </div>
+
+      <!-- Foto normal -->
+      <div class="eles-photo-neon">
+        <img
+          src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=900&auto=format&fit=crop"
+          alt="Mat Elite Flow"
+          loading="lazy">
+        <span class="pn-label">Programa · Mat Elite Flow</span>
+      </div>
+
+    </div>
+
+    <h2 style="margin-top: 60px;">— Separador —</h2>
+  </div>
+
+
+  <!-- =====================================================
+       ── COMPONENTE: FOOTER ──────────────────────────────
+       (Código listo para copiar en cualquier página)
+  ===================================================== -->
+
+  <!-- [FOOTER HTML START] -->
+  <footer class="eles-footer" role="contentinfo">
+
+    <!-- Banda superior -->
+    <div class="eles-footer__hero">
+      <div class="eles-footer__big-logo" aria-hidden="true">ELES</div>
+      <p class="eles-footer__tagline">
+        La plataforma de entrenamiento premium para la mujer que no acepta menos que la excelencia.<br>
+        <strong>Not for everyone. Not for the weak. Not for the undecided.</strong>
+      </p>
+      <a href="planes.html" class="eles-footer__cta">Unirme al Club</a>
+    </div>
+
+    <!-- Columnas de Links -->
+    <div class="eles-footer__grid">
+      <!-- Marca -->
+      <div class="eles-footer__brand">
+        <div class="eles-footer__brand-logo">ELES<em>.</em></div>
+        <p class="eles-footer__brand-desc">
+          Fitness de élite, método técnico y equipo boutique. Una comunidad guiada por la excelencia y la constancia.
+        </p>
+        <!-- Redes Sociales con neón -->
+        <div class="eles-footer__socials">
+          <a href="#" class="eles-footer__social" aria-label="Instagram ELES">
+            <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="TikTok ELES">
+            <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.19a8.18 8.18 0 004.79 1.53V6.27a4.85 4.85 0 01-1.02-.42z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="YouTube ELES">
+            <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Plataforma -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Plataforma</p>
+        <ul>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="planes.html">Membresía</a></li>
+          <li><a href="shop.html">Tienda ELES</a></li>
+          <li><a href="metodo.html">Método</a></li>
+        </ul>
+      </div>
+
+      <!-- Soporte -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Soporte</p>
+        <ul>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="mailto:hola@eles.com">Contacto</a></li>
+          <li><a href="#">Mi Membresía</a></li>
+          <li><a href="#">Devoluciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Legal</p>
+        <ul>
+          <li><a href="#">Aviso Legal</a></li>
+          <li><a href="#">Política de Privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Términos de Uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="eles-footer__bottom">
+      <span class="eles-footer__copy">© 2024 ELES Fitness Studio. Todos los derechos reservados.</span>
+      <span class="eles-footer__badge">not for everyone.</span>
+    </div>
+
+  </footer>
+  <!-- [FOOTER HTML END] -->
+
+
+  <!-- =====================================================
+       ── JAVASCRIPT ──────────────────────────────────────
+       (Copiar justo antes de </body> en cada página)
+  ===================================================== -->
+  <script>
+    /* ── HEADER: Scroll effect ── */
+    (function () {
+      const navbar = document.getElementById('eles-navbar');
+      if (!navbar) return;
+      const onScroll = () => navbar.classList.toggle('nav-scrolled', window.scrollY > 50);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll(); // initial check
+    })();
+
+    /* ── HEADER: Hamburger / Drawer ── */
+    (function () {
+      const burger = document.getElementById('eles-burger');
+      const drawer = document.getElementById('eles-drawer');
+      if (!burger || !drawer) return;
+
+      burger.addEventListener('click', () => {
+        const isOpen = drawer.classList.toggle('open');
+        burger.classList.toggle('open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      // Cierra al hacer clic en un enlace del drawer
+      drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          drawer.classList.remove('open');
+          burger.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // Cierra al hacer clic fuera
+      document.addEventListener('click', (e) => {
+        if (!burger.contains(e.target) && !drawer.contains(e.target)) {
+          drawer.classList.remove('open');
+          burger.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

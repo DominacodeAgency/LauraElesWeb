@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELES · Header Component</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================================
+       TOKENS BASE — copiar en cada página
+    ================================================ */
+    :root {
+      --c-bg:      #1d1d1d;
+      --c-surface: #242424;
+      --c-border:  rgba(255,255,255,0.08);
+      --c-red:     #70000e;
+      --c-red-glow: rgba(112, 0, 14, 0.65);
+      --c-white:   #ffffff;
+      --c-muted:   #888888;
+      --c-light:   #cccccc;
+      --f-serif:   'DM Serif Display', Georgia, serif;
+      --f-sans:    'DM Sans', system-ui, sans-serif;
+      --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--f-sans);
+      background: var(--c-bg);
+      color: var(--c-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ================================================
+       DEMO WRAPPER — solo para visualizar el header
+       (NO copiar en producción)
+    ================================================ */
+    .demo-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(112,0,14,0.06), transparent 40%),
+        var(--c-bg);
+    }
+    .demo-label {
+      font-family: var(--f-serif);
+      font-size: clamp(28px, 5vw, 56px);
+      opacity: 0.06;
+      text-align: center;
+      padding: 0 24px;
+      line-height: 1.2;
+    }
+
+    /* ================================================
+       ╔══════════════════════════════════════════════╗
+       ║           HEADER — ELES COMPONENT            ║
+       ║  Copiar desde aquí hasta [/HEADER CSS END]   ║
+       ╚══════════════════════════════════════════════╝
+    ================================================ */
+
+    /* --- Nav Container --- */
+    .eles-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 999;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      /* Starts transparent; JS añade .scrolled */
+      transition:
+        background     0.5s var(--ease-out),
+        border-color   0.4s,
+        backdrop-filter 0.5s,
+        padding        0.4s var(--ease-out);
+      border-bottom: 1px solid transparent;
+    }
+
+    .eles-header.scrolled {
+      background: rgba(29, 29, 29, 0.94);
+      backdrop-filter: blur(20px) saturate(150%);
+      border-bottom-color: var(--c-border);
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    /* --- Logo --- */
+    .eles-header__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .eles-header__logo-img {
+      height: 60px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: height 0.4s var(--ease-out);
+    }
+    .eles-header.scrolled .eles-header__logo-img {
+      height: 48px;
+    }
+
+    /* --- Desktop Links --- */
+    .eles-header__nav {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      list-style: none;
+    }
+    .eles-header__nav a {
+      position: relative;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-light);
+      transition: color 0.3s;
+    }
+    /* Subrayado neón que crece desde la izquierda */
+    .eles-header__nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 0; height: 1.5px;
+      background: var(--c-red);
+      box-shadow: 0 0 8px var(--c-red-glow);
+      transition: width 0.4s var(--ease-out);
+    }
+    .eles-header__nav a:hover { color: var(--c-white); }
+    .eles-header__nav a:hover::after { width: 100%; }
+    /* Link activo (añadir clase "active" en la página correspondiente) */
+    .eles-header__nav a.active {
+      color: var(--c-white);
+    }
+    .eles-header__nav a.active::after {
+      width: 100%;
+    }
+
+    /* --- Right side: Login + CTA --- */
+    .eles-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .eles-header__login {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--c-muted);
+      transition: color 0.3s;
+    }
+    .eles-header__login:hover { color: var(--c-white); }
+
+    .eles-header__cta {
+      position: relative;
+      overflow: hidden;
+      background: var(--c-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 13px 24px;
+      border-radius: 2px;
+      /* Resplandor exterior */
+      transition:
+        transform    0.35s var(--ease-out),
+        box-shadow   0.35s,
+        background   0.3s;
+    }
+    /* Brillo interno que barre de izquierda a derecha */
+    .eles-header__cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.18),
+        transparent
+      );
+      transition: left 0.55s var(--ease-out);
+    }
+    .eles-header__cta:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 6px 24px var(--c-red-glow),
+        0 0 0 1px rgba(112,0,14,0.4);
+    }
+    .eles-header__cta:hover::before { left: 150%; }
+
+    /* --- Hamburger (móvil) --- */
+    .eles-header__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5.5px;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 4px;
+    }
+    .eles-header__burger span {
+      display: block;
+      width: 100%; height: 1.5px;
+      background: var(--c-white);
+      border-radius: 2px;
+      transform-origin: center;
+      transition:
+        transform  0.45s var(--ease-out),
+        opacity    0.3s,
+        width      0.3s var(--ease-out);
+    }
+    /* Animación de X al abrir */
+    .eles-header__burger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+      width: 0;
+    }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* --- Mobile Drawer --- */
+    .eles-header__drawer {
+      position: fixed;
+      inset: 0 0 0 25%;
+      z-index: 998;
+      background: var(--c-surface);
+      border-left: 1px solid var(--c-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      transform: translateX(100%);
+      transition: transform 0.55s var(--ease-out);
+      gap: 0;
+    }
+    .eles-header__drawer.open {
+      transform: translateX(0);
+    }
+    /* Overlay oscuro detrás del drawer */
+    .eles-header__overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 997;
+      background: rgba(0,0,0,0.6);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .eles-header__overlay.open {
+      display: block;
+      opacity: 1;
+    }
+    .eles-header__drawer a {
+      font-family: var(--f-serif);
+      font-size: clamp(28px, 5vw, 36px);
+      font-style: italic;
+      color: var(--c-white);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--c-border);
+      transition: color 0.3s, padding-left 0.35s var(--ease-out);
+    }
+    .eles-header__drawer a:last-child { border-bottom: none; }
+    .eles-header__drawer a:hover {
+      color: var(--c-red);
+      padding-left: 10px;
+    }
+
+    /* ================================================
+       [/HEADER CSS END]
+    ================================================ */
+
+    /* --- Efecto neón en fotos (bonus, reutilizable) --- */
+    .eles-photo-neon {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .eles-photo-neon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      z-index: 3;
+      pointer-events: none;
+      transition:
+        border-color 0.5s var(--ease-out),
+        box-shadow   0.5s var(--ease-out);
+    }
+    .eles-photo-neon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(112,0,14,0.18) 0%,
+        transparent 70%
+      );
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+      transition: opacity 0.5s var(--ease-out);
+    }
+    .eles-photo-neon img {
+      display: block;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition:
+        transform 0.7s var(--ease-out),
+        filter    0.7s var(--ease-out);
+      filter: brightness(0.7) grayscale(20%);
+    }
+    .eles-photo-neon:hover::before {
+      border-color: var(--c-red);
+      box-shadow:
+        inset 0 0 30px rgba(112,0,14,0.2),
+        0 0 30px rgba(112,0,14,0.5),
+        0 0 80px rgba(112,0,14,0.18);
+    }
+    .eles-photo-neon:hover::after { opacity: 1; }
+    .eles-photo-neon:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.9) grayscale(0%);
+    }
+    .eles-photo-neon .neon-label {
+      position: absolute;
+      bottom: 18px; left: 18px; right: 18px;
+      z-index: 4;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      opacity: 0;
+      transform: translateY(8px);
+      transition:
+        opacity    0.4s 0.08s,
+        transform  0.4s var(--ease-out) 0.08s;
+      text-shadow: 0 0 10px rgba(112,0,14,0.8);
+    }
+    .eles-photo-neon:hover .neon-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Demo gallery */
+    .demo-gallery {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 10px;
+      max-width: 1100px;
+      margin: 160px auto 80px;
+      padding: 0 32px;
+    }
+    .demo-gallery .eles-photo-neon { height: 320px; }
+    .demo-gallery .eles-photo-neon.tall { height: 100%; grid-row: span 2; }
+
+    @media (max-width: 1024px) {
+      .eles-header { padding: 20px 24px; }
+      .eles-header__nav { display: none; }
+      .eles-header__login { display: none; }
+      .eles-header__burger { display: flex; }
+      .demo-gallery {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 120px;
+      }
+      .demo-gallery .eles-photo-neon.tall { grid-row: auto; height: 280px; }
+    }
+    @media (max-width: 600px) {
+      .eles-header__drawer { inset: 0 0 0 0; }
+      .demo-gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       HEADER HTML — Copiar dentro de cada <body>
+       justo al principio.
+  ════════════════════════════════════════════ -->
+
+  <header class="eles-header" id="eles-header" role="banner">
+
+    <!-- Logo -->
+    <a href="inicio.html" class="eles-header__logo" aria-label="ELES Fitness — Inicio">
+      <img src="logo.png" alt="ELES Fitness Logo" class="eles-header__logo-img">
+    </a>
+
+    <!-- Nav Desktop -->
+    <ul class="eles-header__nav" role="list">
+      <li><a href="cursos.html">Cursos</a></li>
+      <li><a href="planes.html">Membresía</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="metodo.html">Método</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="eventos.html">Eventos</a></li>
+    </ul>
+
+    <!-- Acciones -->
+    <div class="eles-header__actions">
+      <a href="#" class="eles-header__login">Mi cuenta</a>
+      <a href="planes.html" class="eles-header__cta">Unirme al Club</a>
+      <button
+        class="eles-header__burger"
+        id="eles-burger"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="eles-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- Overlay oscuro (detrás del drawer) -->
+  <div class="eles-header__overlay" id="eles-overlay" aria-hidden="true"></div>
+
+  <!-- Drawer Móvil -->
+  <nav class="eles-header__drawer" id="eles-drawer" aria-label="Menú de navegación móvil">
+    <a href="inicio.html">Inicio</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="planes.html">Membresía</a>
+    <a href="tienda.html">Tienda</a>
+    <a href="metodo.html">Método</a>
+    <a href="faq.html">FAQ</a>
+    <a href="eventos.html">Eventos</a>
+  </nav>
+
+  <!-- ════════════════════════════════════════════
+       CONTENIDO DEMO (no copiar)
+  ════════════════════════════════════════════ -->
+  <div class="demo-gallery">
+    <div class="eles-photo-neon tall">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1400&auto=format&fit=crop" alt="Cursos ELES" loading="lazy">
+      <span class="neon-label">Cursos · Programa Élite</span>
+    </div>
+    <div class="eles-photo-neon">
+      <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=900&auto=format&fit=crop" alt="The Club" loading="lazy">
+      <span class="neon-label">Membresía · The Club</span>
+    </div>
+    <div class="eles-photo-neon">
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=900&auto=format&fit=crop" alt="ELES Equipment" loading="lazy">
+      <span class="neon-label">Equipment · The Shop</span>
+    </div>
+    <div class="eles-photo-neon">
+      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=900&auto=format&fit=crop" alt="Sculpt Base" loading="lazy">
+      <span class="neon-label">Sculpt Base · 15 clases</span>
+    </div>
+  </div>
+
+  <div class="demo-page">
+    <p class="demo-label">ELES · Not for Everyone</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       JAVASCRIPT — Copiar al final de cada página,
+       justo antes del </body>
+  ════════════════════════════════════════════ -->
+  <script>
+    /* ── Header: Scroll effect ─────────────────── */
+    (function () {
+      const header = document.getElementById('eles-header');
+      if (!header) return;
+      const update = () => header.classList.toggle('scrolled', window.scrollY > 50);
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    /* ── Header: Hamburger / Drawer ────────────── */
+    (function () {
+      const burger  = document.getElementById('eles-burger');
+      const drawer  = document.getElementById('eles-drawer');
+      const overlay = document.getElementById('eles-overlay');
+      if (!burger || !drawer) return;
+
+      function open() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      burger.addEventListener('click', () =>
+        drawer.classList.contains('open') ? close() : open()
+      );
+
+      overlay.addEventListener('click', close);
+
+      drawer.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', close)
+      );
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
+
+</body>
+</html>

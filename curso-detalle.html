@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">ELES · Cursos — Programa</title>
+  <meta name="description" content="Detalle del programa de Pilates ELES. Vídeos, contenido y descripción completa del curso.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ================================================
+       TOKENS & RESET
+    ================================================ */
+    :root {
+      --c-bg:       #1d1d1d;
+      --c-surface:  #181818;
+      --c-surface2: #1a1a1a;
+      --c-border:   rgba(255,255,255,0.08);
+      --c-red:      #70000e;
+      --c-red-glow: rgba(112, 0, 14, 0.65);
+      --c-red-dim:  rgba(112, 0, 14, 0.1);
+      --c-white:    #ffffff;
+      --c-muted:    #888888;
+      --c-light:    #cccccc;
+      --f-serif:    'DM Serif Display', Georgia, serif;
+      --f-sans:     'DM Sans', system-ui, sans-serif;
+      --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-sans);
+      background: var(--c-bg);
+      color: var(--c-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ================================================
+       NAVIGATION
+    ===============================================    /* ================================================
+       HEADER — ELES COMPONENT
+    ================================================ */
+
+    /* --- Nav Container --- */
+    .eles-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 999;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      transition:
+        background     0.5s var(--ease-out),
+        border-color   0.4s,
+        backdrop-filter 0.5s,
+        padding        0.4s var(--ease-out);
+      border-bottom: 1px solid transparent;
+    }
+
+    .eles-header.scrolled {
+      background: rgba(29, 29, 29, 0.94);
+      backdrop-filter: blur(20px) saturate(150%);
+      border-bottom-color: var(--c-border);
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    /* --- Logo --- */
+    .eles-header__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .eles-header__logo-img {
+      height: 60px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: height 0.4s var(--ease-out);
+    }
+    .eles-header.scrolled .eles-header__logo-img {
+      height: 48px;
+    }
+
+    /* --- Desktop Links --- */
+    .eles-header__nav {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      list-style: none;
+    }
+    .eles-header__nav a {
+      position: relative;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-light);
+      transition: color 0.3s;
+    }
+    .eles-header__nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 0; height: 1.5px;
+      background: var(--c-red);
+      box-shadow: 0 0 8px var(--c-red-glow);
+      transition: width 0.4s var(--ease-out);
+    }
+    .eles-header__nav a:hover { color: var(--c-white); }
+    .eles-header__nav a:hover::after { width: 100%; }
+    .eles-header__nav a.active { color: var(--c-white); }
+    .eles-header__nav a.active::after { width: 100%; }
+
+    /* --- Right side: Login + CTA --- */
+    .eles-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+    .eles-header__login {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--c-muted);
+      transition: color 0.3s;
+    }
+    .eles-header__login:hover { color: var(--c-white); }
+
+    .eles-header__cta {
+      position: relative;
+      overflow: hidden;
+      background: var(--c-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 13px 24px;
+      border-radius: 2px;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s, background 0.3s;
+    }
+    .eles-header__cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transition: left 0.55s var(--ease-out);
+    }
+    .eles-header__cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--c-red-glow), 0 0 0 1px rgba(112,0,14,0.4); }
+    .eles-header__cta:hover::before { left: 150%; }
+
+    /* --- Hamburger (móvil) --- */
+    .eles-header__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5.5px;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 4px;
+    }
+    .eles-header__burger span {
+      display: block;
+      width: 100%; height: 1.5px;
+      background: var(--c-white);
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform  0.45s var(--ease-out), opacity 0.3s, width 0.3s var(--ease-out);
+    }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; width: 0; }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* --- Mobile Drawer --- */
+    .eles-header__drawer {
+      position: fixed;
+      inset: 0 0 0 25%;
+      z-index: 998;
+      background: var(--c-surface);
+      border-left: 1px solid var(--c-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      transform: translateX(100%);
+      transition: transform 0.55s var(--ease-out);
+      gap: 0;
+    }
+    .eles-header__drawer.open { transform: translateX(0); }
+    .eles-header__overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 997;
+      background: rgba(0,0,0,0.6);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .eles-header__overlay.open { display: block; opacity: 1; }
+    .eles-header__drawer a {
+      font-family: var(--f-serif);
+      font-size: clamp(28px, 5vw, 36px);
+      font-style: italic;
+      color: var(--c-white);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--c-border);
+      transition: color 0.3s, padding-left 0.35s var(--ease-out);
+    }
+    .eles-header__drawer a:last-child { border-bottom: none; }
+    .eles-header__drawer a:hover { color: var(--c-red); padding-left: 10px; }
+    .eles-header__drawer a.active { color: var(--c-red); }
+t); }
+
+    /* ================================================
+       ╔══════════════════════════════════════════════╗
+       ║           FOOTER — ELES COMPONENT            ║
+       ║  Copiar desde aquí hasta [/FOOTER CSS END]   ║
+       ╚══════════════════════════════════════════════╝
+    ================================================ */
+
+    .eles-footer {
+      background: var(--c-surface);
+      border-top: 1px solid var(--c-border);
+      padding: 0 48px 40px;
+      overflow: hidden;
+    }
+
+    /* ── Banda Marquee ────────────────────────────── */
+    .eles-footer__marquee {
+      border-bottom: 1px solid var(--c-border);
+      padding: 24px 0;
+      overflow: hidden;
+      margin: 0 -48px 70px;
+    }
+    .eles-footer__marquee-track {
+      display: flex;
+      width: max-content;
+      animation: footerMarquee 30s linear infinite;
+    }
+    @keyframes footerMarquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .eles-footer__marquee-track span {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      padding: 0 40px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .eles-footer__marquee-track span em {
+      color: var(--c-red);
+      font-style: normal;
+    }
+
+    /* ── CTA Principal ────────────────────────────── */
+    .eles-footer__cta-block {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding-bottom: 70px;
+      border-bottom: 1px solid var(--c-border);
+      margin-bottom: 70px;
+    }
+    .eles-footer__headline {
+      font-family: var(--f-serif);
+      font-size: clamp(32px, 5vw, 60px);
+      line-height: 1;
+      letter-spacing: -1.5px;
+    }
+    .eles-footer__headline em {
+      font-style: italic;
+      color: var(--c-red);
+    }
+    /* Botón CTA con efecto neón sweep */
+    .eles-footer__main-cta {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--c-red);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 20px 36px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      transition:
+        transform  0.4s var(--ease-out),
+        box-shadow 0.4s;
+    }
+    /* Sweep de brillo */
+    .eles-footer__main-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+      );
+      transition: left 0.6s var(--ease-out);
+    }
+    .eles-footer__main-cta:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 10px 30px var(--c-red-glow),
+        0 0 0 1px rgba(112,0,14,0.5);
+    }
+    .eles-footer__main-cta:hover::before { left: 150%; }
+    .eles-footer__main-cta svg {
+      transition: transform 0.35s var(--ease-out);
+    }
+    .eles-footer__main-cta:hover svg { transform: translateX(5px); }
+
+    /* ── Columnas de Links ────────────────────────── */
+    .eles-footer__grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 70px;
+    }
+
+    /* Columna Marca */
+    .eles-footer__brand-logo {
+      font-family: var(--f-serif);
+      font-size: 26px;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .eles-footer__brand-logo em { color: var(--c-red); font-style: normal; }
+
+    .eles-footer__brand-desc {
+      font-size: 13.5px;
+      color: var(--c-muted);
+      line-height: 1.8;
+      max-width: 290px;
+      margin-bottom: 28px;
+    }
+
+    /* Redes sociales con neón al hover */
+    .eles-footer__socials {
+      display: flex;
+      gap: 10px;
+    }
+    .eles-footer__social {
+      position: relative;
+      width: 42px; height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--c-border);
+      border-radius: 4px;
+      color: var(--c-muted);
+      transition:
+        border-color 0.35s,
+        color        0.35s,
+        box-shadow   0.35s,
+        transform    0.35s var(--ease-out);
+    }
+    .eles-footer__social:hover {
+      border-color: var(--c-red);
+      color: var(--c-red);
+      transform: translateY(-3px);
+      box-shadow:
+        0 0 12px rgba(112,0,14,0.5),
+        inset 0 0 12px rgba(112,0,14,0.07);
+    }
+
+    /* Columnas de nav */
+    .eles-footer__col-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-white);
+      margin-bottom: 22px;
+    }
+    .eles-footer__col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .eles-footer__col a {
+      font-size: 13.5px;
+      color: var(--c-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      transition: color 0.3s, gap 0.35s var(--ease-out), padding-left 0.35s var(--ease-out);
+    }
+    /* Pequeño bullet neón al hover */
+    .eles-footer__col a::before {
+      content: '▸';
+      font-size: 10px;
+      color: var(--c-red);
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      transition: opacity 0.3s, max-width 0.35s var(--ease-out);
+    }
+    .eles-footer__col a:hover {
+      color: var(--c-white);
+      padding-left: 6px;
+    }
+    .eles-footer__col a:hover::before {
+      opacity: 1;
+      max-width: 16px;
+    }
+
+    /* ── Badge / Copyright ────────────────────────── */
+    .eles-footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-top: 1px solid var(--c-border);
+      padding-top: 30px;
+    }
+    .eles-footer__copy {
+      font-size: 11.5px;
+      color: var(--c-muted);
+      letter-spacing: 0.04em;
+    }
+    /* Separador decorativo */
+    .eles-footer__divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eles-footer__divider-line {
+      width: 32px; height: 1.5px;
+      background: var(--c-red);
+      box-shadow: 0 0 8px var(--c-red-glow);
+    }
+    .eles-footer__motto {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 12px;
+      color: var(--c-red);
+      letter-spacing: 0.08em;
+    }
+
+    /* ================================================
+       [/FOOTER CSS END]
+    ================================================ */
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 1100px) {
+      .eles-footer { padding: 0 32px 36px; }
+      .eles-footer__marquee { margin: 0 -32px 60px; }
+      .eles-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .eles-footer__cta-block { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .eles-footer { padding: 0 20px 32px; }
+      .eles-footer__marquee { margin: 0 -20px 50px; }
+      .eles-footer__grid { grid-template-columns: 1fr; gap: 36px; }
+      .eles-footer__bottom { flex-direction: column; align-items: flex-start; }
+      .eles-footer__headline { font-size: 40px; }
+    }
+
+    /* ================================================
+       BREADCRUMB
+    ================================================ */
+    .breadcrumb {
+      padding: 110px 48px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--c-muted);
+      letter-spacing: 0.03em;
+    }
+    .breadcrumb a { color: var(--c-muted); transition: color 0.25s; }
+    .breadcrumb a:hover { color: var(--c-white); }
+    .breadcrumb-sep { opacity: 0.3; }
+    .breadcrumb-current { color: var(--c-light); }
+
+    /* ================================================
+       COURSE HERO
+    ================================================ */
+    .course-hero {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 0;
+      min-height: 72vh;
+      border-bottom: 1px solid var(--c-border);
+      margin-top: 20px;
+    }
+
+    /* Left content — background image with gradient overlay */
+    .course-hero-content {
+      padding: 56px 52px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      background-size: cover;
+      background-position: center 30%;
+      overflow: hidden;
+    }
+    /* Dark gradient overlay so text stays readable */
+    .course-hero-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,  rgba(20,20,20,0.88) 0%,  rgba(20,20,20,0.55) 60%, rgba(20,20,20,0.3) 100%),
+        linear-gradient(to top, rgba(20,20,20,0.96) 0%, rgba(20,20,20,0.5) 50%, rgba(20,20,20,0.15) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Keep text above the overlay */
+    .course-hero-content > * { position: relative; z-index: 1; }
+    .course-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-red); margin-bottom: 20px;
+    }
+    .course-title {
+      font-family: var(--f-serif);
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .course-title em { font-style: italic; color: var(--c-red); }
+    .course-desc {
+      font-size: 16px; color: var(--c-light);
+      font-weight: 300; line-height: 1.75;
+      max-width: 560px; margin-bottom: 36px;
+    }
+    .course-meta-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .cmeta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cmeta-label {
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--c-muted);
+    }
+    .cmeta-value {
+      font-size: 15px; font-weight: 500; color: var(--c-white);
+    }
+    .cmeta-value em { color: var(--c-red); font-style: normal; }
+
+    /* Right panel — sticky purchase */
+    .course-purchase-panel {
+      border-left: 1px solid var(--c-border);
+      background: var(--c-surface2);
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: sticky;
+      top: 80px;
+      align-self: start;
+    }
+    .panel-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-red);
+    }
+    .panel-price {
+      font-family: var(--f-serif);
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .panel-price span {
+      font-family: var(--f-sans);
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--c-muted);
+      letter-spacing: 0;
+    }
+    .panel-period {
+      font-size: 13px; color: var(--c-muted); margin-top: 4px;
+    }
+    .panel-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .panel-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--c-light);
+      line-height: 1.5;
+    }
+    .panel-features li svg { flex-shrink: 0; color: var(--c-red); margin-top: 2px; }
+    .btn-unlock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--c-red);
+      color: white;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 18px 28px;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
+    }
+    .btn-unlock::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s var(--ease-out);
+    }
+    .btn-unlock:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--c-red-glow); }
+    .btn-unlock:hover::before { left: 150%; }
+    .panel-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--c-muted);
+    }
+    .panel-divider {
+      border: none;
+      border-top: 1px solid var(--c-border);
+      margin: 0;
+    }
+    .panel-alt-link {
+      text-align: center;
+      font-size: 12px; color: var(--c-muted);
+    }
+    .panel-alt-link a { color: var(--c-red); transition: opacity 0.25s; }
+    .panel-alt-link a:hover { opacity: 0.8; }
+
+    /* ================================================
+       VIDEOS SECTION
+    ================================================ */
+    .videos-section {
+      padding: 80px 48px;
+    }
+    .videos-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .videos-title {
+      font-family: var(--f-serif);
+      font-size: clamp(26px, 3.5vw, 38px);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .videos-title em { font-style: italic; color: var(--c-red); }
+    .videos-count {
+      font-size: 12px; color: var(--c-muted); letter-spacing: 0.05em;
+    }
+
+    /* Videos grid */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    /* ── Video Card ──────────────────────────── */
+    .vcard {
+      position: relative;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      overflow: hidden;
+    }
+
+    /* Thumbnail */
+    .vcard__thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #111;
+    }
+    .vcard__thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.45) grayscale(40%);
+      transition: filter 0.5s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+    .vcard:hover .vcard__thumb img {
+      filter: brightness(0.35) grayscale(20%);
+      transform: scale(1.04);
+    }
+
+    /* Episode number */
+    .vcard__ep {
+      position: absolute;
+      top: 10px; left: 12px;
+      z-index: 2;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Lock overlay */
+    .vcard__lock-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .vcard__lock-icon {
+      width: 36px; height: 36px;
+      background: rgba(29,29,29,0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-muted);
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    }
+    .vcard:hover .vcard__lock-icon {
+      border-color: rgba(112,0,14,0.5);
+      color: var(--c-red);
+      background: rgba(112,0,14,0.1);
+    }
+
+    /* Hover description overlay */
+    .vcard__hover-desc {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      background: rgba(20,20,20,0.92);
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+    }
+    .vcard:hover .vcard__hover-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .vcard__hover-desc-title {
+      font-family: var(--f-serif);
+      font-size: 15px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      color: var(--c-white);
+    }
+    .vcard__hover-desc-text {
+      font-size: 12px;
+      color: var(--c-muted);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .vcard__hover-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--c-red);
+    }
+
+    /* Card body */
+    .vcard__body {
+      padding: 14px 16px 16px;
+    }
+    .vcard__num {
+      font-size: 9px; color: var(--c-muted); letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .vcard__title {
+      font-family: var(--f-serif);
+      font-size: 15px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .vcard__dur {
+      font-size: 11px; color: var(--c-muted);
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    /* ================================================
+       ACCESS REQUIRED BANNER
+    ================================================ */
+    .access-banner {
+      margin: 0 48px 80px;
+      background: linear-gradient(135deg, var(--c-surface2) 0%, rgba(112,0,14,0.06) 100%);
+      border: 1px solid rgba(112,0,14,0.25);
+      padding: 40px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .access-banner-icon {
+      width: 48px; height: 48px;
+      background: var(--c-red-dim);
+      border: 1px solid rgba(112,0,14,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-red);
+      margin-bottom: 16px;
+    }
+    .access-banner-title {
+      font-family: var(--f-serif);
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .access-banner-text {
+      font-size: 14px; color: var(--c-muted); max-width: 460px; line-height: 1.65;
+    }
+    .access-banner-cta {
+      flex-shrink: 0;
+      background: var(--c-red);
+      color: white;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 30px;
+      border-radius: 2px;
+      transition: opacity 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s;
+      white-space: nowrap;
+    }
+    .access-banner-cta:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-red-glow); }
+
+    /* ================================================
+       REVEAL
+    ================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media (max-width: 1100px) {
+      .course-hero { grid-template-columns: 1fr; min-height: auto; }
+      .course-purchase-panel {
+        position: static;
+        border-left: none;
+        border-top: 1px solid var(--c-border);
+        padding: 40px 48px;
+      }
+      .videos-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .nav { padding: 20px 24px; }
+      .nav-links, .nav-login { display: none; }
+      .nav-burger { display: flex; }
+      .breadcrumb { padding: 100px 24px 0; }
+      .course-hero-content { padding: 40px 24px 56px; }
+      .course-purchase-panel { padding: 40px 24px; }
+      .videos-section { padding: 60px 24px; }
+      .videos-grid { grid-template-columns: repeat(2, 1fr); }
+      .access-banner { margin: 0 24px 60px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 540px) {
+      .videos-grid { grid-template-columns: 1fr; }
+      .course-meta-row { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="navbar">
+    <a href="inicio.html" class="nav-logo">ELES<em>.</em></a>
+    <ul class="nav-links">
+      <li><a href="cursos.html" class="active">Cursos</a></li>
+      <li><a href="planes.html">Membresía</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="metodo.html">Método</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="eventos.html">Eventos</a></li>
+    </ul>
+    <div class="nav-action">
+      <a href="#" class="nav-login">Mi cuenta</a>
+      <a href="planes.html" class="btn-nav">Unirme al Club</a>
+      <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul class="mobile-menu-links">
+      <li><a href="inicio.html">Inicio <span>→</span></a></li>
+      <li><a href="cursos.html" class="active">Cursos <span>→</span></a></li>
+      <li><a href="planes.html">Membresía <span>→</span></a></li>
+      <li><a href="tienda.html">Tienda <span>→</span></a></li>
+      <li><a href="metodo.html">Método <span>→</span></a></li>
+      <li><a href="faq.html">FAQ <span>→</span></a></li>
+      <li><a href="eventos.html">Eventos <span>→</span></a></li>
+    </ul>
+    <div class="mobile-menu-bottom">
+      <a href="planes.html" class="mobile-menu-cta">Unirme al Club →</a>
+      <p class="mobile-menu-note"><a href="#">Mi cuenta</a> · <a href="mailto:hola@eles.com">Contacto</a></p>
+    </div>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="inicio.html">Inicio</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="cursos.html">Cursos</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-current" id="bc-course">Programa</span>
+  </div>
+
+  <!-- ==============================
+       COURSE HERO
+  ============================== -->
+  <div class="course-hero">
+
+    <!-- Left: course info -->
+    <div class="course-hero-content">
+      <p class="course-eyebrow" id="course-cat">Mat · Fundamentos</p>
+      <h1 class="course-title reveal" id="course-title">Sculpt <em>Base</em></h1>
+      <p class="course-desc reveal reveal-d1" id="course-desc">
+        Dominio técnico desde los cimientos. Aprende alineación, activación del core y los patrones de movimiento fundamentales que soportarán todo lo que venga después en tu entrenamiento.
+      </p>
+      <div class="course-meta-row reveal reveal-d2">
+        <div class="cmeta">
+          <span class="cmeta-label">Vídeos</span>
+          <span class="cmeta-value" id="meta-videos">15</span>
+        </div>
+        <div class="cmeta">
+          <span class="cmeta-label">Duración</span>
+          <span class="cmeta-value" id="meta-dur">~40 min / vídeo</span>
+        </div>
+        <div class="cmeta">
+          <span class="cmeta-label">Nivel</span>
+          <span class="cmeta-value" id="meta-level">Principiante</span>
+        </div>
+        <div class="cmeta">
+          <span class="cmeta-label">Instructora</span>
+          <span class="cmeta-value">Laura <em>·</em> ELES</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: purchase panel -->
+    <div class="course-purchase-panel">
+      <p class="panel-badge" id="panel-plan-type">Plan Premium</p>
+      <div>
+        <div class="panel-price" id="panel-price">34<span>€</span></div>
+        <p class="panel-period">por mes · cancela cuando quieras</p>
+      </div>
+      <hr class="panel-divider">
+      <ul class="panel-features">
+        <li>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Acceso a <strong>&nbsp;todos los programas</strong>&nbsp;Basic y Premium
+        </li>
+        <li>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Vídeos HD en streaming ilimitado
+        </li>
+        <li>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Nuevos programas cada mes
+        </li>
+        <li>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Comunidad privada ELES
+        </li>
+        <li>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          15% descuento permanente en Tienda
+        </li>
+      </ul>
+      <a href="planes.html" class="btn-unlock">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Desbloquear acceso
+      </a>
+      <p class="panel-note">Sin permanencia · cancela en cualquier momento</p>
+      <hr class="panel-divider">
+      <p class="panel-alt-link">¿Ya eres miembro? <a href="#">Inicia sesión →</a></p>
+    </div>
+  </div>
+
+  <!-- ==============================
+       VIDEOS GRID
+  ============================== -->
+  <section class="videos-section">
+    <div class="videos-header">
+      <div>
+        <h2 class="videos-title">Contenido del <em>programa</em></h2>
+      </div>
+      <span class="videos-count" id="video-count-text">15 vídeos · Todos bloqueados</span>
+    </div>
+
+    <!-- Grid populated by JS -->
+    <div class="videos-grid" id="videosGrid">
+      <!-- JS will render cards here -->
+    </div>
+  </section>
+
+  <!-- ==============================
+       ACCESS REQUIRED BANNER
+  ============================== -->
+  <div class="access-banner reveal">
+    <div class="access-banner-left">
+      <div class="access-banner-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <h3 class="access-banner-title">Acceso restringido a miembras del Club</h3>
+      <p class="access-banner-text">Para ver los vídeos de este programa necesitas un plan de membresía activo. Por 34€/mes tendrás acceso a todo el contenido — sin límites ni restricciones de tiempo.</p>
+    </div>
+    <a href="planes.html" class="access-banner-cta">Ver planes de acceso →</a>
+  </div>
+
+  <footer class="eles-footer" role="contentinfo">
+
+    <!-- Banda Marquee animada -->
+    <div class="eles-footer__marquee" aria-hidden="true">
+      <div class="eles-footer__marquee-track">
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+        <span><em>Not for everyone</em></span>
+        <span>·</span>
+        <span>Pilates de <em>élite</em></span>
+        <span>·</span>
+        <span>Membresía <em>exclusiva</em></span>
+        <span>·</span>
+        <span>Equipo <em>técnico</em></span>
+        <span>·</span>
+        <span>Resultados <em>reales</em></span>
+        <span>·</span>
+      </div>
+    </div>
+
+    <!-- Columnas -->
+    <div class="eles-footer__grid">
+
+      <!-- Columna Marca -->
+      <div class="eles-footer__brand">
+        <div class="eles-footer__brand-logo">ELES<em>.</em></div>
+        <p class="eles-footer__brand-desc">
+          Fitness de élite, método técnico y equipo boutique. Una comunidad guiada por la excelencia, la constancia y los resultados reales.
+        </p>
+        <div class="eles-footer__socials">
+          <a href="#" class="eles-footer__social" aria-label="Instagram ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="TikTok ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.19a8.18 8.18 0 004.79 1.53V6.27a4.85 4.85 0 01-1.02-.42z"/></svg>
+          </a>
+          <a href="#" class="eles-footer__social" aria-label="YouTube ELES">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna Plataforma -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Plataforma</p>
+        <ul>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="planes.html">Membresía</a></li>
+          <li><a href="tienda.html">Tienda ELES</a></li>
+          <li><a href="metodo.html">Método</a></li>
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Soporte -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Soporte</p>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="mailto:hola@eles.com">Contacto</a></li>
+          <li><a href="#">Mi Membresía</a></li>
+          <li><a href="#">Devoluciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Legal -->
+      <div class="eles-footer__col">
+        <p class="eles-footer__col-title">Legal</p>
+        <ul>
+          <li><a href="#">Aviso Legal</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="terminos.html">Términos</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="eles-footer__bottom">
+      <span class="eles-footer__copy">© 2024 ELES Fitness Studio. Todos los derechos reservados.</span>
+      <div class="eles-footer__divider">
+        <div class="eles-footer__divider-line"></div>
+        <span class="eles-footer__motto">not for everyone.</span>
+      </div>
+    </div>
+
+  </footer>
+
+  <script>
+    // ─── Course Data ──────────────────────────────────────────────────────
+    const COURSES = {
+      'sculpt-base': {
+        title: 'Sculpt Base',
+        cat: 'Mat · Fundamentos',
+        level: 'Principiante',
+        dur: '~40 min / vídeo',
+        cover: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=85&w=1600&auto=format&fit=crop',
+        desc: 'Dominio técnico desde los cimientos. Aprende alineación, activación del core y los patrones de movimiento fundamentales que soportarán todo lo que venga después en tu entrenamiento.',
+        videoCount: 15,
+        isPremium: false,
+        videos: [
+          { title: 'Respiración & Activación', dur: '32 min', desc: 'La base de todo. Aprende a respirar con el diafragma y activar el abdomen transverso antes de cualquier movimiento.' },
+          { title: 'Alineación Postural', dur: '38 min', desc: 'Descubrirás tu postura neutra y cómo mantenerla. Ejercicios lentos y conscientes para corregir los patrones dañinos del día a día.' },
+          { title: 'Roll Down & Roll Up', dur: '40 min', desc: 'El clásico de Pilates. Control vertebral segmento a segmento para desarrollar fuerza abdominal real.' },
+          { title: 'Hundred — Fundamentos', dur: '35 min', desc: 'La clase más icónica. Aprenderás a hacer el Hundred con control total antes de añadir intensidad.' },
+          { title: 'Serie de los 5', dur: '42 min', desc: 'Single leg stretch, double leg, criss-cross, scissors y bicycle. El ciclo que transforma el abdomen.' },
+          { title: 'Trabajo de Cadera', dur: '44 min', desc: 'Círculos, elevaciones y extensiones de cadera para estabilizar la pelvis y activar glúteos correctamente.' },
+          { title: 'Spine Stretch & Saw', dur: '38 min', desc: 'Movilidad torácica y flexibilidad de isquios con control total. Una de las combinaciones más efectivas del método.' },
+          { title: 'Swan & Dart', dur: '36 min', desc: 'Extensión de columna en prono. Fortalece la cadena posterior y alivia tensión lumbar acumulada.' },
+          { title: 'Side Lying Series', dur: '40 min', desc: 'Trabajo lateral para abductores, glúteo medio y estabilidad pélvica. Clave para la biomecánica saludable.' },
+          { title: 'Teaser Preparation', dur: '45 min', desc: 'Progresión paso a paso hacia el Teaser completo. Fuerza abdominal, flexibilidad y equilibrio en un solo ejercicio.' },
+          { title: 'Rolling Like a Ball', dur: '32 min', desc: 'Coordinación, masaje vertebral y control del core en el movimiento más fluido del método.' },
+          { title: 'Child\'s Pose & Recovery', dur: '28 min', desc: 'Sesión de recuperación activa. Estiramientos guiados para integrar el trabajo anterior y reducir tensión residual.' },
+          { title: 'Plank & Shoulder Work', dur: '42 min', desc: 'Fortalecimiento de hombros, escapulares y estabilidad global desde el suelo.' },
+          { title: 'Clase Intensiva', dur: '55 min', desc: 'Combina todo lo aprendido en una secuencia fluida y progresiva. Tu primer entrenamiento real de Pilates.' },
+          { title: 'Evaluación & Cierre', dur: '30 min', desc: 'Revisión técnica de los patrones fundamentales. Preparación para el siguiente nivel del método ELES.' },
+        ]
+      },
+      'mat-pilates': {
+        title: 'Mat Pilates Essentials',
+        cat: 'Mat · Control',
+        level: 'Principiante',
+        dur: '~50 min / vídeo',
+        cover: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=85&w=1600&auto=format&fit=crop',
+        desc: 'Base técnica en colchoneta para desarrollar fuerza funcional, mejorar postura y construir conciencia corporal real desde el principio.',
+        videoCount: 12,
+        isPremium: false,
+        videos: [
+          { title: 'Introducción al Método', dur: '25 min', desc: 'Historia, principios y filosofía del Pilates de élite. Por qué el método ELES es diferente y qué puedes esperar.' },
+          { title: 'Core Foundation', dur: '48 min', desc: 'Activación profunda del abdomen. Cómo distinguir el trabajo superficial del trabajo muscular real.' },
+          { title: 'Spine Articulation', dur: '52 min', desc: 'Movilidad vertebral completa. Trabajamos cada segmento para recuperar el movimiento natural de la columna.' },
+          { title: 'Hip & Glute Activation', dur: '46 min', desc: 'Fortalecimiento de cadera y glúteos para estabilizar la pelvis y mejorar el patrón de marcha.' },
+          { title: 'Upper Body Stability', dur: '50 min', desc: 'Cintura escapular, hombros y dorsal ancho. Claves para una postura erguida sin tensión cervical.' },
+          { title: 'Balance & Propriocepción', dur: '44 min', desc: 'Secuencias de equilibrio para mejorar el control motor y la conciencia corporal en el espacio.' },
+          { title: 'Clase Express Power', dur: '30 min', desc: 'Los mejores ejercicios del método en formato comprimido. Para días con poco tiempo y mucha energía.' },
+          { title: 'Total Body Flow', dur: '55 min', desc: 'Secuencia continua sin descansos. Trabajo de resistencia muscular, coordinación y ritmo.' },
+          { title: 'Flexibility & Mobility', dur: '50 min', desc: 'Estiramientos profundos con control. Ganamos longitud muscular sin perder la estabilidad adquirida.' },
+          { title: 'Recovery Session', dur: '35 min', desc: 'Sesión de recuperación activa. Regenera el tejido muscular y prepara el cuerpo para la siguiente semana.' },
+          { title: 'Advanced Preparatory', dur: '52 min', desc: 'Introducción a los patrones de movimiento avanzados. El puente hacia el siguiente nivel del método.' },
+          { title: 'Closing Integration', dur: '45 min', desc: 'Secuencia completa de integración. Reúne todo lo aprendido en una práctica fluida y consciente.' },
+        ]
+      },
+      'express-30': {
+        title: 'Express 30',
+        cat: 'Express · Eficiencia',
+        level: 'Principiante',
+        dur: '~30 min / vídeo',
+        cover: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=85&w=1600&auto=format&fit=crop',
+        desc: 'El programa para los días sin tiempo. Sesiones de 30 minutos diseñadas para máxima eficiencia sin renunciar a la técnica ni al resultado.',
+        videoCount: 18,
+        isPremium: false,
+        videos: [
+          { title: 'Core Blitz', dur: '28 min', desc: 'Activación abdominal intensa en 28 minutos. Sin calentamiento largo, directo al trabajo.' },
+          { title: 'Glutes & Hips Fast', dur: '30 min', desc: 'Circuito de glúteos y cadera para trabajar específicamente esa zona en tiempo récord.' },
+          { title: 'Upper Body Quick', dur: '27 min', desc: 'Hombros, pecho y brazos con el método Pilates. Eficiencia sin pesas.' },
+          { title: 'Total Body Express', dur: '32 min', desc: 'El workout completo en media hora. Todos los grupos musculares, mínimo descanso.' },
+          { title: 'Low Back Relief', dur: '25 min', desc: 'Alivia la tensión lumbar acumulada. Perfecto para los días de mucho trabajo en escritorio.' },
+          { title: 'Morning Energizer', dur: '22 min', desc: 'Activa el cuerpo al empezar el día. Flujo suave que despierta la musculatura y mejora el ánimo.' },
+          { title: 'Pilates HIIT Fusion', dur: '30 min', desc: 'Combina la precisión del Pilates con la intensidad HIIT. Cardio y fuerza en un solo bloque.' },
+          { title: 'Stress Relief Flow', dur: '28 min', desc: 'Secuencia diseñada para reducir el cortisol y liberar tensión muscular acumulada por el estrés.' },
+          { title: 'Posture Fix', dur: '25 min', desc: 'Corrección postural express. Fortalece la cadena posterior y abre el pecho en menos de 30 minutos.' },
+          { title: 'Legs & Thighs Burn', dur: '32 min', desc: 'Trabajo específico de cuádriceps, isquios y pantorrillas con técnica Pilates.' },
+          { title: 'Core & Cardio', dur: '30 min', desc: 'Abdomen y resistencia cardiovascular en una secuencia sin pausa.' },
+          { title: 'Stretch & Restore', dur: '20 min', desc: 'Estiramiento profundo acelerado. Recuperación en tiempo récord.' },
+          { title: 'Power Plank Series', dur: '28 min', desc: 'Planchas y sus variaciones para core, hombros y control global. Sin material adicional.' },
+          { title: 'Balance Challenge', dur: '25 min', desc: 'Equilibrio y coordinación en formato express. Mejora la propiocepción notablemente.' },
+          { title: 'Full Body Sculpt', dur: '32 min', desc: 'Esculpir y tonificar en media hora. Una de las sesiones más completas del programa.' },
+          { title: 'Recovery & Breathe', dur: '18 min', desc: 'Respiración consciente y relajación muscular. La sesión más corta, y a veces la más necesaria.' },
+          { title: 'Intensity Boost', dur: '30 min', desc: 'Para cuando necesitas desafiarte a ti misma. Nivel de intensidad máximo dentro del Express.' },
+          { title: 'Final Integration', dur: '28 min', desc: 'Cierre del programa. Secuencia que honra todo el trabajo realizado y cierra el ciclo.' },
+        ]
+      },
+      'mat-elite-flow': {
+        title: 'Mat Elite Flow',
+        cat: 'Flow · Intensidad',
+        level: 'Intermedio',
+        dur: '~50 min / vídeo',
+        cover: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=85&w=1600&auto=format&fit=crop',
+        desc: 'Secuencias fluidas para resistencia, coordinación y foco mental durante 8 semanas de progresión real. Diseñado para mujeres con base técnica que buscan elevar su práctica.',
+        videoCount: 22,
+        isPremium: true,
+        videos: [
+          { title: 'Flow Assessment', dur: '30 min', desc: 'Evaluación de tu nivel real de fluidez y control. Establecemos la línea base para medir tu progresión a lo largo de las 8 semanas.' },
+          { title: 'Semana 1 · Activación de Flujo', dur: '48 min', desc: 'Introducción al concepto de movimiento continuo en Pilates. Sin pausas forzadas — aprendes a transicionar entre ejercicios con gracia y control.' },
+          { title: 'Semana 1 · Core en Movimiento', dur: '50 min', desc: 'El abdomen como motor del flujo. Secuencias donde el core trabaja constantemente sin convertirse en el protagonista visible.' },
+          { title: 'Semana 2 · Cadenas Posteriores', dur: '52 min', desc: 'Glúteos, isquios y columna torácica en secuencias encadenadas. La sincronía entre la cadena posterior y el control anterior es la clave de esta sesión.' },
+          { title: 'Semana 2 · Apertura de Cadera', dur: '48 min', desc: 'Movilidad profunda de cadera con control pélvico estricto. Flexores, rotadores externos y psoas en un flujo sin interrupciones.' },
+          { title: 'Semana 2 · Full Body Flow I', dur: '55 min', desc: 'Primera secuencia de cuerpo completo sin descansos. Cardio de baja intensidad integrado con fuerza y control postural.' },
+          { title: 'Semana 3 · Equilibrio Dinámico', dur: '50 min', desc: 'Trabajo de balance en movimiento. Cada transición desafía tu propiocepción y activa los estabilizadores más profundos del cuerpo.' },
+          { title: 'Semana 3 · Columna en Extensión', dur: '46 min', desc: 'Swan advanced, rocking y extensiones complejas que requieren conciencia vertebral y fuerza de cadena posterior consolidada.' },
+          { title: 'Semana 3 · Rotación & Control', dur: '52 min', desc: 'Movimientos de rotación torácica y lumbar en secuencia. El saw, el twist y variaciones del criss-cross a nueva velocidad.' },
+          { title: 'Semana 4 · Semana de Integración', dur: '60 min', desc: 'Sesión más larga del programa. Todos los patrones de las semanas anteriores encadenados en una secuencia completa de élite.' },
+          { title: 'Semana 4 · Recovery Flow', dur: '38 min', desc: 'Recuperación activa con movimiento. No es una sesión suave — es una sesión inteligente para regenerar sin detener el progreso.' },
+          { title: 'Semana 5 · Velocidad Controlada', dur: '50 min', desc: 'Mismos ejercicios de las semanas anteriores, ejecutados más rápido con el mismo nivel de control técnico. El verdadero test de tu progreso.' },
+          { title: 'Semana 5 · Piernas & Glúteos Avanzado', dur: '54 min', desc: 'Side-lying series, single-leg work y variaciones de bridge en secuencia continua sin parar ni entre ejercicios.' },
+          { title: 'Semana 5 · Arms & Scapular Flow', dur: '48 min', desc: 'Cintura escapular, romboides, tríceps y bíceps trabajados desde el suelo con el método Pilates en formato fluido.' },
+          { title: 'Semana 6 · Teaser & Variaciones', dur: '52 min', desc: 'El Teaser completo y todas sus variaciones posibles. Cuando puedes hacer esto en flujo, sabes que tu core es elite.' },
+          { title: 'Semana 6 · Jumping & Impact Flow', dur: '46 min', desc: 'Introducción al trabajo de impacto controlado integrado con Pilates. Pliometría mínima, control máximo.' },
+          { title: 'Semana 6 · Double Leg Sequences', dur: '50 min', desc: 'La serie de doble pierna más completa del programa. Double leg stretch, scissors, bicycle — en el límite de lo que tu core puede mantener.' },
+          { title: 'Semana 7 · High Intensity Flow', dur: '55 min', desc: 'La sesión más intensa hasta ahora. Frecuencia cardíaca elevada mientras mantienes la técnica Pilates intacta. Difícil por diseño.' },
+          { title: 'Semana 7 · Control Articular', dur: '48 min', desc: 'Trabajo específico de articulaciones — rodillas, caderas, hombros y tobillos — con secuencias de movilidad articular en movimiento.' },
+          { title: 'Semana 8 · Peak Performance', dur: '60 min', desc: 'La sesión final de intensidad máxima. Todos los elementos del programa llevados a su expresión más pura y completa.' },
+          { title: 'Semana 8 · Benchmark Flow', dur: '50 min', desc: 'Repite la secuencia de la Semana 1 para medir tu evolución real. La diferencia entre la primera y última vez es visible e impactante.' },
+          { title: 'Cierre & Siguiente Nivel', dur: '35 min', desc: 'Integración final, evaluación de logros y orientación para continuar con Extreme Burn Protocol o Power Reformer. El final es solo una nueva base.' },
+        ]
+      },
+      'extreme-burn': {
+        title: 'Extreme Burn Protocol',
+        cat: 'Burn · Transformación',
+        level: 'Avanzado',
+        dur: '~45 min / vídeo',
+        cover: 'https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?q=85&w=1600&auto=format&fit=crop',
+        desc: 'El protocolo de transformación total. Intensidad máxima y progresión sin piedad para las que ya tienen la base y buscan resultados que el resto no consigue.',
+        videoCount: 30,
+        isPremium: true,
+        videos: [
+          { title: 'Protocol Intro & Assessment', dur: '28 min', desc: 'Evaluación de fuerza real, movilidad y control. Sin este paso no puedes seguir el protocolo de forma segura. Laura te guía a través de 8 tests de capacidad.' },
+          { title: 'Fase 1 · Ignition', dur: '44 min', desc: 'El arranque del protocolo. Activación del sistema neuromuscular completo para preparar el cuerpo al nivel de intensidad que vendrá. No es un calentamiento — es un protocolo.' },
+          { title: 'Fase 1 · Burn Core I', dur: '46 min', desc: 'Abdomen en series de alta repetición con control técnico estricto. La intensidad te tentará a perder forma — el protocolo no lo permite.' },
+          { title: 'Fase 1 · Glute Activation Protocol', dur: '48 min', desc: 'Activación máxima del glúteo mayor, medio y menor en secuencia progresiva. Series de 45 segundos sin descanso entre ejercicios.' },
+          { title: 'Fase 1 · Upper Power', dur: '42 min', desc: 'Cadena superior — dorsales, pectorales, hombros y brazos — en el protocolo ELES de alta densidad. Sin equipamiento, solo control y potencia.' },
+          { title: 'Fase 1 · Total Body Ignition', dur: '52 min', desc: 'Primer workout de cuerpo completo del protocolo. Más intenso que cualquier cosa de la fase básica pero con la misma exigencia técnica.' },
+          { title: 'Fase 1 · Recovery Protocol', dur: '30 min', desc: 'La recuperación también es parte del protocolo. Técnicas de regeneración activa diseñadas para acelerar la recuperación sin frenar la adaptación.' },
+          { title: 'Fase 2 · Threshold Training', dur: '50 min', desc: 'Entrenamos en el umbral de tu capacidad. Series que duelen — y eso es exactamente el punto. Adapta o no avanza.' },
+          { title: 'Fase 2 · Burn Legs Advanced', dur: '48 min', desc: 'El protocolo de piernas más exigente de ELES. Cuádriceps, isquios, glúteos y pantorrillas en densidad máxima.' },
+          { title: 'Fase 2 · Burn Arms & Back', dur: '44 min', desc: 'Trabajo de brazos y espalda alta en circuitos sin pausa. El sistema dorsal completo como no lo has trabajado antes.' },
+          { title: 'Fase 2 · Core Burn II', dur: '50 min', desc: 'Segunda sesión de core de alta intensidad. Mayor complejidad, mayor velocidad, mismo nivel de control. La mielina se construye aquí.' },
+          { title: 'Fase 2 · HIIT Pilates Fusion', dur: '45 min', desc: 'El matrimonio perfecto entre el control del Pilates y la intensidad del HIIT. Frecuencia cardíaca en zona 4 mientras tu columna permanece neutral.' },
+          { title: 'Fase 2 · Full Burn Session', dur: '55 min', desc: 'Sesión completa de alta intensidad sin zona de confort. Esta es la sesión que separa las que quieren de las que pueden.' },
+          { title: 'Fase 2 · Active Recovery II', dur: '32 min', desc: 'Regeneración del sistema muscular tras la semana más intensa del programa. Foam rolling guiado, respiración y activación profunda.' },
+          { title: 'Fase 3 · Peak Intensity I', dur: '52 min', desc: 'Entramos en la fase de pico. El volumen baja, la intensidad sube. Cada repetición cuenta más que nunca.' },
+          { title: 'Fase 3 · Power Glutes', dur: '48 min', desc: 'El protocolo de glúteos de la Fase 3. Sprints isométricos, pliometría controlada y series de resistencia máxima.' },
+          { title: 'Fase 3 · Sprint Core', dur: '44 min', desc: 'Core en velocidad. Los ejercicios que conoces, ejecutados al límite de velocidad que permite la técnica perfecta.' },
+          { title: 'Fase 3 · Strength & Burn', dur: '50 min', desc: 'Combinación de trabajo de fuerza pura con intervalos de quema. El cuerpo se adapta o se rompe — el protocolo elige el primero.' },
+          { title: 'Fase 3 · Complex Movements', dur: '46 min', desc: 'Movimientos combinados de múltiples articulaciones. Coordinación, fuerza y resistencia en el mismo patrón.' },
+          { title: 'Fase 3 · Mental Toughness', dur: '48 min', desc: 'La sesión más difícil del programa. Diseñada para entrenar la resiliencia mental tanto como la física. Cuando quieras parar — no pares.' },
+          { title: 'Fase 3 · Peak Performance Day', dur: '60 min', desc: 'La sesión culminante de la Fase 3. Intensidad máxima, técnica perfecta, sin excusas. Esta sesión marca el antes y el después.' },
+          { title: 'Fase 4 · Taper Week I', dur: '38 min', desc: 'Semana de reducción. El volumen baja para dejar que el cuerpo superkompense. No es fácil — es más difícil parar que seguir.' },
+          { title: 'Fase 4 · Taper Week II', dur: '35 min', desc: 'Segunda sesión de la semana de reducción. Mantenemos la intensidad pero reducimos el volumen. El cuerpo se está reconstruyendo.' },
+          { title: 'Fase 4 · Mobility & Restoration', dur: '40 min', desc: 'Movilidad profunda como parte del protocolo final. Recuperar el rango articular perdido durante las fases de alta intensidad.' },
+          { title: 'Fase 4 · Mind-Body Integration', dur: '42 min', desc: 'La conexión neuromuscular después de 4 fases de entrenamiento intenso. Cuando el cuerpo aprende a moverse desde la eficiencia, no desde el esfuerzo.' },
+          { title: 'Final Protocol · Day 1', dur: '55 min', desc: 'El protocolo final comienza. Las tres primeras sesiones son las más importantes del programa. Todo lo que hiciste antes fue para prepararte para esto.' },
+          { title: 'Final Protocol · Day 2', dur: '52 min', desc: 'Segunda sesión del protocolo final. La fatiga acumulada es parte del diseño — superar este día es la prueba real de transformación.' },
+          { title: 'Final Protocol · Day 3', dur: '50 min', desc: 'La última sesión de alta intensidad. Después de esto, el cuerpo no es el mismo. Técnicamente, físicamente, mentalmente.' },
+          { title: 'Benchmark — Comparativa Final', dur: '45 min', desc: 'Repite los 8 tests del día 1 y mide tu progresión real. Los números no mienten. La diferencia entre el día 1 y el día 30 es el Extreme Burn Protocol.' },
+          { title: 'Cierre del Protocolo', dur: '25 min', desc: 'Integración, reflexión y mapeo del siguiente paso. Has completado el programa más exigente de ELES. Ahora qué quieres construir sobre esta base.' },
+        ]
+      },
+      'deep-core': {
+        title: 'Deep Core Series',
+        cat: 'Core · Fuerza',
+        level: 'Intermedio',
+        dur: '~40 min / vídeo',
+        cover: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=85&w=1600&auto=format&fit=crop',
+        desc: 'Activación profunda del abdomen transverso, suelo pélvico y multífidos. El trabajo invisible que cambia absolutamente todo lo que sí se ve.',
+        videoCount: 20,
+        isPremium: true,
+        videos: [
+          { title: 'Anatomía del Core Profundo', dur: '22 min', desc: 'Antes de activar, necesitas entender. Anatomía práctica del abdomen transverso, suelo pélvico y multífidos — y por qué la mayoría entrena el core equivocado.' },
+          { title: 'Respiración Diafragmática Avanzada', dur: '35 min', desc: 'La respiración como herramienta de activación. El 360° de expansión torácica que todo el core profundo necesita para funcionar correctamente.' },
+          { title: 'Conexión Suelo Pélvico — Core', dur: '40 min', desc: 'El suelo pélvico y el transverso trabajan juntos o no trabajan de verdad. Esta sesión establece esa coordinación mediante ejercicios de respiración y activación progresiva.' },
+          { title: 'Activación Transversa Aislada', dur: '38 min', desc: 'Aprender a activar el abdomen transverso de forma aislada es más difícil de lo que parece. Esta sesión te enseña a sentirlo, no solo a contraerlo.' },
+          { title: 'Multífidos & Estabilidad Lumbar', dur: '42 min', desc: 'Los músculos más ignorados del entrenamiento femenino. Los multífidos son los guardianes de tu columna lumbar — esta sesión los despierta.' },
+          { title: 'Integración Core — Movimiento Global', dur: '44 min', desc: 'El core profundo no puede vivir aislado. Aprendemos a mantener la activación transversa mientras el cuerpo se mueve en todos los planos.' },
+          { title: 'Plancha Isométrica — Progresión Real', dur: '38 min', desc: 'No todas las planchas son iguales. Progresión de planchas desde la activación correcta hasta variaciones complejas que demandan todo el sistema profundo.' },
+          { title: 'Core Profundo en Decúbito Supino', dur: '40 min', desc: 'Ejercicios en posición tumbada boca arriba donde el transverso debe trabajar contra la gravedad sin que la zona lumbar se despegue del suelo.' },
+          { title: 'Core Profundo en Bipedestación', dur: '42 min', desc: 'Mantener el core activo de pie es diferente. Secuencias en bipedestación que integran el trabajo profundo con el movimiento funcional de la vida real.' },
+          { title: 'Bird-Dog & Variaciones Avanzadas', dur: '38 min', desc: 'El bird-dog es el ejercicio más representativo del control del core profundo. Esta sesión lleva el concepto hasta variaciones que pondrán a prueba tu estabilidad real.' },
+          { title: 'Dead Bug Protocol', dur: '36 min', desc: 'El dead bug en todas sus variaciones posibles. Si la zona lumbar se mueve, el ejercicio no sirve. Laura supervisa cada repetición.' },
+          { title: 'Hollow Body & Core Tension', dur: '40 min', desc: 'El hollow body es el ejercicio de tensión de core más puro que existe. Progresión completa desde la posición básica hasta las variantes más complejas.' },
+          { title: 'Core & Respiración bajo Carga', dur: '44 min', desc: 'Mantener la respiración correcta cuando el core está bajo carga es el reto más difícil. Esta sesión te enseña a no aguantar la respiración — nunca.' },
+          { title: 'Integración Suelo Pélvico Fase 2', dur: '42 min', desc: 'Segunda fase del trabajo de suelo pélvico con mayor complejidad y movimiento. Kegel funcional integrado en los patrones de Pilates.' },
+          { title: 'Core Profundo & Cadena Posterior', dur: '46 min', desc: 'El trabajo de glúteos e isquios necesita del core profundo para ser efectivo. Esta sesión une ambos sistemas en secuencias funcionales complejas.' },
+          { title: 'Anti-Rotación & Anti-Flexión', dur: '40 min', desc: 'El core también trabaja resistiendo el movimiento. Pallof press variations, planchas laterales y palancas que desafían la estabilidad rotacional.' },
+          { title: 'Respiración Avanzada en Movimiento', dur: '38 min', desc: 'Coordinación de la respiración con movimientos rápidos y complejos. El último test de tu sistema de control profundo.' },
+          { title: 'Core de Fuerza — Progressión Final', dur: '45 min', desc: 'Las variaciones más complejas de todos los ejercicios anteriores encadenadas en una secuencia de alta demanda técnica y muscular.' },
+          { title: 'Benchmark — Test de Estabilidad', dur: '30 min', desc: 'Repetición de los tests del día 1. La diferencia en estabilidad, control y resistencia muscular es medible y visible.' },
+          { title: 'Mantenimiento & Vida Real', dur: '25 min', desc: 'Cómo integrar el core profundo en tu vida cotidiana — sentada, de pie, cargando, entrenando. El objetivo siempre fue este: hacerlo automático.' },
+        ]
+      },
+      'power-reformer': {
+        title: 'Power Reformer',
+        cat: 'Reformer · Potencia',
+        level: 'Avanzado',
+        dur: '~55 min / vídeo',
+        cover: 'https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?q=85&w=1600&auto=format&fit=crop',
+        desc: 'El sistema más completo de Pilates en reformer. Fuerza, longitud muscular y estabilidad articular en un solo programa diseñado para el máximo rendimiento.',
+        videoCount: 28,
+        isPremium: true,
+        videos: [
+          { title: 'Introducción al Reformer ELES', dur: '35 min', desc: 'El reformer no es una máquina más — es un sistema de resistencia variable que amplifica cualquier error o virtud de tu técnica. Aprende sus mecanismos antes de usarlo.' },
+          { title: 'Footwork — Fundamentos Avanzados', dur: '50 min', desc: 'El footwork es el abc del reformer. En el nivel avanzado, cada variante activa patrones específicos de cadera, rodilla y tobillo que el mat no puede replicar.' },
+          { title: 'Hundred en Reformer', dur: '48 min', desc: 'El Hundred con el movimiento del carrito añade una capa de resistencia que transforma un ejercicio conocido en un desafío completamente nuevo.' },
+          { title: 'Short Box Series Completa', dur: '55 min', desc: 'La short box series completa con todas sus variaciones — round back, flat back, side stretch, twist y tree. Control vertebral en su máxima expresión.' },
+          { title: 'Long Stretch Series', dur: '52 min', desc: 'Planchas con movimiento en el reformer. Down stretch, up stretch, elephant y up-down stretch en una secuencia que demanda fuerza y control absoluto.' },
+          { title: 'Leg Circles & Hip Work', dur: '50 min', desc: 'Circles, frogs y variaciones de cadera en el reformer. La resistencia variable de los springs hace que cada posición demande un trabajo diferente.' },
+          { title: 'Stomach Massage Series', dur: '48 min', desc: 'Una de las series más compljas del repertorio de reformer. Control de columna, core activo y piernas trabajando a diferentes velocidades simultáneamente.' },
+          { title: 'Rowing Series — Parte I', dur: '52 min', desc: 'Las primeras tres variaciones del rowing. Trabajo de cadena posterior, escapulares y dorsales con la resistencia del reformer.' },
+          { title: 'Rowing Series — Parte II', dur: '55 min', desc: 'Las variaciones avanzadas del rowing incluyendo backstroke, teaser rowing y shaving. Coordinación y fuerza superior en el límite.' },
+          { title: 'Long Box — Swan & Pull Straps', dur: '50 min', desc: 'Extensión de columna en long box con las correas. Swan, pull straps I y II activan la cadena posterior con una carga que el mat no puede ofrecer.' },
+          { title: 'Tendon Stretch & Control', dur: '46 min', desc: 'Trabajo de pantorrilla, tendón de Aquiles y control de tobillo en el reformer. Crucial para la estabilidad de la cadena inferior completa.' },
+          { title: 'Hip & Hamstring Advanced', dur: '52 min', desc: 'Isquios, glúteos y cadera en las posiciones más exigentes del reformer. Single leg work, arabesque prep y leg pull advanced.' },
+          { title: 'Arm Work con Springs', dur: '48 min', desc: 'Brazos, hombros y cintura escapular con la resistencia variable de los springs. Bíceps, tríceps, hombros y romboides en el protocolo de reformer.' },
+          { title: 'Knee Stretch Series', dur: '50 min', desc: 'Rodillas en el carrito con diferentes posiciones de columna. Round back, flat back y arch — control total del core mientras las piernas empujan.' },
+          { title: 'Running & Plie', dur: '45 min', desc: 'Trabajo de pies y tobillos al final de las sesiones de reformer. Running en el carrito y los pliés finales que cierran la cadena inferior.' },
+          { title: 'Side Split & Front Split', dur: '55 min', desc: 'Los splits en el reformer son el test definitivo de apertura de cadera, control de core y equilibrio dinámico. Variantes de pie en el carrito.' },
+          { title: 'Standing Work en Reformer', dur: '52 min', desc: 'Las variaciones de pie en el reformer son las más inestables y exigentes del programa. Requieren control total y confianza en el equipo.' },
+          { title: 'Kneeling Side Splits', dur: '48 min', desc: 'De rodillas en el reformer para splits laterales con control de aductores, abductores y glúteo medio. Estabilidad pélvica al límite.' },
+          { title: 'Tower & Cadillac Elements', dur: '55 min', desc: 'Incorporamos elementos del tower y el cadillac al trabajo de reformer. Push-through bar, roll-back bar y spring exercises de alta complejidad.' },
+          { title: 'Advanced Footwork Variations', dur: '50 min', desc: 'El footwork avanzado con los springs en posiciones no convencionales — inner thighs, tendon stretch, single leg y variantes de tobillos.' },
+          { title: 'Power Session I — Intensidad Máxima', dur: '60 min', desc: 'Primera sesión de potencia donde todos los elementos del programa se combinan sin red. Alta intensidad, control técnico, sin descansos programados.' },
+          { title: 'Power Session II — Resistencia Total', dur: '58 min', desc: 'La segunda sesión de potencia eleva el volumen. Más repeticiones, los mismos estándares técnicos. Resistencia muscular de élite.' },
+          { title: 'Flexibility Protocol en Reformer', dur: '45 min', desc: 'El reformer como herramienta de flexibilidad. Estiramientos con asistencia de springs que permiten llegar a rangos articulares imposibles desde el mat.' },
+          { title: 'Correctives & Precision', dur: '42 min', desc: 'Vuelta a la precisión técnica. Corrección de los errores más comunes que aparecen cuando el nivel de dificultad es alto. Calidad sobre cantidad.' },
+          { title: 'Coordination & Rythm', dur: '52 min', desc: 'Coordinación entre tren superior e inferior, y ritmo en el movimiento del carrito. El reformer no perdona la desincronización.' },
+          { title: 'Full Program Integration', dur: '60 min', desc: 'Secuencia completa de integración que encadena todos los elementos del programa. Del footwork al standing, sin parar, con la técnica del primer día.' },
+          { title: 'Benchmark — Evaluación Final', dur: '45 min', desc: 'Repetición de las secuencias del día 1 para medir el progreso real en fuerza, flexibilidad, coordinación y resistencia en el reformer.' },
+          { title: 'Mantenimiento & Práctica Autónoma', dur: '30 min', desc: 'Cómo estructurar tu práctica de reformer de forma autónoma. Rutinas de mantenimiento, progresiones futuras y cómo seguir mejorando sin un programa estructurado.' },
+        ]
+      }
+    };
+
+    // ─── Thumbnail pool ───────────────────────────────────────────────────
+    const THUMBS = [
+      'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=70&w=600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=70&w=600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=70&w=600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=70&w=600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?q=70&w=600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=70&w=600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?q=70&w=600&auto=format&fit=crop',
+    ];
+
+    // ─── Init ─────────────────────────────────────────────────────────────
+    function init() {
+      const params = new URLSearchParams(location.search);
+      const courseId = params.get('curso') || 'sculpt-base';
+      const nivel = params.get('nivel') || 'basico';
+
+      const course = COURSES[courseId] || COURSES['sculpt-base'];
+
+      // Update page title
+      document.getElementById('page-title').textContent = `ELES · Cursos — ${course.title}`;
+      document.getElementById('bc-course').textContent = course.title;
+
+      // Hero
+      document.getElementById('course-cat').textContent = course.cat;
+      const titleEl = document.getElementById('course-title');
+      titleEl.innerHTML = course.title;
+      document.getElementById('course-desc').textContent = course.desc;
+      document.getElementById('meta-videos').textContent = course.videoCount;
+      document.getElementById('meta-dur').textContent = course.dur;
+      document.getElementById('meta-level').textContent = course.level;
+
+      // Panel
+      if (nivel === 'basico') {
+        document.getElementById('panel-plan-type').textContent = 'Plan Básico · desde 19€/mes';
+        document.getElementById('panel-price').innerHTML = '19<span>€</span>';
+      } else {
+        document.getElementById('panel-plan-type').textContent = 'Plan Premium · Acceso total';
+        document.getElementById('panel-price').innerHTML = '34<span>€</span>';
+      }
+
+      // Video count text
+      document.getElementById('video-count-text').textContent =
+        `${course.videoCount} vídeos · ${course.isPremium ? 'Plan Premium requerido' : 'Plan Básico incluido'}`;
+
+      // Cover image as background of the left hero panel
+      const heroContent = document.querySelector('.course-hero-content');
+      if (course.cover) {
+        heroContent.style.backgroundImage = `url('${course.cover}')`;
+      }
+
+      // Render videos
+      renderVideos(course);
+    }
+
+    function renderVideos(course) {
+      const grid = document.getElementById('videosGrid');
+      grid.innerHTML = '';
+
+      course.videos.forEach((v, i) => {
+        const thumb = THUMBS[i % THUMBS.length];
+        const ep = String(i + 1).padStart(2, '0');
+
+        const card = document.createElement('div');
+        card.className = 'vcard reveal';
+        card.style.transitionDelay = `${(i % 4) * 0.06}s`;
+
+        card.innerHTML = `
+          <div class="vcard__thumb">
+            <img src="${thumb}" alt="${v.title}" loading="lazy">
+            <span class="vcard__ep">EP. ${ep}</span>
+
+            <!-- Lock overlay (always visible) -->
+            <div class="vcard__lock-overlay">
+              <div class="vcard__lock-icon">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <rect x="3" y="11" width="18" height="11" rx="2"/>
+                  <path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Hover description -->
+            <div class="vcard__hover-desc">
+              <div class="vcard__hover-desc-title">${v.title}</div>
+              <div class="vcard__hover-desc-text">${v.desc}</div>
+              <a href="planes.html" class="vcard__hover-cta">
+                Desbloquear
+                <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="vcard__body">
+            <div class="vcard__num">EP. ${ep}</div>
+            <div class="vcard__title">${v.title}</div>
+            <div class="vcard__dur">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              ${v.dur}
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      // Observe new cards
+      document.querySelectorAll('.vcard.reveal').forEach(el => obs.observe(el));
+    }
+
+    /* ── Header: Scroll effect ─────────────────── */
+    (function () {
+      const header = document.getElementById('eles-header');
+      if (!header) return;
+      const update = () => header.classList.toggle('scrolled', window.scrollY > 50);
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    /* ── Header: Hamburger / Drawer ────────────── */
+    (function () {
+      const burger  = document.getElementById('eles-burger');
+      const drawer  = document.getElementById('eles-drawer');
+      const overlay = document.getElementById('eles-overlay');
+      if (!burger || !drawer) return;
+
+      function open() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      burger.addEventListener('click', () =>
+        drawer.classList.contains('open') ? close() : open()
+      );
+
+      overlay.addEventListener('click', close);
+
+      drawer.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', close)
+      );
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') close();
+      });
+    })();
+
+    // ─── Reveal observer ──────────────────────────────────────────────────
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ─── Run ──────────────────────────────────────────────────────────────
+    init();
+  </script>
+
+</body>
+</html>
