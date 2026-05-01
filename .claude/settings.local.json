@@ -7,7 +7,8 @@
       "Bash(mv \"IMG_5822.jpg\" \"eles-mujer-pilates-pesa-mano-mat-ejercicio.jpg\")",
       "Bash(mv \"freepik_generate-9-different-angl_2761968331.jpeg\" \"eles-mat-pilates-gris-claro-logo-detalle.jpeg\")",
       "Bash(mv \"freepik_generate-9-different-angl_2761968335.jpeg\" \"eles-pesas-pilates-mano-detalle-beige-logo.jpeg\")",
-      "Bash(mv \"freepik_haz-una-foto-de-ecommerce_2759926081.jpeg\" \"eles-pesas-pilates-mano-par-producto-beige.jpeg\")"
+      "Bash(mv \"freepik_haz-una-foto-de-ecommerce_2759926081.jpeg\" \"eles-pesas-pilates-mano-par-producto-beige.jpeg\")",
+      "Bash(npx skills *)"
     ]
   }
 }

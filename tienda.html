@@ -7,444 +7,430 @@
   <meta name="description" content="Equipamiento premium de Pilates y fitness. Mats, bandas, accesorios y ropa técnica seleccionados para mujeres que exigen calidad.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <style>
-    :root{--c-bg:#1d1d1d;--c-surface:#242424;--c-surface2:#1a1a1a;--c-border:rgba(255,255,255,0.08);--c-red:#70000e;--c-red-glow:rgba(112,0,14,0.45);--c-red-dim:rgba(112,0,14,0.1);--c-white:#ffffff;--c-muted:#888;--c-light:#ccc;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--ease:cubic-bezier(.25,.46,.45,.94);--ease-out:cubic-bezier(.16,1,.3,1)}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:var(--f-sans);background:var(--c-bg);color:var(--c-white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-    img{display:block;width:100%;height:100%;object-fit:cover}
-    a{text-decoration:none;color:inherit}
-    button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+    /* ── TOKENS ─────────────────────────────────── */
+    :root {
+      --c-bg:       #1a1a1a;
+      --c-surface:  #212121;
+      --c-surface2: #191919;
+      --c-border:   rgba(255,255,255,0.07);
+      --c-border2:  rgba(255,255,255,0.12);
+      --c-red:      #70000e;
+      --c-red-glow: rgba(112,0,14,0.40);
+      --c-red-dim:  rgba(112,0,14,0.08);
+      --c-white:    #ffffff;
+      --c-muted:    #777;
+      --c-light:    #bbb;
+      --f-serif:    'DM Serif Display', Georgia, serif;
+      --f-sans:     'DM Sans', system-ui, sans-serif;
+      --ease:       cubic-bezier(.25,.46,.45,.94);
+      --ease-out:   cubic-bezier(.16,1,.3,1);
+    }
 
-    /* ================================================
-       HEADER — ELES COMPONENT
-    ================================================ */
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+    html { scroll-behavior:smooth }
+    body { font-family:var(--f-sans); background:var(--c-bg); color:var(--c-white); overflow-x:hidden; -webkit-font-smoothing:antialiased }
+    img  { display:block; width:100%; height:100%; object-fit:cover }
+    a    { text-decoration:none; color:inherit }
+    button { font-family:inherit; cursor:pointer; border:none; background:none; color:inherit }
 
-    /* --- Nav Container --- */
+    /* ── HEADER ─────────────────────────────────── */
     .eles-header {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 999;
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-      transition:
-        background     0.5s var(--ease-out),
-        border-color   0.4s,
-        backdrop-filter 0.5s,
-        padding        0.4s var(--ease-out);
-      border-bottom: 1px solid transparent;
+      position:fixed; inset:0 0 auto 0; z-index:999;
+      padding:28px 48px;
+      display:flex; align-items:center; justify-content:space-between; gap:30px;
+      transition: background .5s var(--ease-out), border-color .4s, backdrop-filter .5s, padding .4s var(--ease-out);
+      border-bottom:1px solid transparent;
     }
-
     .eles-header.scrolled {
-      background: rgba(29, 29, 29, 0.94);
-      backdrop-filter: blur(20px) saturate(150%);
-      border-bottom-color: var(--c-border);
-      padding-top: 18px;
-      padding-bottom: 18px;
+      background:rgba(26,26,26,0.95);
+      backdrop-filter:blur(20px) saturate(150%);
+      border-bottom-color:var(--c-border);
+      padding-top:18px; padding-bottom:18px;
     }
-
-    /* --- Logo --- */
-    .eles-header__logo {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .eles-header__logo-img {
-      height: 60px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      transition: height 0.4s var(--ease-out);
-    }
-    .eles-header.scrolled .eles-header__logo-img {
-      height: 48px;
-    }
-
-    /* --- Desktop Links --- */
-    .eles-header__nav {
-      display: flex;
-      align-items: center;
-      gap: 38px;
-      list-style: none;
-    }
+    .eles-header__logo { display:flex; align-items:center; flex-shrink:0 }
+    .eles-header__logo-img { height:60px; width:auto; filter:brightness(0) invert(1); transition:height .4s var(--ease-out) }
+    .eles-header.scrolled .eles-header__logo-img { height:48px }
+    .eles-header__nav { display:flex; align-items:center; gap:38px; list-style:none }
     .eles-header__nav a {
-      position: relative;
-      font-size: 12.5px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--c-light);
-      transition: color 0.3s;
+      position:relative; font-size:12.5px; font-weight:500;
+      letter-spacing:.08em; text-transform:uppercase;
+      color:var(--c-light); transition:color .3s;
     }
     .eles-header__nav a::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -5px;
-      width: 0; height: 1.5px;
-      background: var(--c-red);
-      box-shadow: 0 0 8px var(--c-red-glow);
-      transition: width 0.4s var(--ease-out);
+      content:''; position:absolute; left:0; bottom:-5px;
+      width:0; height:1.5px;
+      background:var(--c-red); box-shadow:0 0 8px var(--c-red-glow);
+      transition:width .4s var(--ease-out);
     }
-    .eles-header__nav a:hover { color: var(--c-white); }
-    .eles-header__nav a:hover::after { width: 100%; }
-    .eles-header__nav a.active { color: var(--c-white); }
-    .eles-header__nav a.active::after { width: 100%; }
-
-    /* --- Right side: Login + CTA --- */
-    .eles-header__actions {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-shrink: 0;
-    }
-    .eles-header__login {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--c-muted);
-      transition: color 0.3s;
-    }
-    .eles-header__login:hover { color: var(--c-white); }
-
+    .eles-header__nav a:hover { color:var(--c-white) }
+    .eles-header__nav a:hover::after { width:100% }
+    .eles-header__nav a.active { color:var(--c-white) }
+    .eles-header__nav a.active::after { width:100% }
+    .eles-header__actions { display:flex; align-items:center; gap:20px; flex-shrink:0 }
+    .eles-header__login { font-size:12px; font-weight:500; letter-spacing:.05em; color:var(--c-muted); transition:color .3s }
+    .eles-header__login:hover { color:var(--c-white) }
     .eles-header__cta {
-      position: relative;
-      overflow: hidden;
-      background: var(--c-red);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 13px 24px;
-      border-radius: 2px;
-      transition: transform 0.35s var(--ease-out), box-shadow 0.35s, background 0.3s;
+      position:relative; overflow:hidden;
+      background:var(--c-red); color:#fff;
+      font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      padding:13px 24px; border-radius:2px;
+      transition:transform .35s var(--ease-out), box-shadow .35s;
     }
     .eles-header__cta::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-      transition: left 0.55s var(--ease-out);
+      content:''; position:absolute; top:0; left:-100%;
+      width:60%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+      transition:left .55s var(--ease-out);
     }
-    .eles-header__cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--c-red-glow), 0 0 0 1px rgba(112,0,14,0.4); }
-    .eles-header__cta:hover::before { left: 150%; }
-
-    /* --- Hamburger (móvil) --- */
+    .eles-header__cta:hover { transform:translateY(-2px); box-shadow:0 6px 24px var(--c-red-glow),0 0 0 1px rgba(112,0,14,.4) }
+    .eles-header__cta:hover::before { left:150% }
     .eles-header__burger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5.5px;
-      width: 36px; height: 36px;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      padding: 4px;
+      display:none; flex-direction:column; justify-content:center; gap:5.5px;
+      width:36px; height:36px; cursor:pointer; background:transparent; border:none; padding:4px;
     }
     .eles-header__burger span {
-      display: block;
-      width: 100%; height: 1.5px;
-      background: var(--c-white);
-      border-radius: 2px;
-      transform-origin: center;
-      transition: transform  0.45s var(--ease-out), opacity 0.3s, width 0.3s var(--ease-out);
+      display:block; width:100%; height:1.5px;
+      background:var(--c-white); border-radius:2px; transform-origin:center;
+      transition:transform .45s var(--ease-out), opacity .3s, width .3s var(--ease-out);
     }
-    .eles-header__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .eles-header__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; width: 0; }
-    .eles-header__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* --- Mobile Drawer --- */
+    .eles-header__burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg) }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(2) { opacity:0; width:0 }
+    .eles-header__burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg) }
     .eles-header__drawer {
-      position: fixed;
-      inset: 0 0 0 25%;
-      z-index: 998;
-      background: var(--c-surface);
-      border-left: 1px solid var(--c-border);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 60px 40px;
-      transform: translateX(100%);
-      transition: transform 0.55s var(--ease-out);
-      gap: 0;
+      position:fixed; inset:0 0 0 25%; z-index:998;
+      background:var(--c-surface); border-left:1px solid var(--c-border);
+      display:flex; flex-direction:column; justify-content:center;
+      padding:60px 40px;
+      transform:translateX(100%); transition:transform .55s var(--ease-out);
     }
-    .eles-header__drawer.open { transform: translateX(0); }
+    .eles-header__drawer.open { transform:translateX(0) }
     .eles-header__overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 997;
-      background: rgba(0,0,0,0.6);
-      opacity: 0;
-      transition: opacity 0.4s;
+      display:none; position:fixed; inset:0; z-index:997;
+      background:rgba(0,0,0,.6); opacity:0; transition:opacity .4s;
     }
-    .eles-header__overlay.open { display: block; opacity: 1; }
+    .eles-header__overlay.open { display:block; opacity:1 }
     .eles-header__drawer a {
-      font-family: var(--f-serif);
-      font-size: clamp(28px, 5vw, 36px);
-      font-style: italic;
-      color: var(--c-white);
-      padding: 16px 0;
-      border-bottom: 1px solid var(--c-border);
-      transition: color 0.3s, padding-left 0.35s var(--ease-out);
+      font-family:var(--f-serif); font-size:clamp(28px,5vw,36px);
+      font-style:italic; color:var(--c-white);
+      padding:16px 0; border-bottom:1px solid var(--c-border);
+      transition:color .3s, padding-left .35s var(--ease-out);
     }
-    .eles-header__drawer a:last-child { border-bottom: none; }
-    .eles-header__drawer a:hover { color: var(--c-red); padding-left: 10px; }
-    .eles-header__drawer a.active { color: var(--c-red); }
-
-    /* CART ICON */
-    .nav-cart{position:relative;color:var(--c-light);transition:color .25s}
-    .nav-cart:hover{color:var(--c-white)}
-    .nav-cart__count{position:absolute;top:-6px;right:-8px;background:var(--c-red);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-
-    /* HERO */
-    .shop-hero{padding:160px 48px 80px;border-bottom:1px solid var(--c-border);position:relative;overflow:hidden}
-    .shop-hero::before{content:'';position:absolute;top:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(112,0,14,.07) 0%,transparent 65%);pointer-events:none}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--c-red);margin-bottom:24px}
-    .hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--c-red)}
-    .hero-title{font-family:var(--f-serif);font-size:clamp(48px,8vw,100px);line-height:.95;letter-spacing:-2px;max-width:860px;margin-bottom:32px}
-    .hero-title em{font-style:italic;color:var(--c-red)}
-    .hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
-    .hero-desc{max-width:440px;font-size:16px;color:var(--c-light);font-weight:300;line-height:1.75}
-    .hero-stats{display:flex;gap:40px;flex-shrink:0}
-    .hstat-num{font-family:var(--f-serif);font-size:36px;line-height:1;margin-bottom:4px}
-    .hstat-num em{color:var(--c-red);font-style:normal}
-    .hstat-label{font-size:11px;color:var(--c-muted);letter-spacing:.1em;text-transform:uppercase}
-
-    /* TOOLBAR */
-    .shop-toolbar{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--c-border);background:var(--c-surface2);position:sticky;top:84px;z-index:50}
-    .toolbar-left{display:flex;align-items:center;gap:16px}
-    .toolbar-count{font-size:13px;color:var(--c-muted)}
-    .toolbar-count strong{color:var(--c-white)}
-    .filter-chips{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:8px 18px;border:1px solid var(--c-border);border-radius:2px;color:var(--c-muted);transition:all .3s var(--ease);cursor:pointer;background:transparent}
-    .chip:hover,.chip.active{color:var(--c-white);border-color:var(--c-red);background:var(--c-red-dim)}
-    .toolbar-right{display:flex;align-items:center;gap:12px}
-    .sort-select{background:transparent;border:1px solid var(--c-border);color:var(--c-light);font-size:12px;font-weight:500;padding:8px 14px;border-radius:2px;font-family:var(--f-sans);appearance:none;cursor:pointer}
-    .sort-select option{background:var(--c-surface);color:var(--c-white)}
-    .view-btns{display:flex;gap:4px}
-    .view-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid var(--c-border);border-radius:2px;color:var(--c-muted);transition:all .25s}
-    .view-btn:hover,.view-btn.active{color:var(--c-white);border-color:rgba(255,255,255,.2)}
-
-    /* SHOP LAYOUT */
-    .shop-layout{display:grid;grid-template-columns:1fr;min-height:80vh}
-
-    /* SIDEBAR */
-    .shop-sidebar{padding:32px 28px;border-right:1px solid var(--c-border);position:sticky;top:122px;height:fit-content;max-height:calc(100vh - 130px);overflow-y:auto}
-    .sidebar-group{margin-bottom:32px}
-    .sidebar-title{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--c-red);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
-    .sidebar-title svg{color:var(--c-muted);transition:transform .3s}
-    .filter-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-    .filter-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--c-muted);cursor:pointer;transition:color .25s}
-    .filter-item:hover{color:var(--c-white)}
-    .filter-check{width:16px;height:16px;border:1px solid var(--c-border);border-radius:2px;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
-    .filter-item.checked .filter-check{background:var(--c-red);border-color:var(--c-red)}
-    .filter-item.checked{color:var(--c-white)}
-    .filter-count{margin-left:auto;font-size:11px;color:rgba(255,255,255,.15);font-weight:500}
-    .price-range{display:flex;flex-direction:column;gap:12px}
-    .price-inputs{display:flex;gap:8px;align-items:center}
-    .price-input{background:transparent;border:1px solid var(--c-border);color:var(--c-white);font-size:12px;padding:8px 10px;border-radius:2px;width:100%;font-family:var(--f-sans)}
-    .price-sep{color:var(--c-muted);font-size:12px}
-    .price-slider{width:100%;accent-color:var(--c-red);cursor:pointer}
-    .sidebar-divider{height:1px;background:var(--c-border);margin:24px 0}
-
-    /* PRODUCT CATALOG */
-    .shop-products{padding:0;border-top:1px solid var(--c-border)}
-    .pc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--c-border)}
-    .pc-card{display:flex;flex-direction:column;background:var(--c-bg);transition:background .3s var(--ease)}
-    .pc-card:hover{background:var(--c-surface)}
-    .pc-card__img{position:relative;aspect-ratio:1/1;background:var(--c-surface2);overflow:hidden;padding:28px}
-    .pc-card__img img{width:100%;height:100%;object-fit:contain;transition:transform .6s var(--ease-out)}
-    .pc-card:hover .pc-card__img img{transform:scale(1.05)}
-    .pc-card__badge{position:absolute;top:12px;left:12px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:2px;z-index:2}
-    .pc-card__badge--new{background:var(--c-red);color:#fff}
-    .pc-card__badge--excl{background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,.13);color:var(--c-light)}
-    .pc-card__info{padding:16px 18px 20px;display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--c-border);flex:1}
-    .pc-card__cat{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--c-red)}
-    .pc-card__name{font-family:var(--f-serif);font-size:clamp(15px,1.15vw,18px);line-height:1.18;color:var(--c-white);transition:color .25s}
-    .pc-card__name em{font-style:italic;color:var(--c-red)}
-    .pc-card:hover .pc-card__name{color:rgba(255,255,255,.82)}
-    .pc-card__colors{display:flex;gap:5px;margin-top:2px}
-    .pc-card__swatch{width:11px;height:11px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:border-color .2s}
-    .pc-card__swatch.active,.pc-card__swatch:hover{border-color:var(--c-white)}
-    .pc-card__footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid var(--c-border)}
-    .pc-card__price{font-family:var(--f-serif);font-size:20px;color:var(--c-white)}
-    .pc-card__cta{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--c-border);border-radius:2px;color:var(--c-muted);background:transparent;transition:all .3s var(--ease-out);cursor:pointer;font-family:var(--f-sans)}
-    .pc-card:hover .pc-card__cta{background:var(--c-red);border-color:var(--c-red);color:#fff}
-    .pc-card__stars{color:var(--c-red);font-size:10px;letter-spacing:1px}
-
-    /* LOAD MORE */
-    .load-more{padding:60px 48px;text-align:center;border-top:1px solid var(--c-border)}
-    .load-more__btn{background:transparent;border:1px solid var(--c-border);color:var(--c-light);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:16px 48px;border-radius:2px;transition:all .3s var(--ease-out);cursor:pointer}
-    .load-more__btn:hover{border-color:var(--c-red);color:var(--c-white);background:var(--c-red-dim);transform:translateY(-2px)}
-    .load-more__text{font-size:12px;color:var(--c-muted);margin-top:12px}
-
-    /* CTA BAND */
-    .cta-band{padding:96px 48px;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--c-border)}
-    .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(112,0,14,.08) 0%,transparent 65%);pointer-events:none}
-    .cta-band-tag{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--c-red);margin-bottom:18px}
-    .cta-band-title{font-family:var(--f-serif);font-size:clamp(32px,5vw,58px);line-height:1.02;letter-spacing:-1.5px;margin-bottom:14px}
-    .cta-band-title em{font-style:italic;color:var(--c-red)}
-    .cta-band-sub{font-size:15px;color:var(--c-muted);max-width:440px;margin:0 auto 40px;line-height:1.7}
-    .btn-primary{background:var(--c-red);color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:16px 34px;border-radius:2px;transition:opacity .3s,transform .3s var(--ease-out),box-shadow .3s;display:inline-block}
-    .btn-primary:hover{opacity:.9;transform:translateY(-3px);box-shadow:0 10px 30px var(--c-red-glow)}
-
-    /* FOOTER */
-    .footer{border-top:1px solid var(--c-border);padding:80px 48px 40px}
-    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:80px}
-    .footer-logo{font-family:var(--f-serif);font-size:28px;letter-spacing:-.5px;margin-bottom:16px}
-    .footer-logo em{color:var(--c-red);font-style:normal}
-    .footer-tagline{font-size:13px;color:var(--c-muted);line-height:1.7;max-width:260px;margin-bottom:28px}
-    .footer-col-title{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--c-white);margin-bottom:20px}
-    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
-    .footer-col a{font-size:14px;color:var(--c-muted);transition:color .25s}
-    .footer-col a:hover{color:var(--c-white)}
-    .footer-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--c-border);padding-top:32px}
-    .footer-copy{font-size:12px;color:var(--c-muted);letter-spacing:.05em}
-    .footer-red-lne{width:40px;height:2px;background:var(--c-red)}
-
-    /* REVEALS */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}.reveal-d4{transition-delay:.4s}
-
-    /* RESPONSIVE */
-    @media(max-width:1024px){
-      .eles-header{padding:20px 24px}
-      .eles-header__nav{display:none}
-      .eles-header__login{display:none}
-      .eles-header__burger{display:flex}
-      .shop-hero{padding:130px 24px 72px}
-      .hero-bottom{flex-direction:column;align-items:flex-start}
-      .footer-top{grid-template-columns:1fr 1fr;gap:32px}
-    }
-    @media(max-width:768px){
-      .pc-grid{grid-template-columns:repeat(2,1fr)}
-      .pc-card__img{padding:20px}
-    }
-    @media(max-width:480px){
-      .pc-card__info{padding:12px 14px 16px}
-      .pc-card__name{font-size:13px}
-      .pc-card__price{font-size:17px}
-      .pc-card__cta{padding:7px 10px;font-size:8px}
-      .footer-top{grid-template-columns:1fr}
+    .eles-header__drawer a:last-child { border-bottom:none }
+    .eles-header__drawer a:hover { color:var(--c-red); padding-left:10px }
+    .eles-header__drawer a.active { color:var(--c-red) }
+    .nav-cart { position:relative; color:var(--c-light); transition:color .25s }
+    .nav-cart:hover { color:var(--c-white) }
+    .nav-cart__count {
+      position:absolute; top:-6px; right:-8px;
+      background:var(--c-red); color:#fff; font-size:9px; font-weight:700;
+      width:16px; height:16px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
     }
 
-    /* MOBILE FILTER TOGGLE */
-    .mobile-filter-btn{display:none;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c-light);border:1px solid var(--c-border);padding:8px 16px;border-radius:2px}
-    @media(max-width:1024px){.mobile-filter-btn{display:inline-flex}}
+    /* ── HERO (compacto) ─────────────────────────── */
+    .shop-hero {
+      padding:148px 48px 64px;
+      border-bottom:1px solid var(--c-border);
+      position:relative; overflow:hidden;
+    }
+    .shop-hero::before {
+      content:''; position:absolute; top:-80px; left:-100px;
+      width:600px; height:600px;
+      background:radial-gradient(circle,rgba(112,0,14,.06) 0%,transparent 65%);
+      pointer-events:none;
+    }
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
+      color:var(--c-red); margin-bottom:20px;
+    }
+    .hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--c-red) }
+    .hero-title {
+      font-family:var(--f-serif);
+      font-size:clamp(44px,7vw,88px);
+      line-height:.93; letter-spacing:-2px;
+      max-width:720px; margin-bottom:24px;
+    }
+    .hero-title em { font-style:italic; color:var(--c-red) }
+    .hero-desc {
+      max-width:420px; font-size:15px;
+      color:var(--c-muted); font-weight:300; line-height:1.8;
+    }
+
+    /* ── FILTER BAR ──────────────────────────────── */
+    .shop-bar {
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:16px 48px;
+      border-bottom:1px solid var(--c-border);
+      background:var(--c-surface2);
+      position:sticky; top:84px; z-index:50;
+    }
+    .bar-left  { display:flex; align-items:center; gap:8px }
+    .bar-right { display:flex; align-items:center; gap:12px; flex-shrink:0 }
+
+    .chip {
+      font-size:10.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+      padding:7px 16px;
+      border:1px solid var(--c-border); border-radius:2px;
+      color:var(--c-muted); background:transparent;
+      transition:color .25s, border-color .25s, background .25s;
+      cursor:pointer;
+    }
+    .chip:hover  { color:var(--c-light); border-color:var(--c-border2) }
+    .chip.active { color:var(--c-white); border-color:var(--c-red); background:var(--c-red-dim) }
+
+    .bar-count { font-size:12px; color:var(--c-muted); white-space:nowrap }
+    .bar-count strong { color:var(--c-white) }
+
+    .sort-select {
+      background:transparent; border:1px solid var(--c-border);
+      color:var(--c-light); font-size:12px; font-weight:500;
+      padding:7px 12px; border-radius:2px;
+      font-family:var(--f-sans); appearance:none; cursor:pointer;
+    }
+    .sort-select option { background:var(--c-surface); color:var(--c-white) }
+
+    /* ── PRODUCT GRID ────────────────────────────── */
+    /*
+      auto-fill + minmax → escalable sin tocar el CSS.
+      4 cols ~1400px | 3 cols ~1050px | 2 cols ~700px | 1 col ~360px
+    */
+    .pc-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+      gap:1px;
+      background:var(--c-border);
+    }
+
+    /* ── PRODUCT CARD ────────────────────────────── */
+    .pc-card {
+      display:flex; flex-direction:column;
+      background:var(--c-bg);
+      transition:background .3s var(--ease);
+      position:relative;
+    }
+    .pc-card:hover { background:var(--c-surface) }
+
+    /* Imagen */
+    .pc-card__media {
+      position:relative;
+      aspect-ratio:4/5;
+      background:var(--c-surface2);
+      overflow:hidden;
+    }
+    .pc-card__media img {
+      width:100%; height:100%; object-fit:cover;
+      transition:transform .7s var(--ease-out);
+    }
+    .pc-card:hover .pc-card__media img { transform:scale(1.04) }
+    .pc-card__media--full img { object-fit:contain; padding:12px }
+
+    /* Badge */
+    .pc-badge {
+      position:absolute; top:14px; left:14px; z-index:2;
+      font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+      padding:4px 10px; border-radius:2px;
+    }
+    .pc-badge--new  { background:var(--c-red); color:#fff }
+    .pc-badge--excl { background:rgba(18,18,18,.9); border:1px solid rgba(255,255,255,.13); color:var(--c-light) }
+
+    /* CTA overlay — aparece en hover */
+    .pc-card__overlay {
+      position:absolute; inset:auto 0 0 0;
+      padding:16px;
+      background:linear-gradient(to top, rgba(18,18,18,.92) 0%, transparent 100%);
+      transform:translateY(100%);
+      transition:transform .4s var(--ease-out);
+      display:flex; align-items:flex-end;
+    }
+    .pc-card:hover .pc-card__overlay { transform:translateY(0) }
+    .pc-add-btn {
+      width:100%;
+      font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      padding:11px 0;
+      background:var(--c-red); color:#fff; border-radius:2px;
+      transition:opacity .25s;
+    }
+    .pc-add-btn:hover { opacity:.88 }
+
+    /* Info */
+    .pc-card__info {
+      padding:18px 20px 20px;
+      display:flex; flex-direction:column; gap:6px;
+      border-top:1px solid var(--c-border); flex:1;
+    }
+    .pc-cat {
+      font-size:9.5px; font-weight:700; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--c-red);
+    }
+    .pc-name {
+      font-family:var(--f-serif);
+      font-size:clamp(15px,1.2vw,17px);
+      line-height:1.2; color:var(--c-white);
+    }
+    .pc-name em { font-style:italic; color:rgba(255,255,255,.6) }
+
+    .pc-footer {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:auto; padding-top:14px;
+      border-top:1px solid var(--c-border);
+    }
+    .pc-price { font-family:var(--f-serif); font-size:20px; color:var(--c-white) }
+
+    /* Color swatches (compactos) */
+    .pc-swatches { display:flex; gap:5px }
+    .pc-swatch {
+      width:10px; height:10px; border-radius:50%;
+      border:1.5px solid transparent; cursor:pointer;
+      transition:border-color .2s;
+    }
+    .pc-swatch.active, .pc-swatch:hover { border-color:rgba(255,255,255,.7) }
+
+    /* Card oculta por filtro */
+    .pc-card[hidden] { display:none }
+
+    /* Members only */
+    .pc-members-tag {
+      position:absolute; top:14px; right:14px; z-index:3;
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+      padding:5px 10px;
+      background:rgba(18,18,18,.88);
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:2px; color:var(--c-light);
+      backdrop-filter:blur(8px);
+    }
+    .pc-members-tag svg { flex-shrink:0; opacity:.7 }
+    .pc-add-btn--members {
+      background:transparent;
+      border:1px solid rgba(255,255,255,.25);
+      color:var(--c-white);
+    }
+    .pc-add-btn--members:hover { background:var(--c-red); border-color:var(--c-red); opacity:1 }
+
+    /* ── LOAD MORE ───────────────────────────────── */
+    .load-more {
+      padding:64px 48px; text-align:center;
+      border-top:1px solid var(--c-border);
+    }
+    .load-more__btn {
+      background:transparent; border:1px solid var(--c-border);
+      color:var(--c-light); font-size:11px; font-weight:700;
+      letter-spacing:.12em; text-transform:uppercase;
+      padding:14px 48px; border-radius:2px;
+      transition:border-color .3s, color .3s, background .3s, transform .3s var(--ease-out);
+    }
+    .load-more__btn:hover {
+      border-color:var(--c-red); color:var(--c-white);
+      background:var(--c-red-dim); transform:translateY(-2px);
+    }
+    .load-more__hint { font-size:11px; color:var(--c-muted); margin-top:10px }
+
+    /* ── REVEALS ─────────────────────────────────── */
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease-out), transform .8s var(--ease-out) }
+    .reveal.visible { opacity:1; transform:translateY(0) }
+    .reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}
+    .reveal-d3{transition-delay:.24s}.reveal-d4{transition-delay:.32s}
 
     /* ── FOOTER ─────────────────────────────────── */
     .eles-footer {
-      background: var(--c-surface, #181818);
-      border-top: 1px solid var(--c-border, rgba(255,255,255,0.08));
-      padding: 0 48px 40px;
+      background:var(--c-surface);
+      border-top:1px solid var(--c-border);
+      padding:0 48px 40px;
     }
     .eles-footer__marquee {
-      border-bottom: 1px solid var(--c-border, rgba(255,255,255,0.08));
-      overflow: hidden;
-      padding: 18px 0;
-      margin: 0 -48px 60px;
+      border-bottom:1px solid var(--c-border);
+      overflow:hidden; padding:18px 0; margin:0 -48px 60px;
     }
     .eles-footer__marquee-track {
-      display: flex;
-      width: max-content;
-      animation: footerMarquee 30s linear infinite;
+      display:flex; width:max-content;
+      animation:footerMarquee 30s linear infinite;
     }
     @keyframes footerMarquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+      from { transform:translateX(0) }
+      to   { transform:translateX(-50%) }
     }
     .eles-footer__marquee-track span {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--c-muted, #888);
-      padding: 0 24px;
-      white-space: nowrap;
+      font-size:12px; font-weight:500; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--c-muted);
+      padding:0 24px; white-space:nowrap;
     }
-    .eles-footer__marquee-track span em { color: var(--c-red, #70000e); font-style: normal; }
+    .eles-footer__marquee-track span em { color:var(--c-red); font-style:normal }
     .eles-footer__grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 60px;
+      display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:48px; margin-bottom:60px;
     }
     .eles-footer__brand-logo {
-      font-family: var(--f-serif, 'DM Serif Display', Georgia, serif);
-      font-size: 26px;
-      letter-spacing: -0.5px;
-      margin-bottom: 14px;
-      color: var(--c-white, #fff);
+      font-family:var(--f-serif); font-size:26px; letter-spacing:-.5px;
+      margin-bottom:14px; color:var(--c-white);
     }
-    .eles-footer__brand-logo em { color: var(--c-red, #70000e); font-style: normal; }
+    .eles-footer__brand-logo em { color:var(--c-red); font-style:normal }
     .eles-footer__brand-desc {
-      font-size: 13.5px;
-      color: var(--c-muted, #888);
-      line-height: 1.8;
-      max-width: 290px;
-      margin-bottom: 28px;
+      font-size:13.5px; color:var(--c-muted); line-height:1.8;
+      max-width:290px; margin-bottom:28px;
     }
-    .eles-footer__socials { display: flex; gap: 10px; }
+    .eles-footer__socials { display:flex; gap:10px }
     .eles-footer__social {
-      width: 38px; height: 38px;
-      border: 1px solid var(--c-border, rgba(255,255,255,0.08));
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--c-muted, #888);
-      transition: border-color 0.3s, color 0.3s, transform 0.3s;
+      width:38px; height:38px;
+      border:1px solid var(--c-border); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--c-muted);
+      transition:border-color .3s, color .3s, transform .3s;
     }
-    .eles-footer__social:hover { border-color: var(--c-red, #70000e); color: var(--c-red, #70000e); transform: translateY(-3px); }
+    .eles-footer__social:hover { border-color:var(--c-red); color:var(--c-red); transform:translateY(-3px) }
     .eles-footer__col-title {
-      font-size: 10.5px; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--c-white, #fff); margin-bottom: 22px;
+      font-size:10.5px; font-weight:700; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--c-white); margin-bottom:22px;
     }
-    .eles-footer__col ul { list-style: none; display: flex; flex-direction: column; gap: 13px; }
-    .eles-footer__col a {
-      font-size: 13.5px; color: var(--c-muted, #888);
-      text-decoration: none; transition: color 0.3s;
-    }
-    .eles-footer__col a:hover { color: var(--c-white, #fff); }
+    .eles-footer__col ul { list-style:none; display:flex; flex-direction:column; gap:13px }
+    .eles-footer__col a { font-size:13.5px; color:var(--c-muted); transition:color .3s }
+    .eles-footer__col a:hover { color:var(--c-white) }
     .eles-footer__bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
-      border-top: 1px solid var(--c-border, rgba(255,255,255,0.08));
-      padding-top: 28px;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:20px;
+      border-top:1px solid var(--c-border); padding-top:28px;
     }
-    .eles-footer__copy { font-size: 11.5px; color: var(--c-muted, #888); letter-spacing: 0.04em; }
-    .eles-footer__divider { display: flex; align-items: center; gap: 10px; }
-    .eles-footer__divider-line { width: 32px; height: 1.5px; background: var(--c-red, #70000e); box-shadow: 0 0 8px rgba(112,0,14,0.65); }
-    .eles-footer__motto { font-family: var(--f-serif, 'DM Serif Display', Georgia, serif); font-style: italic; font-size: 12px; color: var(--c-red, #70000e); letter-spacing: 0.08em; }
-    @media (max-width: 1100px) {
-      .eles-footer { padding: 0 32px 36px; }
-      .eles-footer__marquee { margin: 0 -32px 60px; }
-      .eles-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .eles-footer__copy { font-size:11.5px; color:var(--c-muted); letter-spacing:.04em }
+    .eles-footer__divider { display:flex; align-items:center; gap:10px }
+    .eles-footer__divider-line { width:32px; height:1.5px; background:var(--c-red); box-shadow:0 0 8px rgba(112,0,14,.65) }
+    .eles-footer__motto { font-family:var(--f-serif); font-style:italic; font-size:12px; color:var(--c-red); letter-spacing:.08em }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media(max-width:1024px) {
+      .eles-header { padding:20px 24px }
+      .eles-header__nav { display:none }
+      .eles-header__login { display:none }
+      .eles-header__burger { display:flex }
+      .shop-hero { padding:120px 24px 56px }
+      .shop-bar { padding:14px 24px; top:78px }
+      .eles-footer { padding:0 32px 36px }
+      .eles-footer__marquee { margin:0 -32px 60px }
+      .eles-footer__grid { grid-template-columns:1fr 1fr; gap:40px }
     }
-    @media (max-width: 700px) {
-      .eles-footer { padding: 0 20px 32px; }
-      .eles-footer__marquee { margin: 0 -20px 50px; }
-      .eles-footer__grid { grid-template-columns: 1fr; gap: 36px; }
-      .eles-footer__bottom { flex-direction: column; align-items: flex-start; }
+    @media(max-width:640px) {
+      .pc-grid { grid-template-columns:repeat(2,1fr) }
+      .pc-card__media { aspect-ratio:3/4 }
+      .shop-bar { flex-wrap:wrap; gap:10px }
+      .bar-right { display:none }
+    }
+    @media(max-width:420px) {
+      .pc-grid { grid-template-columns:1fr }
+      .eles-footer { padding:0 20px 32px }
+      .eles-footer__marquee { margin:0 -20px 50px }
+      .eles-footer__grid { grid-template-columns:1fr; gap:36px }
+      .eles-footer__bottom { flex-direction:column; align-items:flex-start }
     }
   </style>
 </head>
 <body>
 
-  <!-- ==============================
-       HEADER — ELES COMPONENT
-  ============================== -->
+  <!-- HEADER -->
   <header class="eles-header" id="eles-header" role="banner">
-    <!-- Logo -->
     <a href="inicio.html" class="eles-header__logo" aria-label="ELES Fitness — Inicio">
       <img src="logo.png" alt="ELES Fitness Logo" class="eles-header__logo-img">
     </a>
-
-    <!-- Nav Desktop -->
     <ul class="eles-header__nav" role="list">
       <li><a href="cursos.html">Cursos</a></li>
       <li><a href="planes.html">Membresía</a></li>
@@ -453,29 +439,22 @@
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="eventos.html">Eventos</a></li>
     </ul>
-
-    <!-- Acciones -->
     <div class="eles-header__actions">
-      <a href="#" class="nav-cart">
+      <a href="#" class="nav-cart" aria-label="Carrito">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span class="nav-cart__count">3</span>
+        <span class="nav-cart__count">0</span>
       </a>
       <a href="#" class="eles-header__login">Mi cuenta</a>
       <a href="planes.html" class="eles-header__cta">Unirme al Club</a>
-      <button
-        class="eles-header__burger"
-        id="eles-burger"
-        aria-label="Abrir menú de navegación"
-        aria-expanded="false"
-        aria-controls="eles-drawer">
+      <button class="eles-header__burger" id="eles-burger"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="eles-drawer">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
   <div class="eles-header__overlay" id="eles-overlay" aria-hidden="true"></div>
-
-  <nav class="eles-header__drawer" id="eles-drawer" aria-label="Menú de navegación móvil">
+  <nav class="eles-header__drawer" id="eles-drawer" aria-label="Menú móvil">
     <a href="inicio.html">Inicio</a>
     <a href="cursos.html">Cursos</a>
     <a href="planes.html">Membresía</a>
@@ -487,129 +466,159 @@
 
   <!-- HERO -->
   <section class="shop-hero">
-    <p class="hero-eyebrow">04 / The Shop</p>
-    <h1 class="hero-title reveal">Equípate con <br><em>precisión.</em></h1>
-    <div class="hero-bottom">
-      <p class="hero-desc reveal reveal-d1">Equipamiento premium seleccionado por nuestro equipo. Cada producto ha sido probado, validado y aprobado para garantizar rendimiento real en cada sesión.</p>
-    </div>
+    <p class="hero-eyebrow reveal">The Shop</p>
+    <h1 class="hero-title reveal reveal-d1">Equípate con<br><em>precisión.</em></h1>
+    <p class="hero-desc reveal reveal-d2">
+      Equipamiento seleccionado y testado por nuestro equipo. Solo lo que funciona, solo lo que dura.
+    </p>
   </section>
 
-  <!-- SHOP LAYOUT -->
-  <div class="shop-layout">
+  <!-- FILTER BAR -->
+  <!--
+    WooCommerce: los chips mapean a taxonomías de producto (product_cat).
+    El filtro activo puede pasarse como query param /?product_cat=mats
+    o manejarse via AJAX con wc_get_products().
+  -->
+  <div class="shop-bar" role="toolbar" aria-label="Filtros de productos">
+    <div class="bar-left">
+      <button class="chip active" data-filter="all">Todos</button>
+      <button class="chip" data-filter="mat">Mats</button>
+      <button class="chip" data-filter="accesorios">Accesorios</button>
+      <button class="chip" data-filter="pesos">Pesos</button>
+    </div>
+    <div class="bar-right">
+      <span class="bar-count"><strong id="product-count">4</strong> productos</span>
+      <select class="sort-select" aria-label="Ordenar por">
+        <option>Destacados</option>
+        <option>Precio: menor a mayor</option>
+        <option>Precio: mayor a menor</option>
+        <option>Más recientes</option>
+      </select>
+    </div>
+  </div>
 
-    <!-- PRODUCTS -->
-    <section class="shop-products">
-      <div class="pc-grid">
+  <!-- PRODUCTS -->
+  <!--
+    WooCommerce: cada .pc-card es un loop item.
+    data-cat = slug de la categoría WooCommerce.
+    El bloque se genera con woocommerce_product_loop_start() / woocommerce_product_loop_end().
+    El botón .pc-add-btn usa woocommerce_template_loop_add_to_cart() con data-product_id y data-quantity.
+  -->
+  <main>
+    <section class="shop-products" aria-label="Catálogo de productos">
+      <div class="pc-grid" id="product-grid">
 
-        <a href="producto.html" class="pc-card reveal">
-          <div class="pc-card__img">
-            <span class="pc-card__badge pc-card__badge--new">Nuevo</span>
-            <img src="productos/eles-mat-pilates-enrollado-correa-transporte.jpg" alt="ELES Pro Mat" loading="lazy">
+        <!-- PRODUCTO 1: The ELES Kit -->
+        <div class="pc-card reveal" data-cat="mat">
+          <div class="pc-card__media pc-card__media--full">
+            <span class="pc-members-tag">
+              <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Only for Members
+            </span>
+            <img src="productos/eles-kit-pilates-mat-pesas-banda-pelota-toalla.jpg"
+                 alt="The ELES Kit" loading="lazy">
+            <div class="pc-card__overlay">
+              <a href="planes.html" class="pc-add-btn pc-add-btn--members">Únete al Club →</a>
+            </div>
           </div>
           <div class="pc-card__info">
-            <p class="pc-card__cat">Mat · Premium</p>
-            <h3 class="pc-card__name">ELES Pro Mat — <em>Edición Limitada</em></h3>
-            <div class="pc-card__colors">
-              <span class="pc-card__swatch active" style="background:#1a1a1a"></span>
-              <span class="pc-card__swatch" style="background:#70000e"></span>
-              <span class="pc-card__swatch" style="background:#c4b5a0"></span>
+            <p class="pc-cat">Kit · Completo</p>
+            <h3 class="pc-name">The ELES Kit</h3>
+            <div class="pc-footer">
+              <span class="pc-price">99 €</span>
             </div>
-            <div class="pc-card__footer">
-              <span class="pc-card__price">89 €</span>
-              <button class="pc-card__cta">+ Carrito</button>
+          </div>
+        </div>
+
+        <!-- PRODUCTO 2: The Ritual Mat -->
+        <a href="producto.html" class="pc-card reveal reveal-d1" data-cat="mat">
+          <div class="pc-card__media">
+            <img src="productos/eles-mat-pilates-enrollado-correa-transporte.jpg"
+                 alt="The Ritual Mat" loading="lazy">
+            <div class="pc-card__overlay">
+              <button class="pc-add-btn" onclick="addToCart(event, 2)">+ Añadir al carrito</button>
+            </div>
+          </div>
+          <div class="pc-card__info">
+            <p class="pc-cat">Mat · Premium</p>
+            <h3 class="pc-name">The Ritual Mat</h3>
+            <div class="pc-footer">
+              <span class="pc-price">89 €</span>
+              <div class="pc-swatches">
+                <span class="pc-swatch active" style="background:#1a1a1a" title="Negro"></span>
+                <span class="pc-swatch" style="background:#70000e" title="Rojo"></span>
+                <span class="pc-swatch" style="background:#c4b5a0" title="Arena"></span>
+              </div>
             </div>
           </div>
         </a>
 
-        <a href="#" class="pc-card reveal reveal-d1">
-          <div class="pc-card__img">
-            <span class="pc-card__badge pc-card__badge--excl">Exclusivo</span>
-            <img src="productos/eles-mat-pilates-gris-oscuro-logo-producto.jpg" alt="ELES Mat Gris Obsidiana" loading="lazy">
+        <!-- PRODUCTO 3: Pelota Pilates -->
+        <a href="producto.html" class="pc-card reveal reveal-d2" data-cat="accesorios">
+          <div class="pc-card__media">
+            <img src="productos/eles-pelota-pilates-pequeña-gris-duo.jpg"
+                 alt="Pelota Pilates ELES — Grip Superior" loading="lazy">
+            <div class="pc-card__overlay">
+              <button class="pc-add-btn" onclick="addToCart(event, 3)">+ Añadir al carrito</button>
+            </div>
           </div>
           <div class="pc-card__info">
-            <p class="pc-card__cat">Mat · Edición</p>
-            <h3 class="pc-card__name">ELES Mat Pro — <em>Gris Obsidiana</em></h3>
-            <div class="pc-card__footer">
-              <span class="pc-card__price">89 €</span>
-              <button class="pc-card__cta">+ Carrito</button>
+            <p class="pc-cat">Accesorios · Pilates</p>
+            <h3 class="pc-name">The Ball</h3>
+            <div class="pc-footer">
+              <span class="pc-price">16 €</span>
             </div>
           </div>
         </a>
 
-        <a href="#" class="pc-card reveal reveal-d2">
-          <div class="pc-card__img">
-            <img src="productos/eles-pelota-pilates-pequeña-gris-duo.jpg" alt="Pelota Pilates ELES" loading="lazy">
-          </div>
-          <div class="pc-card__info">
-            <p class="pc-card__cat">Accesorios · Pilates</p>
-            <h3 class="pc-card__name">Pelota Pilates ELES — <em>Grip Superior</em></h3>
-            <div class="pc-card__footer">
-              <span class="pc-card__price">18 €</span>
-              <button class="pc-card__cta">+ Carrito</button>
+        <!-- PRODUCTO 4: Pesas -->
+        <a href="producto.html" class="pc-card reveal reveal-d3" data-cat="pesos">
+          <div class="pc-card__media">
+            <img src="productos/eles-pesas-pilates-mano-par-producto-beige.jpeg"
+                 alt="Pesas ELES — Par Beige" loading="lazy">
+            <div class="pc-card__overlay">
+              <button class="pc-add-btn" onclick="addToCart(event, 4)">+ Añadir al carrito</button>
             </div>
           </div>
-        </a>
-
-        <a href="#" class="pc-card reveal reveal-d3">
-          <div class="pc-card__img">
-            <span class="pc-card__badge pc-card__badge--new">Nuevo</span>
-            <img src="productos/eles-pesas-pilates-mano-par-producto-beige.jpeg" alt="Pesas Pilates ELES" loading="lazy">
-          </div>
           <div class="pc-card__info">
-            <p class="pc-card__cat">Pesos · Fuerza</p>
-            <h3 class="pc-card__name">Pesas ELES — <em>Par Beige</em></h3>
-            <div class="pc-card__footer">
-              <span class="pc-card__price">59 €</span>
-              <button class="pc-card__cta">+ Carrito</button>
+            <p class="pc-cat">Pesos · Fuerza</p>
+            <h3 class="pc-name">The Weights</h3>
+            <div class="pc-footer">
+              <span class="pc-price">32 €</span>
             </div>
           </div>
         </a>
 
       </div>
     </section>
-  </div>
 
-  <!-- LOAD MORE REMOVED -->
-
+    <!-- LOAD MORE (activo cuando haya más productos) -->
+    <div class="load-more" id="load-more" style="display:none">
+      <button class="load-more__btn">Cargar más</button>
+      <p class="load-more__hint">Mostrando <span id="shown">4</span> de <span id="total">4</span></p>
+    </div>
+  </main>
 
   <!-- FOOTER -->
   <footer class="eles-footer" role="contentinfo">
-
-    <!-- Banda Marquee animada -->
     <div class="eles-footer__marquee" aria-hidden="true">
       <div class="eles-footer__marquee-track">
-        <span><em>Not for everyone</em></span>
-        <span>·</span>
-        <span>Pilates de <em>élite</em></span>
-        <span>·</span>
-        <span>Membresía <em>exclusiva</em></span>
-        <span>·</span>
-        <span>Equipo <em>técnico</em></span>
-        <span>·</span>
-        <span>Resultados <em>reales</em></span>
-        <span>·</span>
-        <span><em>Not for everyone</em></span>
-        <span>·</span>
-        <span>Pilates de <em>élite</em></span>
-        <span>·</span>
-        <span>Membresía <em>exclusiva</em></span>
-        <span>·</span>
-        <span>Equipo <em>técnico</em></span>
-        <span>·</span>
-        <span>Resultados <em>reales</em></span>
-        <span>·</span>
+        <span><em>Not for everyone</em></span><span>·</span>
+        <span>Pilates de <em>élite</em></span><span>·</span>
+        <span>Membresía <em>exclusiva</em></span><span>·</span>
+        <span>Equipo <em>técnico</em></span><span>·</span>
+        <span>Resultados <em>reales</em></span><span>·</span>
+        <span><em>Not for everyone</em></span><span>·</span>
+        <span>Pilates de <em>élite</em></span><span>·</span>
+        <span>Membresía <em>exclusiva</em></span><span>·</span>
+        <span>Equipo <em>técnico</em></span><span>·</span>
+        <span>Resultados <em>reales</em></span><span>·</span>
       </div>
     </div>
-
-    <!-- Columnas -->
     <div class="eles-footer__grid">
-
-      <!-- Columna Marca -->
       <div class="eles-footer__brand">
         <div class="eles-footer__brand-logo">ELES<em>.</em></div>
-        <p class="eles-footer__brand-desc">
-          Fitness de élite, método técnico y equipo boutique. Una comunidad guiada por la excelencia, la constancia y los resultados reales.
-        </p>
+        <p class="eles-footer__brand-desc">Fitness de élite, método técnico y equipo boutique. Una comunidad guiada por la excelencia, la constancia y los resultados reales.</p>
         <div class="eles-footer__socials">
           <a href="#" class="eles-footer__social" aria-label="Instagram ELES">
             <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -622,8 +631,6 @@
           </a>
         </div>
       </div>
-
-      <!-- Columna Plataforma -->
       <div class="eles-footer__col">
         <p class="eles-footer__col-title">Plataforma</p>
         <ul>
@@ -635,8 +642,6 @@
           <li><a href="faq.html">FAQ</a></li>
         </ul>
       </div>
-
-      <!-- Columna Soporte -->
       <div class="eles-footer__col">
         <p class="eles-footer__col-title">Soporte</p>
         <ul>
@@ -646,8 +651,6 @@
           <li><a href="#">Devoluciones</a></li>
         </ul>
       </div>
-
-      <!-- Columna Legal -->
       <div class="eles-footer__col">
         <p class="eles-footer__col-title">Legal</p>
         <ul>
@@ -657,10 +660,7 @@
           <li><a href="terminos.html">Términos</a></li>
         </ul>
       </div>
-
     </div>
-
-    <!-- Copyright -->
     <div class="eles-footer__bottom">
       <span class="eles-footer__copy">© 2024 ELES Fitness Studio. Todos los derechos reservados.</span>
       <div class="eles-footer__divider">
@@ -668,11 +668,10 @@
         <span class="eles-footer__motto">not for everyone.</span>
       </div>
     </div>
-
   </footer>
 
   <script>
-    /* ── Header: Scroll effect ─────────────────── */
+    /* ── Header scroll ───────────────────────────── */
     (function () {
       const header = document.getElementById('eles-header');
       if (!header) return;
@@ -681,57 +680,79 @@
       update();
     })();
 
-    /* ── Header: Hamburger / Drawer ────────────── */
+    /* ── Header hamburger ────────────────────────── */
     (function () {
       const burger  = document.getElementById('eles-burger');
       const drawer  = document.getElementById('eles-drawer');
       const overlay = document.getElementById('eles-overlay');
       if (!burger || !drawer) return;
-
-      function open() {
-        drawer.classList.add('open');
-        overlay.classList.add('open');
-        burger.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-      }
-      function close() {
-        drawer.classList.remove('open');
-        overlay.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-
-      burger.addEventListener('click', () =>
-        drawer.classList.contains('open') ? close() : open()
-      );
-
+      const open  = () => { drawer.classList.add('open'); overlay.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden' };
+      const close = () => { drawer.classList.remove('open'); overlay.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow='' };
+      burger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
       overlay.addEventListener('click', close);
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close() });
+    })();
 
-      drawer.querySelectorAll('a').forEach(a =>
-        a.addEventListener('click', close)
-      );
+    /* ── Scroll reveals ──────────────────────────── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target) } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') close();
+    /* ── Filter chips ────────────────────────────── */
+    /*
+      WooCommerce migration: reemplaza este bloque por wp_ajax
+      con wc_get_products(['category' => $slug]) y re-render via PHP template.
+    */
+    (function () {
+      const chips   = document.querySelectorAll('.chip');
+      const cards   = document.querySelectorAll('.pc-card');
+      const counter = document.getElementById('product-count');
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const filter = chip.dataset.filter;
+
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+
+          let visible = 0;
+          cards.forEach(card => {
+            const show = filter === 'all' || card.dataset.cat === filter;
+            card.hidden = !show;
+            if (show) visible++;
+          });
+
+          if (counter) counter.textContent = visible;
+        });
       });
     })();
 
-    // Reveal animations
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-
-    // Color selector
-    document.querySelectorAll('.pc-card__swatch').forEach(c => {
-      c.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        c.closest('.pc-card__colors').querySelectorAll('.pc-card__swatch').forEach(s => s.classList.remove('active'));
-        c.classList.add('active');
+    /* ── Color swatches ──────────────────────────── */
+    document.querySelectorAll('.pc-swatches').forEach(group => {
+      group.querySelectorAll('.pc-swatch').forEach(swatch => {
+        swatch.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          group.querySelectorAll('.pc-swatch').forEach(s => s.classList.remove('active'));
+          swatch.classList.add('active');
+        });
       });
     });
+
+    /* ── Cart (placeholder — conectar con WooCommerce AJAX) ── */
+    /*
+      WooCommerce: reemplazar con fetch a ?wc-ajax=add_to_cart
+      con body: { product_id, quantity, nonce }
+    */
+    const cartCount = document.querySelector('.nav-cart__count');
+    let cartItems = 0;
+
+    function addToCart(e, productId) {
+      e.preventDefault(); e.stopPropagation();
+      cartItems++;
+      if (cartCount) cartCount.textContent = cartItems;
+    }
   </script>
 </body>
 </html>

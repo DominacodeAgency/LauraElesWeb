@@ -226,303 +226,162 @@
       .eles-header__burger { display: flex; }
     }
 
-    /* ================================================
-       PAGE HERO — FAQ
-    ================================================ */
+    /* ── HERO ───────────────────────────────────── */
     .page-hero {
       position: relative;
-      padding: 160px 48px 100px;
+      padding: 160px 48px 80px;
       border-bottom: 1px solid var(--c-border);
       overflow: hidden;
     }
-    /* Subtle background pattern */
     .page-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(112,0,14,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 15% 80%, rgba(112,0,14,0.04) 0%, transparent 60%);
+      background: radial-gradient(ellipse 50% 70% at 65% 50%, rgba(112,0,14,0.05) 0%, transparent 65%);
       pointer-events: none;
-    }
-    /* Big decorative text */
-    .page-hero-deco {
-      position: absolute;
-      right: 40px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: var(--f-serif);
-      font-size: clamp(120px, 18vw, 220px);
-      line-height: 1;
-      letter-spacing: -8px;
-      color: rgba(255,255,255,0.025);
-      pointer-events: none;
-      user-select: none;
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--c-red);
-      margin-bottom: 28px;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: var(--c-red);
     }
     .page-hero h1 {
       font-family: var(--f-serif);
-      font-size: clamp(48px, 8vw, 100px);
+      font-size: clamp(48px, 8vw, 96px);
       line-height: 0.93;
       letter-spacing: -2px;
       max-width: 700px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .page-hero h1 em { font-style: italic; color: var(--c-red); }
     .page-hero-desc {
-      max-width: 440px;
-      font-size: 16px;
-      color: var(--c-light);
+      max-width: 420px;
+      font-size: 15px;
+      color: var(--c-muted);
       font-weight: 300;
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
-    /* ================================================
-       FAQ SECTION
-    ================================================ */
-    .faq-section {
-      padding: 80px 48px 120px;
-    }
-
-    .faq-layout {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 80px;
-      max-width: 1140px;
-    }
-
-    /* ── Sidebar categories ── */
-    .faq-sidebar {
-      position: sticky;
-      top: 120px;
-      align-self: start;
-    }
-    .faq-sidebar-title {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--c-muted);
-      margin-bottom: 24px;
-    }
-    .faq-cats {
+    /* ── FILTER BAR ──────────────────────────────── */
+    .faq-bar {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .faq-cat-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border-radius: 2px;
-      color: var(--c-muted);
-      font-family: var(--f-sans);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-align: left;
-      transition: color 0.25s, background 0.25s;
-    }
-    .faq-cat-btn::before {
-      content: '';
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-      transition: background 0.25s, transform 0.3s;
-    }
-    .faq-cat-btn:hover,
-    .faq-cat-btn.active {
-      color: var(--c-white);
-      background: rgba(255,255,255,0.04);
-    }
-    .faq-cat-btn.active {
-      color: var(--c-red);
-    }
-    .faq-cat-btn.active::before {
-      background: var(--c-red);
-      transform: scale(1.6);
-    }
-
-    /* Contact card at sidebar bottom */
-    .faq-contact-card {
-      margin-top: 48px;
-      padding: 28px 24px;
-      border: 1px solid var(--c-border);
-      background: var(--c-surface);
-    }
-    .faq-contact-card p {
-      font-size: 13px;
-      color: var(--c-muted);
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-    .faq-contact-card a {
-      display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--c-red);
-      transition: gap 0.3s var(--ease-out), opacity 0.25s;
+      padding: 16px 48px;
+      border-bottom: 1px solid var(--c-border);
+      background: var(--c-surface);
+      position: sticky;
+      top: 84px;
+      z-index: 50;
+      flex-wrap: wrap;
     }
-    .faq-contact-card a:hover { gap: 14px; opacity: 0.85; }
+    .chip {
+      font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 7px 16px;
+      border: 1px solid var(--c-border); border-radius: 2px;
+      color: var(--c-muted); background: transparent;
+      transition: color .25s, border-color .25s, background .25s;
+      cursor: pointer;
+    }
+    .chip:hover  { color: var(--c-light); border-color: rgba(255,255,255,.12) }
+    .chip.active { color: var(--c-white); border-color: var(--c-red); background: rgba(112,0,14,.08) }
 
-    /* ── FAQ groups ── */
-    .faq-groups {
+    /* ── FAQ SECTION ─────────────────────────────── */
+    .faq-section {
+      padding: 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ── FAQ group ───────────────────────────────── */
+    .faq-group { display: none }
+    .faq-group.visible { display: block }
+    .faq-group + .faq-group { margin-top: 56px }
+
+    /* ── Section header ──────────────────────────── */
+    .faq-group-header {
       display: flex;
-      flex-direction: column;
-      gap: 60px;
-    }
-    .faq-group {
-      display: none;
-    }
-    .faq-group.visible {
-      display: block;
-    }
-    .faq-group-label {
-      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-red);
-      margin-bottom: 32px;
+      gap: 20px;
+      padding: 28px 48px;
+      background: var(--c-surface);
+      border-top: 1px solid var(--c-border);
+      border-bottom: 1px solid var(--c-border);
     }
-    .faq-group-label::after {
-      content: '';
+    .faq-group-header__num {
+      font-family: var(--f-serif);
+      font-size: 13px;
+      font-style: italic;
+      color: var(--c-red);
+      letter-spacing: .04em;
+      flex-shrink: 0;
+    }
+    .faq-group-header__label {
+      font-family: var(--f-serif);
+      font-size: clamp(22px, 3vw, 30px);
+      font-style: italic;
+      color: var(--c-white);
+      line-height: 1;
+    }
+    .faq-group-header__line {
       flex: 1;
       height: 1px;
       background: var(--c-border);
-      min-width: 60px;
     }
 
-    /* ── Individual accordion item ── */
+    /* ── Accordion item ──────────────────────────── */
     .faq-item {
-      border-top: 1px solid var(--c-border);
-      position: relative;
+      border-bottom: 1px solid var(--c-border);
     }
-    .faq-item:last-child { border-bottom: 1px solid var(--c-border); }
+    .faq-item:first-of-type { border-top: 1px solid var(--c-border) }
 
     .faq-btn {
-      width: 100%;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 1fr 32px;
-      align-items: center;
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
       gap: 24px;
-      padding: 26px 0;
+      padding: 24px 48px;
       text-align: left;
       color: var(--c-white);
       font-family: var(--f-sans);
-      transition: padding-left 0.35s var(--ease-out);
-      position: relative;
+      transition: background .2s;
     }
-    .faq-btn::before {
-      content: '';
-      position: absolute;
-      left: -48px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--c-red);
-      box-shadow: 0 0 14px rgba(112,0,14,0.7);
-      opacity: 0;
-      transition: opacity 0.35s;
-    }
-    .faq-item.open .faq-btn::before { opacity: 1; }
-    .faq-btn:hover { padding-left: 6px; }
-    .faq-item.open .faq-btn { padding-left: 6px; }
+    .faq-btn:hover { background: rgba(255,255,255,.02) }
+    .faq-item.open .faq-btn { background: rgba(255,255,255,.02) }
 
     .faq-question {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 400;
-      line-height: 1.35;
-      color: var(--c-white);
-      transition: color 0.25s;
-    }
-    .faq-btn:hover .faq-question,
-    .faq-item.open .faq-question {
+      line-height: 1.4;
       color: var(--c-white);
     }
 
-    /* Plus/minus icon */
     .faq-icon {
-      width: 32px;
-      height: 32px;
-      border: 1px solid var(--c-border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.3s, border-color 0.3s, transform 0.5s var(--ease-out);
+      width: 28px; height: 28px; flex-shrink: 0;
+      border: 1px solid var(--c-border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
       color: var(--c-muted);
+      transition: background .3s, border-color .3s, transform .45s var(--ease-out), color .3s;
     }
     .faq-item.open .faq-icon {
-      background: var(--c-red);
-      border-color: var(--c-red);
-      color: white;
-      transform: rotate(45deg);
-    }
-    .faq-icon svg {
-      pointer-events: none;
+      background: var(--c-red); border-color: var(--c-red);
+      color: #fff; transform: rotate(45deg);
     }
 
-    /* Panel */
     .faq-panel {
       overflow: hidden;
       max-height: 0;
-      transition: max-height 0.55s var(--ease-out), opacity 0.4s var(--ease-out), padding 0.4s var(--ease-out);
       opacity: 0;
-      padding: 0 64px 0 6px;
+      transition: max-height .5s var(--ease-out), opacity .35s var(--ease-out);
     }
     .faq-item.open .faq-panel {
-      max-height: 600px;
+      max-height: 400px;
       opacity: 1;
-      padding: 0 64px 28px 6px;
+    }
+    .faq-panel-inner {
+      padding: 0 48px 28px;
     }
     .faq-panel p {
       font-size: 15px;
       color: var(--c-light);
       font-weight: 300;
-      line-height: 1.8;
+      line-height: 1.85;
     }
-    .faq-panel strong { color: var(--c-white); font-weight: 500; }
-
-    /* ================================================
-       ALL FAQ (show all at once for "all" category)
-    ================================================ */
-    .faq-group.show-all {
-      display: block;
-    }
+    .faq-panel strong { color: var(--c-white); font-weight: 500 }
 
     /* ================================================
        CTA BAND
@@ -871,30 +730,16 @@
        RESPONSIVE
     ================================================ */
     @media (max-width: 1024px) {
-      .nav { padding: 20px 24px; }
-      .nav-links, .nav-login { display: none; }
-      .page-hero { padding: 130px 24px 72px; }
-      .faq-section { padding: 60px 24px 80px; }
-      .faq-layout { grid-template-columns: 1fr; gap: 40px; }
-      .faq-sidebar { position: static; }
-      .faq-cats { flex-direction: row; flex-wrap: wrap; gap: 8px; }
-      .faq-cat-btn { padding: 9px 14px; }
-      .faq-contact-card { margin-top: 24px; }
-      .faq-cta { grid-template-columns: 1fr; gap: 32px; }
-      .faq-cta-pills { flex-wrap: wrap; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .footer { padding: 60px 24px 32px; }
-      .faq-btn::before { display: none; }
+      .page-hero { padding: 130px 24px 64px }
+      .faq-bar { padding: 14px 24px; top: 78px }
+      .faq-btn { padding: 22px 24px }
+      .faq-panel-inner { padding: 0 24px 24px }
+      .faq-cta { grid-template-columns: 1fr; gap: 32px }
+      .faq-cta-pills { flex-wrap: wrap }
     }
     @media (max-width: 640px) {
-      .page-hero h1 { font-size: clamp(42px, 13vw, 72px); }
-      .faq-section { padding: 48px 20px 72px; }
-      .faq-question { font-size: 16px; }
-      .faq-panel { padding: 0 40px 0 6px; }
-      .faq-item.open .faq-panel { padding: 0 40px 22px 6px; }
-      .footer-top { grid-template-columns: 1fr; gap: 40px; }
-      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .page-hero-deco { display: none; }
+      .page-hero h1 { font-size: clamp(40px, 12vw, 68px) }
+      .faq-question { font-size: 15px }
     }
   </style>
 </head>
@@ -946,215 +791,184 @@
     <a href="eventos.html">Eventos</a>
   </nav>
 
-  <!-- ==============================
-       PAGE HERO
-  ============================== -->
+  <!-- HERO -->
   <section class="page-hero">
-    <div class="page-hero-deco" aria-hidden="true">FAQ</div>
-    <p class="hero-eyebrow reveal">Soporte · Ayuda</p>
-    <h1 class="reveal reveal-delay-1">
-      Todo lo que<br>necesitas <em>saber.</em>
-    </h1>
-    <p class="page-hero-desc reveal reveal-delay-2">
-      Respuestas directas sobre membresías, clases, método híbrido y cobros. Sin rodeos.
-    </p>
+    <h1 class="reveal">Todo lo que<br>necesitas <em>saber.</em></h1>
+    <p class="page-hero-desc reveal reveal-delay-1">Respuestas directas sobre membresías, clases, método y cobros.</p>
   </section>
 
-  <!-- ==============================
-       FAQ CONTENT
-  ============================== -->
+  <!-- FILTER BAR -->
+  <div class="faq-bar" role="toolbar" aria-label="Filtrar preguntas">
+    <button class="chip active" data-cat="all">Todas</button>
+    <button class="chip" data-cat="metodo">Método</button>
+    <button class="chip" data-cat="membresia">Membresía</button>
+    <button class="chip" data-cat="pagos">Pagos</button>
+    <button class="chip" data-cat="tienda">Tienda</button>
+  </div>
+
+  <!-- FAQ ACCORDION -->
   <section class="faq-section">
-    <div class="faq-layout">
 
-      <!-- ── Sidebar ── -->
-      <aside class="faq-sidebar reveal">
-        <p class="faq-sidebar-title">Categorías</p>
-        <div class="faq-cats">
-          <button class="faq-cat-btn active" data-cat="all" id="cat-all">Todo</button>
-          <button class="faq-cat-btn" data-cat="metodo" id="cat-metodo">Método Híbrido</button>
-          <button class="faq-cat-btn" data-cat="membresia" id="cat-membresia">Membresía</button>
-          <button class="faq-cat-btn" data-cat="pagos" id="cat-pagos">Pagos</button>
-          <button class="faq-cat-btn" data-cat="tienda" id="cat-tienda">Tienda</button>
+    <!-- Método Híbrido -->
+    <div class="faq-group visible" data-group="metodo">
+      <div class="faq-group-header">
+        <span class="faq-group-header__num">01</span>
+        <span class="faq-group-header__label">Método Híbrido</span>
+        <span class="faq-group-header__line"></span>
+      </div>
+
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-1">
+          <span class="faq-question">¿Necesito experiencia previa para empezar?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-1" role="region">
+          <div class="faq-panel-inner"><p>No. Tenemos rutas para <strong>principiante, intermedio y avanzado</strong>. El sistema analiza tu nivel inicial y te sugiere la progresión ideal.</p></div>
         </div>
+      </article>
 
-        <div class="faq-contact-card">
-          <p>¿No encuentras lo que buscas? Escríbenos directamente y te respondemos en menos de 24h.</p>
-          <a href="mailto:hola@eles.com" id="contact-link">
-            Contactar ahora
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
-          </a>
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-2">
+          <span class="faq-question">¿Cómo se combinan las clases online y presenciales?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-2" role="region">
+          <div class="faq-panel-inner"><p>Entrenas online durante la semana y usas las sesiones presenciales para <strong>corrección técnica y ajustes individualizados</strong>. Rigor técnico con la flexibilidad que necesitas.</p></div>
         </div>
-      </aside>
+      </article>
 
-      <!-- ── FAQ Accordion ── -->
-      <div class="faq-groups">
-
-        <!-- Método Híbrido -->
-        <div class="faq-group visible" data-group="metodo" id="group-metodo">
-          <p class="faq-group-label">Método Híbrido</p>
-
-          <article class="faq-item reveal" id="faq-1">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-1" id="btn-faq-1">
-              <span class="faq-question">¿Necesito experiencia previa para empezar?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-1" role="region" aria-labelledby="btn-faq-1">
-              <p>No. Tenemos rutas diseñadas para <strong>principiante, intermedio y avanzado</strong>. El sistema analiza tu nivel inicial y te sugiere la progresión ideal para que nunca te sientas perdida ni por debajo de tu potencial.</p>
-            </div>
-          </article>
-
-          <article class="faq-item reveal reveal-delay-1" id="faq-2">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-2" id="btn-faq-2">
-              <span class="faq-question">¿Cómo se combinan las clases online y presenciales?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-2" role="region" aria-labelledby="btn-faq-2">
-              <p>Entrenas online durante la semana con nuestros programas en vídeo y usas las sesiones presenciales para <strong>corrección técnica y ajustes individualizados</strong>. Lo mejor de los dos mundos: rigor técnico y la flexibilidad que necesitas.</p>
-            </div>
-          </article>
-
-          <article class="faq-item reveal reveal-delay-2" id="faq-3">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-3" id="btn-faq-3">
-              <span class="faq-question">¿Cuánto tiempo necesito dedicar cada semana?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-3" role="region" aria-labelledby="btn-faq-3">
-              <p>Con <strong>3-4 sesiones semanales de 30 a 45 minutos</strong> verás cambios reales en 8 semanas. El método está diseñado para ser efectivo sin monopolizar tu agenda. Calidad sobre cantidad, siempre.</p>
-            </div>
-          </article>
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-3">
+          <span class="faq-question">¿Cuánto tiempo necesito dedicar cada semana?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-3" role="region">
+          <div class="faq-panel-inner"><p>Con <strong>3-4 sesiones de 30-45 minutos</strong> verás cambios reales en 8 semanas. Calidad sobre cantidad.</p></div>
         </div>
+      </article>
 
-        <!-- Membresía -->
-        <div class="faq-group visible" data-group="membresia" id="group-membresia">
-          <p class="faq-group-label">Membresía & Acceso</p>
+    </div>
 
-          <article class="faq-item reveal" id="faq-4">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-4" id="btn-faq-4">
-              <span class="faq-question">¿Qué incluye la zona premium?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-4" role="region" aria-labelledby="btn-faq-4">
-              <p>La membresía incluye <strong>programas completos, masterclasses exclusivas, calendario avanzado y seguimiento privado</strong>. Además tienes acceso prioritario a nuevos contenidos y un descuento fijo del 15% en todos los productos de la tienda.</p>
-            </div>
-          </article>
+    <!-- Membresía -->
+    <div class="faq-group visible" data-group="membresia">
+      <div class="faq-group-header">
+        <span class="faq-group-header__num">02</span>
+        <span class="faq-group-header__label">Membresía &amp; Acceso</span>
+        <span class="faq-group-header__line"></span>
+      </div>
 
-          <article class="faq-item reveal reveal-delay-1" id="faq-5">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-5" id="btn-faq-5">
-              <span class="faq-question">¿Puedo pausar o cancelar mi plan?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-5" role="region" aria-labelledby="btn-faq-5">
-              <p>Sí. Puedes <strong>pausar hasta 2 meses al año o cancelar en cualquier momento</strong> desde tu cuenta, con al menos 48 horas antes de la renovación mensual. Sin penalizaciones, sin letra pequeña.</p>
-            </div>
-          </article>
-
-          <article class="faq-item reveal reveal-delay-2" id="faq-6">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-6" id="btn-faq-6">
-              <span class="faq-question">¿Puedo acceder desde el móvil?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-6" role="region" aria-labelledby="btn-faq-6">
-              <p>Sí. La plataforma está <strong>optimizada para móvil, tablet y escritorio</strong>. Entrena donde y cuando quieras: en casa, en el estudio o de viaje. El contenido también funciona sin conexión si lo guardas previamente.</p>
-            </div>
-          </article>
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-4">
+          <span class="faq-question">¿Qué incluye la zona premium?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-4" role="region">
+          <div class="faq-panel-inner"><p>Programas completos, masterclasses exclusivas, calendario avanzado, seguimiento privado y <strong>15% de descuento</strong> en todos los productos de la tienda.</p></div>
         </div>
+      </article>
 
-        <!-- Pagos -->
-        <div class="faq-group visible" data-group="pagos" id="group-pagos">
-          <p class="faq-group-label">Pagos & Facturación</p>
-
-          <article class="faq-item reveal" id="faq-7">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-7" id="btn-faq-7">
-              <span class="faq-question">¿Qué métodos de pago se aceptan?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-7" role="region" aria-labelledby="btn-faq-7">
-              <p>Aceptamos <strong>tarjeta de crédito y débito VISA, Mastercard y American Express</strong>, así como PayPal. Todos los pagos se procesan de forma segura a través de Stripe con cifrado SSL.</p>
-            </div>
-          </article>
-
-          <article class="faq-item reveal reveal-delay-1" id="faq-8">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-8" id="btn-faq-8">
-              <span class="faq-question">¿Cuándo se renueva mi suscripción?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-8" role="region" aria-labelledby="btn-faq-8">
-              <p>La renovación es <strong>automática cada mes en la fecha exacta de alta</strong>. Recibirás un recordatorio por email 72 horas antes y podrás gestionar todo desde el panel de tu cuenta sin contactar con soporte.</p>
-            </div>
-          </article>
-
-          <article class="faq-item reveal reveal-delay-2" id="faq-9">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-9" id="btn-faq-9">
-              <span class="faq-question">¿Ofrecéis reembolsos?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-9" role="region" aria-labelledby="btn-faq-9">
-              <p>Disponemos de una <strong>garantía de satisfacción de 14 días</strong>. Si dentro de ese plazo no estás satisfecha, te devolvemos el importe íntegro sin preguntas. Fuera de ese periodo, las suscripciones no son reembolsables pero puedes cancelar sin coste.</p>
-            </div>
-          </article>
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-5">
+          <span class="faq-question">¿Puedo pausar o cancelar mi plan?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-5" role="region">
+          <div class="faq-panel-inner"><p>Sí. <strong>Pausa hasta 2 meses al año o cancela cuando quieras</strong> desde tu cuenta, con 48h de antelación. Sin penalizaciones, sin letra pequeña.</p></div>
         </div>
+      </article>
 
-        <!-- Tienda -->
-        <div class="faq-group visible" data-group="tienda" id="group-tienda">
-          <p class="faq-group-label">Tienda & Envíos</p>
-
-          <article class="faq-item reveal" id="faq-10">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-10" id="btn-faq-10">
-              <span class="faq-question">¿Cuánto tarda en llegar mi pedido?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-10" role="region" aria-labelledby="btn-faq-10">
-              <p>Los pedidos dentro de España peninsular se entregan en <strong>2-4 días hábiles</strong>. Islas y Portugal en 3-6 días. El resto de Europa en 5-8 días. El envío es gratuito a partir de 60€ y recibirás un número de seguimiento en cuanto salga tu pedido.</p>
-            </div>
-          </article>
-
-          <article class="faq-item reveal reveal-delay-1" id="faq-11">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-11" id="btn-faq-11">
-              <span class="faq-question">¿Puedo devolver un producto de la tienda?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-11" role="region" aria-labelledby="btn-faq-11">
-              <p>Sí. Dispones de <strong>30 días desde la recepción para devolver cualquier artículo</strong> en perfecto estado y con el embalaje original. Los gastos de devolución corren por cuenta de la clienta excepto si el artículo presenta defectos de fabricación.</p>
-            </div>
-          </article>
-
-          <article class="faq-item reveal reveal-delay-2" id="faq-12">
-            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-12" id="btn-faq-12">
-              <span class="faq-question">¿Los miembros premium tienen descuento en la tienda?</span>
-              <span class="faq-icon" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-              </span>
-            </button>
-            <div class="faq-panel" id="panel-12" role="region" aria-labelledby="btn-faq-12">
-              <p>Sí. Las miembros con membresía activa disfrutan de un <strong>descuento fijo del 15%</strong> en todos los productos de la tienda, acceso anticipado a nuevos lanzamientos y envío prioritario sin coste adicional.</p>
-            </div>
-          </article>
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-6">
+          <span class="faq-question">¿Puedo acceder desde el móvil?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-6" role="region">
+          <div class="faq-panel-inner"><p>Sí. Plataforma <strong>optimizada para móvil, tablet y escritorio</strong>. Entrena donde y cuando quieras.</p></div>
         </div>
+      </article>
 
-      </div><!-- /faq-groups -->
-    </div><!-- /faq-layout -->
+    </div>
+
+    <!-- Pagos -->
+    <div class="faq-group visible" data-group="pagos">
+      <div class="faq-group-header">
+        <span class="faq-group-header__num">03</span>
+        <span class="faq-group-header__label">Pagos &amp; Facturación</span>
+        <span class="faq-group-header__line"></span>
+      </div>
+
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-7">
+          <span class="faq-question">¿Qué métodos de pago se aceptan?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-7" role="region">
+          <div class="faq-panel-inner"><p><strong>VISA, Mastercard, American Express y PayPal</strong>. Pagos seguros vía Stripe con cifrado SSL.</p></div>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-8">
+          <span class="faq-question">¿Cuándo se renueva mi suscripción?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-8" role="region">
+          <div class="faq-panel-inner"><p>Renovación <strong>automática cada mes en tu fecha de alta</strong>. Recibirás un recordatorio 72h antes. Gestiónalo todo desde tu cuenta.</p></div>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-9">
+          <span class="faq-question">¿Ofrecéis reembolsos?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-9" role="region">
+          <div class="faq-panel-inner"><p><strong>Garantía de 14 días</strong>. Si no estás satisfecha, te devolvemos el importe íntegro sin preguntas.</p></div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Tienda -->
+    <div class="faq-group visible" data-group="tienda">
+      <div class="faq-group-header">
+        <span class="faq-group-header__num">04</span>
+        <span class="faq-group-header__label">Tienda &amp; Envíos</span>
+        <span class="faq-group-header__line"></span>
+      </div>
+
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-10">
+          <span class="faq-question">¿Cuánto tarda en llegar mi pedido?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-10" role="region">
+          <div class="faq-panel-inner"><p>España peninsular <strong>2-4 días hábiles</strong>. Islas y Portugal 3-6 días. Resto de Europa 5-8 días. Envío gratuito a partir de 60€.</p></div>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-11">
+          <span class="faq-question">¿Puedo devolver un producto?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-11" role="region">
+          <div class="faq-panel-inner"><p>Sí. <strong>30 días desde la recepción</strong> para devolver en perfecto estado con embalaje original. Defectos de fabricación: gastos cubiertos por ELES.</p></div>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false" aria-controls="panel-12">
+          <span class="faq-question">¿Los miembros tienen descuento en la tienda?</span>
+          <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-panel" id="panel-12" role="region">
+          <div class="faq-panel-inner"><p>Sí. <strong>15% de descuento fijo</strong>, acceso anticipado a lanzamientos y envío prioritario sin coste.</p></div>
+        </div>
+      </article>
+
+    </div>
+
   </section>
 
   <!-- ==============================
@@ -1340,50 +1154,30 @@
     reveals.forEach(el => observer.observe(el));
 
     // ── Accordion ─────────────────────────────────────
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const btn = item.querySelector('.faq-btn');
-      btn.addEventListener('click', () => {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-btn').addEventListener('click', () => {
         const isOpen = item.classList.contains('open');
-        // Close all
-        faqItems.forEach(i => {
+        document.querySelectorAll('.faq-item').forEach(i => {
           i.classList.remove('open');
           i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
         });
-        // Toggle clicked
         if (!isOpen) {
           item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
+          item.querySelector('.faq-btn').setAttribute('aria-expanded', 'true');
         }
       });
     });
 
     // ── Category filter ───────────────────────────────
-    const catBtns = document.querySelectorAll('.faq-cat-btn');
-    const groups  = document.querySelectorAll('.faq-group');
-
-    catBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Update active button
-        catBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const cat = btn.dataset.cat;
-
-        if (cat === 'all') {
-          groups.forEach(g => g.classList.add('visible'));
-        } else {
-          groups.forEach(g => {
-            if (g.dataset.group === cat) {
-              g.classList.add('visible');
-            } else {
-              g.classList.remove('visible');
-            }
-          });
-        }
-
-        // Close all open items when switching category
-        faqItems.forEach(i => {
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const cat = chip.dataset.cat;
+        document.querySelectorAll('.faq-group').forEach(g => {
+          g.classList.toggle('visible', cat === 'all' || g.dataset.group === cat);
+        });
+        document.querySelectorAll('.faq-item').forEach(i => {
           i.classList.remove('open');
           i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
         });
